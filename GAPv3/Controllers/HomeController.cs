@@ -9,11 +9,11 @@ namespace GAPv3.Controllers
 {
     public class HomeController : Controller
     {
-        private GAPv3Context db = new GAPv3Context();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         public ActionResult Index()
         {
-            var norms = db.Norms.ToList();
+            var norms = unitOfWork.NormRepository.Get().ToList();
             return View(norms);
         }
 
@@ -29,6 +29,12 @@ namespace GAPv3.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
