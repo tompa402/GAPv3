@@ -10,7 +10,7 @@ namespace GAPv3.DAL
     {
         private GAPv3Context context = new GAPv3Context();
         private GenericRepository<Norm> normRepository;
-        // private GenericRepository<Course> courseRepository;
+        private GenericRepository<Report> reportRepository;
 
         public GenericRepository<Norm> NormRepository
         {
@@ -25,18 +25,18 @@ namespace GAPv3.DAL
             }
         }
 
-       /* public GenericRepository<Course> CourseRepository
+        public GenericRepository<Report> ReportRepository
         {
             get
             {
 
-                if (this.courseRepository == null)
+                if (this.reportRepository == null)
                 {
-                    this.courseRepository = new GenericRepository<Course>(context);
+                    this.reportRepository = new GenericRepository<Report>(context);
                 }
-                return courseRepository;
+                return reportRepository;
             }
-        }*/
+        }
 
         public void Save()
         {

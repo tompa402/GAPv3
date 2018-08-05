@@ -23,6 +23,13 @@ namespace GAPv3.DAL
                 Name = "HRN ISO/IEC 27002:2013",
                 Description = "Information technology – Security techniques – Code of practice for information security controls"
             });
+
+            context.Organisations.Add(new Organisation() { OrganisationId = 1, Name = "Test organizacija" });
+            context.Organisations.Add(new Organisation() { OrganisationId = 2, Name = "Druga test organizacija" });
+
+            context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
+            context.Reports.Add(new Report() { Name = "Custom report 2", NormId = 2, OrganisationId = 2 });
+
             context.SaveChanges();
         }
     }
