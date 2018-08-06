@@ -19,5 +19,6 @@ namespace GAPv3.DAL
         public DbSet<Norm> Norms { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<NormItem> NormItems { get; set; }
     }
 }

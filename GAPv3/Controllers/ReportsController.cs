@@ -52,11 +52,11 @@ namespace GAPv3.Controllers
         }
 
         // GET: Reports/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name");
-            ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name");
-            return View();
+            List<NormItem> rv = db.NormItems.Where(item => item.NormId == id).ToList();
+
+            return View(rv);
         }
 
         // POST: Reports/Create
