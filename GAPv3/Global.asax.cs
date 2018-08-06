@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using GAPv3.DAL;
+using GAPv3.Service;
 
 namespace GAPv3
 {
@@ -19,6 +20,7 @@ namespace GAPv3
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperWebProfile.Run();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace GAPv3.Controllers
 {
     public class ReportsController : Controller
     {
-        private GAPv3Context db = new GAPv3Context();
+        private GAPv3Context db = new GAPv3Context(); // TODO: remove after all action methods are refactored
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Reports
@@ -24,16 +24,12 @@ namespace GAPv3.Controllers
         {
             var reports = unitOfWork.ReportRepository.Get(filter: x => x.NormId == id, includeProperties: "Norm, Organisation");
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Report, ReportViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-
             List<ReportViewModel> reportsViewModel = new List<ReportViewModel>();
 
             foreach (Report report in reports)
             {
-                var reportViewModel = mapper.Map<Report, ReportViewModel>(report);
+                var reportViewModel = Mapper.Map<Report, ReportViewModel>(report);
+                // TODO: getPopunjenost from service after initial data is inserted
                 reportsViewModel.Add(reportViewModel);
             }
 

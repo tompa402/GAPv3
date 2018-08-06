@@ -187,6 +187,7 @@
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\ReportService.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
   </ItemGroup>
