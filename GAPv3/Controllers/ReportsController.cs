@@ -18,6 +18,12 @@ namespace GAPv3.Controllers
     {
         private GAPv3Context db = new GAPv3Context(); // TODO: remove after all action methods are refactored
         private UnitOfWork unitOfWork = new UnitOfWork();
+        private ReportService service;
+
+        public ReportsController()
+        {
+            this.service = new ReportService(unitOfWork);
+        }
 
         // GET: Reports
         public ActionResult Index(int? id)
@@ -54,9 +60,9 @@ namespace GAPv3.Controllers
         // GET: Reports/Create
         public ActionResult Create(int? id)
         {
-            List<NormItem> rv = db.NormItems.Where(item => item.NormId == id).ToList();
+            var rv =  unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null).ToList();
 
-            return View(rv);
+            return View(rv.ToList());
         }
 
         // POST: Reports/Create

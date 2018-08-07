@@ -20,5 +20,10 @@ namespace GAPv3.DAL
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<NormItem> NormItems { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
