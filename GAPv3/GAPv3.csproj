@@ -187,6 +187,8 @@
     <Compile Include="Models\NormItem.cs" />
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportValue.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\ReportService.cs" />

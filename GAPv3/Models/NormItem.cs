@@ -24,6 +24,6 @@ namespace GAPv3.Models
         [ForeignKey("ParentId")]
         public virtual ICollection<NormItem> Children { get; set; }
 
-        // public virtual ICollection<ReportValue> ReportValue { get; set; }
+        public virtual ICollection<ReportValue> ReportValue { get; set; }
     }
 }

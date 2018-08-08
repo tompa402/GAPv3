@@ -60,9 +60,12 @@ namespace GAPv3.Controllers
         // GET: Reports/Create
         public ActionResult Create(int? id)
         {
-            var rv =  unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null).ToList();
+            var rv = unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
+            ReportViewModel reportViwModel = service.CreateReportViewModel(rv);
 
-            return View(rv.ToList());
+            ViewBag.StatusId = new SelectList(db.Statuses, "StatusId", "Name");
+            ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name");
+            return View(reportViwModel);
         }
 
         // POST: Reports/Create
@@ -70,18 +73,19 @@ namespace GAPv3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReportId,Name,NormId,OrganisationId")] Report report)
+        public ActionResult Create(ReportViewModel reportViwModel)
         {
-            if (ModelState.IsValid)
-            {
-                db.Reports.Add(report);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            /* if (ModelState.IsValid)
+             {
+                 db.Reports.Add(report);
+                 db.SaveChanges();
+                 return RedirectToAction("Index");
+             }
 
-            ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
-            ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
-            return View(report);
+             ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
+             ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
+             return View(report);*/
+            return View();
         }
 
         // GET: Reports/Edit/5

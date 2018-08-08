@@ -17,5 +17,7 @@ namespace GAPv3.Models
 
         public int OrganisationId { get; set; }
         public virtual Organisation Organisation { get; set; }
+
+        public virtual ICollection<ReportValue> ReportValue { get; set; }
     }
 }

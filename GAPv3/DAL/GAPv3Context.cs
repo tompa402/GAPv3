@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -20,10 +21,16 @@ namespace GAPv3.DAL
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<NormItem> NormItems { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<ReportValue> ReportValues { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // TODO: remove after enabling DATA MIGRATIONS --> in add migration we will disable delete on cascade.
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
 }

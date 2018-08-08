@@ -20,5 +20,12 @@ namespace GAPv3.ViewModels
 
         [Display(Name = "Popunjenost")]
         public int Popunjenost { get; set; }
+
+        public List<ReportValue> ReportValues { get; set; }
+
+        public ReportViewModel()
+        {
+            this.ReportValues = new List<ReportValue>();
+        }
     }
 }
