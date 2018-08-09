@@ -25,6 +25,7 @@ namespace GAPv3.Service
             {
                 ReportValue temp = new ReportValue()
                 {
+                    NormItemId = parent.NormItemId,
                     NormItem = parent
                 };
                 reportViwModel.ReportValues.Add(temp);
@@ -33,6 +34,7 @@ namespace GAPv3.Service
                 {
                     ReportValue tempChild = new ReportValue()
                     {
+                        NormItemId = child.NormItemId,
                         NormItem = child
                     };
                     temp.Children.Add(tempChild);
@@ -41,6 +43,7 @@ namespace GAPv3.Service
                     {
                         ReportValue tempGrandChild = new ReportValue()
                         {
+                            NormItemId = grandChild.NormItemId,
                             NormItem = grandChild
                         };
                         tempChild.Children.Add(tempGrandChild);

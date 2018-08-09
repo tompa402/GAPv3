@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -75,6 +77,62 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportViewModel reportViwModel)
         {
+            Report report = new Report()
+            {
+                Name = reportViwModel.Name,
+                NormId = 1,
+                OrganisationId = reportViwModel.OrganisationId
+            };
+            db.Reports.Add(report);
+            db.SaveChanges();
+
+            int reportId = report.ReportId;
+
+            foreach (var parent in reportViwModel.ReportValues)
+            {
+                foreach (var child in parent.Children)
+                {
+                   // if (child.NormItem.IsItem)
+                    //{
+                    ReportValue asd = new ReportValue()
+                    {
+                        NormItemId = child.NormItemId,
+                        ReportId = reportId
+                    };
+                        child.ReportId = reportId;
+                        db.ReportValues.Add(asd);
+                        db.SaveChanges();
+                   // }
+                    /*else
+                    {
+                        foreach (var grandChild in child.Children)
+                        {
+                            grandChild.ReportId = reportId;
+                            db.ReportValues.Add(grandChild);
+                            db.SaveChanges();
+                        }
+                    }*/
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                            validationError.PropertyName,
+                            validationError.ErrorMessage);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
             /* if (ModelState.IsValid)
              {
                  db.Reports.Add(report);
@@ -85,7 +143,6 @@ namespace GAPv3.Controllers
              ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
              ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
              return View(report);*/
-            return View();
         }
 
         // GET: Reports/Edit/5

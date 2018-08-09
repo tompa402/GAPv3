@@ -11,10 +11,11 @@ namespace GAPv3.Models
     {
         [Key, Column(Order = 0)]
         public int ReportId { get; set; }
+        public virtual Report Report { get; set; }
 
         [Key, Column(Order = 1)]
         public int NormItemId { get; set; }
-        public NormItem NormItem { get; set; }
+        public virtual NormItem NormItem { get; set; }
 
         public int? StatusId { get; set; }
         [Display(Name = "Trenutni status")]

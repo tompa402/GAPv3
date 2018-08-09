@@ -31,6 +31,23 @@ namespace GAPv3.DAL
             // TODO: remove after enabling DATA MIGRATIONS --> in add migration we will disable delete on cascade.
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<ReportValue>().HasKey(q =>
+                new {
+                    q.ReportId,
+                    q.NormItemId
+                });
+
+            // Relationships
+            modelBuilder.Entity<ReportValue>()
+                .HasRequired(t => t.Report)
+                .WithMany(t => t.ReportValue)
+                .HasForeignKey(t => t.ReportId);
+
+            modelBuilder.Entity<ReportValue>()
+                .HasRequired(t => t.NormItem)
+                .WithMany(t => t.ReportValue)
+                .HasForeignKey(t => t.NormItemId);
         }
     }
 }

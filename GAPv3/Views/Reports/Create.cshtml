@@ -46,52 +46,65 @@
                 </tr>
             </thead>
             <tbody>
-            @{ var parent = Model.ReportValues; }
-            @for (int i = 0; i < Model.ReportValues.Count(); i++)
-            {
-
-                <tr>
-                    @Html.HiddenFor(m => m.ReportValues[i].NormItem.NormItemId, new {Value = Model.ReportValues[i].NormItem.NormItemId})
-                    <td>
-                        @Html.DisplayFor(model => model.ReportValues[i].NormItem.Order)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)
-                    </td>
-                    <td>@Html.DropDownListFor(model => model.ReportValues[i].StatusId, (SelectList) ViewBag.StatusId, "- Please Select -", htmlAttributes: new {@class = "form-control"})</td>
-                    <td>@Html.TextBoxFor(model => model.ReportValues[i].Note, new {@class = "form-control"})</td>
-                </tr>
-                var children = Model.ReportValues[i].Children;
-                for (int j = 0; j < children.Count(); j++)
+                @{ var parent = Model.ReportValues; }
+                @for (int i = 0; i < Model.ReportValues.Count(); i++)
                 {
-                    <tr>
-                        @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItem.NormItemId, new {Value = Model.ReportValues[i].Children[j].NormItem.NormItemId})
+                    <tr class="bg-light text-dark">
+                        @Html.HiddenFor(m => m.ReportValues[i].NormItem.NormItemId, new { Value = Model.ReportValues[i].NormItem.NormItemId })
+                        @Html.HiddenFor(m => m.ReportValues[i].NormItemId, new { Value = Model.ReportValues[i].NormItemId })
                         <td>
-                            @parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order)
+                            @Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)
+                            @Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)
                         </td>
-                        <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].StatusId, (SelectList) ViewBag.StatusId, "- Please Select -", htmlAttributes: new {@class = "form-control"})</td>
-                        <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Note, new {@class = "form-control"})</td>
+                        <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
+                        <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
                     </tr>
-                    var grandChildren = children[j].Children;
-                    for (int k = 0; k < grandChildren.Count(); k++)
+                    var children = Model.ReportValues[i].Children;
+                    for (int j = 0; j < children.Count(); j++)
                     {
-                        <tr>
-                            @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItem.NormItemId, new {Value = Model.ReportValues[i].Children[j].Children[k].NormItem.NormItemId})
+                        var parentCss = children[j].NormItem.IsItem ? "" : "bg-light text-dark";
+                        <tr class=@parentCss>
+                            @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItem.NormItemId, new { Value = Model.ReportValues[i].Children[j].NormItem.NormItemId })
+                            @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItemId, new { Value = Model.ReportValues[i].Children[j].NormItemId })
                             <td>
-                                @parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order)
+                                @parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)
+                                @Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)
                             </td>
-                            <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].StatusId, (SelectList) ViewBag.StatusId, "- Please Select -", htmlAttributes: new {@class = "form-control"})</td>
-                            <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Children[k].Note, new {@class = "form-control"})</td>
+                            @if (children[j].NormItem.IsItem)
+                        {
+                                <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Note, new { @class = "form-control" })</td>
+                            }
+                            else
+                            {
+                                <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
+                                <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
+                            }
+
                         </tr>
+                        var grandChildren = children[j].Children;
+                        for (int k = 0; k < grandChildren.Count(); k++)
+                        {
+                            <tr>
+                                @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItem.NormItemId, new { Value = Model.ReportValues[i].Children[j].Children[k].NormItem.NormItemId })
+                                @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItemId, new { Value = Model.ReportValues[i].Children[j].Children[k].NormItemId })
+
+                                <td>
+                                    @parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)
+                                </td>
+                                <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
+                                <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Children[k].Note, new { @class = "form-control" })</td>
+                            </tr>
+                        }
                     }
                 }
-            }
             </tbody>
         </table>
 
@@ -101,7 +114,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")

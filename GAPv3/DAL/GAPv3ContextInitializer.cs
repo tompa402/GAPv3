@@ -15,11 +15,13 @@ namespace GAPv3.DAL
             // loading default values
             context.Norms.Add(new Norm()
             {
+                NormId = 1,
                 Name = "HRN ISO/IEC 27001:2013",
                 Description = "Informacijska tehnologija - Sigurnosne tehnike - Sustavi upravljanja informacijskom sigurnošću - Zahtjevi"
             });
             context.Norms.Add(new Norm()
             {
+                NormId = 2,
                 Name = "HRN ISO/IEC 27002:2013",
                 Description = "Information technology – Security techniques – Code of practice for information security controls"
             });
@@ -30,42 +32,42 @@ namespace GAPv3.DAL
             context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
             context.Reports.Add(new Report() { Name = "Custom report 2", NormId = 2, OrganisationId = 2 });
 
-            context.NormItems.Add(new NormItem() { Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Razumijevanje potreba i očekivanja zainteresiranih strana", IsItem = true, Order = 2, ParentId = 1, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Definiranje opsega ISMS-a", IsItem = true, Order = 3, ParentId = 1, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Sustav upravljanja informacijskom sigurnošću", IsItem = true, Order = 4, ParentId = 1, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Rukovodstvo", IsItem = false, ParentId = null, Order = 5, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Rukovodstvo i predanost menadžmenta", IsItem = true, Order = 1, ParentId = 6, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "ISMS politika", IsItem = true, Order = 2, ParentId = 6, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Uloge, odgovornosti i ovlasti", IsItem = true, Order = 3, ParentId = 6, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Planiranje", IsItem = false, ParentId = null, Order = 6, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Aktivnosti za prepoznavanje rizika i prilika", IsItem = false, Order = 1, ParentId = 10, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Općenito", IsItem = true, Order = 1, ParentId = 11, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Procjena rizika informacijske sigurnosti", IsItem = true, Order = 2, ParentId = 11, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Obrada rizika informacijske sigurnosti", IsItem = true, Order = 3, ParentId = 11, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Ciljevi ISMS-a i planovi za njihovo ostvarivanje", IsItem = true, Order = 2, ParentId = 10, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Podrška", IsItem = false, ParentId = null, Order = 7, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Resursi", IsItem = true, Order = 1, ParentId = 16, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Kompetencije", IsItem = true, Order = 2, ParentId = 16, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Awareness", IsItem = true, Order = 3, ParentId = 16, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Komunikacija", IsItem = true, Order = 4, ParentId = 16, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Dokumentirane informacije", IsItem = false, Order = 5, ParentId = 16, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Općenito", Order = 1, IsItem = true, ParentId = 21, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Izrada i ažuriranje", IsItem = true, Order = 2, ParentId = 21, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Kontrola dokumentiranih informacija", IsItem = true, Order = 3, ParentId = 21, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Operacije", IsItem = false, ParentId = null, Order = 8, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Operativno planiranje i nadzor", IsItem = true, Order = 1, ParentId = 25, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Procjena rizika informacijske sigurnosti", IsItem = true, Order = 2, ParentId = 25, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Obrada rizika informacijske sigurnosti", IsItem = true, Order = 3, ParentId = 25, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Ocjenjivanje uspješnosti", IsItem = false, ParentId = null, Order = 9, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Praćenje, mjerenje, analiza i procjena", IsItem = true, Order = 1, ParentId = 29, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Interni audit", IsItem = true, Order = 2, ParentId = 29, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Ocjena sustava od strane Uprave", IsItem = true, Order = 3, ParentId = 29, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Poboljšanja", IsItem = false, ParentId = null, Order = 10, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Nesukladnosti i korektivne aktivnosti", IsItem = true, Order = 1, ParentId = 33, NormId = 1 });
-            context.NormItems.Add(new NormItem() { Name = "Kontinuirano poboljšavanje", IsItem = true, Order = 2, ParentId = 33, NormId = 1 });
-
+            context.NormItems.Add(new NormItem() { NormItemId = 1, Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 2, Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 3, Name = "Razumijevanje potreba i očekivanja zainteresiranih strana", IsItem = true, Order = 2, ParentId = 1, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 4, Name = "Definiranje opsega ISMS-a", IsItem = true, Order = 3, ParentId = 1, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 5, Name = "Sustav upravljanja informacijskom sigurnošću", IsItem = true, Order = 4, ParentId = 1, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 6, Name = "Rukovodstvo", IsItem = false, ParentId = null, Order = 5, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 7, Name = "Rukovodstvo i predanost menadžmenta", IsItem = true, Order = 1, ParentId = 6, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 8, Name = "ISMS politika", IsItem = true, Order = 2, ParentId = 6, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 9, Name = "Uloge, odgovornosti i ovlasti", IsItem = true, Order = 3, ParentId = 6, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 10, Name = "Planiranje", IsItem = false, ParentId = null, Order = 6, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 11, Name = "Aktivnosti za prepoznavanje rizika i prilika", IsItem = false, Order = 1, ParentId = 10, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 12, Name = "Općenito", IsItem = true, Order = 1, ParentId = 11, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 13, Name = "Procjena rizika informacijske sigurnosti", IsItem = true, Order = 2, ParentId = 11, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 14, Name = "Obrada rizika informacijske sigurnosti", IsItem = true, Order = 3, ParentId = 11, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 15, Name = "Ciljevi ISMS-a i planovi za njihovo ostvarivanje", IsItem = true, Order = 2, ParentId = 10, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 16, Name = "Podrška", IsItem = false, ParentId = null, Order = 7, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 17, Name = "Resursi", IsItem = true, Order = 1, ParentId = 16, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 18, Name = "Kompetencije", IsItem = true, Order = 2, ParentId = 16, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 19, Name = "Awareness", IsItem = true, Order = 3, ParentId = 16, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 20, Name = "Komunikacija", IsItem = true, Order = 4, ParentId = 16, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 21, Name = "Dokumentirane informacije", IsItem = false, Order = 5, ParentId = 16, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 22, Name = "Općenito", Order = 1, IsItem = true, ParentId = 21, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 23, Name = "Izrada i ažuriranje", IsItem = true, Order = 2, ParentId = 21, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 24, Name = "Kontrola dokumentiranih informacija", IsItem = true, Order = 3, ParentId = 21, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 25, Name = "Operacije", IsItem = false, ParentId = null, Order = 8, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 26, Name = "Operativno planiranje i nadzor", IsItem = true, Order = 1, ParentId = 25, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 27, Name = "Procjena rizika informacijske sigurnosti", IsItem = true, Order = 2, ParentId = 25, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 28, Name = "Obrada rizika informacijske sigurnosti", IsItem = true, Order = 3, ParentId = 25, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 29, Name = "Ocjenjivanje uspješnosti", IsItem = false, ParentId = null, Order = 9, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 30, Name = "Praćenje, mjerenje, analiza i procjena", IsItem = true, Order = 1, ParentId = 29, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 31, Name = "Interni audit", IsItem = true, Order = 2, ParentId = 29, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 32, Name = "Ocjena sustava od strane Uprave", IsItem = true, Order = 3, ParentId = 29, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 33, Name = "Poboljšanja", IsItem = false, ParentId = null, Order = 10, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 34, Name = "Nesukladnosti i korektivne aktivnosti", IsItem = true, Order = 1, ParentId = 33, NormId = 1 });
+            context.NormItems.Add(new NormItem() { NormItemId = 35, Name = "Kontinuirano poboljšavanje", IsItem = true, Order = 2, ParentId = 33, NormId = 1 });
+            context.SaveChanges();
             // report ISO2
             context.NormItems.Add(new NormItem() { Name = "Politike ISMS-a", IsItem = false, ParentId = null, Order = 5, NormId = 2 });
             context.NormItems.Add(new NormItem() { Name = "Politika informacijske sigurnosti", IsItem = false, ParentId = 36, Order = 1, NormId = 2 });
