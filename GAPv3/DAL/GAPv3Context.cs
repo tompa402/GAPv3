@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using GAPv3.Migrations;
 using GAPv3.Models;
 
 namespace GAPv3.DAL
@@ -27,27 +28,6 @@ namespace GAPv3.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // TODO: remove after enabling DATA MIGRATIONS --> in add migration we will disable delete on cascade.
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-            modelBuilder.Entity<ReportValue>().HasKey(q =>
-                new {
-                    q.ReportId,
-                    q.NormItemId
-                });
-
-            // Relationships
-            modelBuilder.Entity<ReportValue>()
-                .HasRequired(t => t.Report)
-                .WithMany(t => t.ReportValue)
-                .HasForeignKey(t => t.ReportId);
-
-            modelBuilder.Entity<ReportValue>()
-                .HasRequired(t => t.NormItem)
-                .WithMany(t => t.ReportValue)
-                .HasForeignKey(t => t.NormItemId);
         }
     }
 }

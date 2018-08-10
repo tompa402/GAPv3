@@ -50,7 +50,6 @@
                 @for (int i = 0; i < Model.ReportValues.Count(); i++)
                 {
                     <tr class="bg-light text-dark">
-                        @Html.HiddenFor(m => m.ReportValues[i].NormItem.NormItemId, new { Value = Model.ReportValues[i].NormItem.NormItemId })
                         @Html.HiddenFor(m => m.ReportValues[i].NormItemId, new { Value = Model.ReportValues[i].NormItemId })
                         <td>
                             @Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).
@@ -66,7 +65,6 @@
                     {
                         var parentCss = children[j].NormItem.IsItem ? "" : "bg-light text-dark";
                         <tr class=@parentCss>
-                            @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItem.NormItemId, new { Value = Model.ReportValues[i].Children[j].NormItem.NormItemId })
                             @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItemId, new { Value = Model.ReportValues[i].Children[j].NormItemId })
                             <td>
                                 @parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).
@@ -90,9 +88,7 @@
                         for (int k = 0; k < grandChildren.Count(); k++)
                         {
                             <tr>
-                                @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItem.NormItemId, new { Value = Model.ReportValues[i].Children[j].Children[k].NormItem.NormItemId })
                                 @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItemId, new { Value = Model.ReportValues[i].Children[j].Children[k].NormItemId })
-
                                 <td>
                                     @parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).
                                 </td>

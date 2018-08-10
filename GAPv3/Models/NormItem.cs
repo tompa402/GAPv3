@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using GAPv3.Migrations;
 
 namespace GAPv3.Models
 {
@@ -24,6 +25,7 @@ namespace GAPv3.Models
         [ForeignKey("ParentId")]
         public virtual ICollection<NormItem> Children { get; set; }
 
+        [ForeignKey("NormItemId")]
         public virtual ICollection<ReportValue> ReportValue { get; set; }
     }
 }

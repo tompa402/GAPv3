@@ -47,7 +47,11 @@ namespace GAPv3.Controllers
         // GET: Reports/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            ReportViewModel reportViwModel = new ReportViewModel();
+            reportViwModel.ReportValues =
+                db.ReportValues.Where(x => x.NormItem.ParentId == null && x.ReportId == id).ToList();
+
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -56,7 +60,8 @@ namespace GAPv3.Controllers
             {
                 return HttpNotFound();
             }
-            return View(report);
+            return View(report);*/
+            return View("Index");
         }
 
         // GET: Reports/Create
@@ -77,60 +82,7 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReportViewModel reportViwModel)
         {
-            Report report = new Report()
-            {
-                Name = reportViwModel.Name,
-                NormId = 1,
-                OrganisationId = reportViwModel.OrganisationId
-            };
-            db.Reports.Add(report);
-            db.SaveChanges();
-
-            int reportId = report.ReportId;
-
-            foreach (var parent in reportViwModel.ReportValues)
-            {
-                foreach (var child in parent.Children)
-                {
-                   // if (child.NormItem.IsItem)
-                    //{
-                    ReportValue asd = new ReportValue()
-                    {
-                        NormItemId = child.NormItemId,
-                        ReportId = reportId
-                    };
-                        child.ReportId = reportId;
-                        db.ReportValues.Add(asd);
-                        db.SaveChanges();
-                   // }
-                    /*else
-                    {
-                        foreach (var grandChild in child.Children)
-                        {
-                            grandChild.ReportId = reportId;
-                            db.ReportValues.Add(grandChild);
-                            db.SaveChanges();
-                        }
-                    }*/
-                }
-            }
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}",
-                            validationError.PropertyName,
-                            validationError.ErrorMessage);
-                    }
-                }
-            }
+            service.SaveReportValues(reportViwModel);
 
             return RedirectToAction("Index");
             /* if (ModelState.IsValid)
@@ -148,7 +100,7 @@ namespace GAPv3.Controllers
         // GET: Reports/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -159,7 +111,8 @@ namespace GAPv3.Controllers
             }
             ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
             ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
-            return View(report);
+            return View(report);*/
+            return View();
         }
 
         // POST: Reports/Edit/5
@@ -169,7 +122,7 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReportId,Name,NormId,OrganisationId")] Report report)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 db.Entry(report).State = EntityState.Modified;
                 db.SaveChanges();
@@ -177,7 +130,8 @@ namespace GAPv3.Controllers
             }
             ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
             ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
-            return View(report);
+            return View(report);*/
+            return View();
         }
 
         // GET: Reports/Delete/5

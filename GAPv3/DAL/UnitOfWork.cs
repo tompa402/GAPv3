@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using GAPv3.Migrations;
 using GAPv3.Models;
 
 namespace GAPv3.DAL
@@ -12,6 +13,7 @@ namespace GAPv3.DAL
         private GenericRepository<Norm> normRepository;
         private GenericRepository<Report> reportRepository;
         private GenericRepository<NormItem> normItemRepository;
+        private GenericRepository<ReportValue> reportValueRepository;
 
         public GenericRepository<Norm> NormRepository
         {
@@ -49,6 +51,19 @@ namespace GAPv3.DAL
                     this.normItemRepository = new GenericRepository<NormItem>(context);
                 }
                 return normItemRepository;
+            }
+        }
+
+        public GenericRepository<ReportValue> ReportValueRepository
+        {
+            get
+            {
+
+                if (this.reportValueRepository == null)
+                {
+                    this.reportValueRepository = new GenericRepository<ReportValue>(context);
+                }
+                return reportValueRepository;
             }
         }
 

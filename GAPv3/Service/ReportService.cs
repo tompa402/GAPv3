@@ -54,5 +54,37 @@ namespace GAPv3.Service
             return reportViwModel;
         }
 
+        public void SaveReportValues(ReportViewModel reportViwModel)
+        {
+            Report report = new Report()
+            {
+                Name = reportViwModel.Name,
+                NormId = 1,
+                OrganisationId = reportViwModel.OrganisationId
+            };
+            unitOfWork.ReportRepository.Insert(report);
+            unitOfWork.Save();
+
+            int reportId = report.ReportId;
+
+            foreach (var parent in reportViwModel.ReportValues)
+            {
+                parent.ReportId = reportId;
+                unitOfWork.ReportValueRepository.Insert(parent);
+                foreach (var child in parent.Children)
+                {
+                    child.ReportId = reportId;
+                    unitOfWork.ReportValueRepository.Insert(child);
+
+                    foreach (var grandChild in child.Children)
+                    {
+                        grandChild.ReportId = reportId;
+                        unitOfWork.ReportValueRepository.Insert(grandChild);
+                    }
+                }
+                unitOfWork.Save();
+            }
+
+        }
     }
 }

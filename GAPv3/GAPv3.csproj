@@ -183,6 +183,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808091646185_Initial.cs" />
+    <Compile Include="Migrations\201808091646185_Initial.Designer.cs">
+      <DependentUpon>201808091646185_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091652236_CreateNorm_UpdateNormItem%28SelfReference%29.cs" />
+    <Compile Include="Migrations\201808091652236_CreateNorm_UpdateNormItem%28SelfReference%29.Designer.cs">
+      <DependentUpon>201808091652236_CreateNorm_UpdateNormItem%28SelfReference%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091655424_CreateOrganisation_UpdateReport%28FK_orgId%29.cs" />
+    <Compile Include="Migrations\201808091655424_CreateOrganisation_UpdateReport%28FK_orgId%29.Designer.cs">
+      <DependentUpon>201808091655424_CreateOrganisation_UpdateReport%28FK_orgId%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091705552_CreateStatus_UpdateReportValue%28FK_statusId%29.cs" />
+    <Compile Include="Migrations\201808091705552_CreateStatus_UpdateReportValue%28FK_statusId%29.Designer.cs">
+      <DependentUpon>201808091705552_CreateStatus_UpdateReportValue%28FK_statusId%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091749245_UpdateReportValue%28FK_selfReference%29.cs" />
+    <Compile Include="Migrations\201808091749245_UpdateReportValue%28FK_selfReference%29.Designer.cs">
+      <DependentUpon>201808091749245_UpdateReportValue%28FK_selfReference%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Norm.cs" />
     <Compile Include="Models\NormItem.cs" />
     <Compile Include="Models\Organisation.cs" />
@@ -299,6 +320,23 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808091646185_Initial.resx">
+      <DependentUpon>201808091646185_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091652236_CreateNorm_UpdateNormItem%28SelfReference%29.resx">
+      <DependentUpon>201808091652236_CreateNorm_UpdateNormItem%28SelfReference%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091655424_CreateOrganisation_UpdateReport%28FK_orgId%29.resx">
+      <DependentUpon>201808091655424_CreateOrganisation_UpdateReport%28FK_orgId%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091705552_CreateStatus_UpdateReportValue%28FK_statusId%29.resx">
+      <DependentUpon>201808091705552_CreateStatus_UpdateReportValue%28FK_statusId%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091749245_UpdateReportValue%28FK_selfReference%29.resx">
+      <DependentUpon>201808091749245_UpdateReportValue%28FK_selfReference%29.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
