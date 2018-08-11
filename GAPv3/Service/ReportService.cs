@@ -17,10 +17,9 @@ namespace GAPv3.Service
             this.unitOfWork = unitOfWork;
         }
 
-        public ReportViewModel CreateReportViewModel(List<NormItem> rv)
+        public List<ReportValue> CreateInitialReportValuesList(List<NormItem> rv)
         {
-            ReportViewModel reportViwModel = new ReportViewModel();
-
+            List<ReportValue> newList = new List<ReportValue>();
             foreach (var parent in rv)
             {
                 ReportValue temp = new ReportValue()
@@ -28,7 +27,6 @@ namespace GAPv3.Service
                     NormItemId = parent.NormItemId,
                     NormItem = parent
                 };
-                reportViwModel.ReportValues.Add(temp);
 
                 foreach (var child in parent.Children.OrderBy(x => x.Order).ToList())
                 {
@@ -37,7 +35,6 @@ namespace GAPv3.Service
                         NormItemId = child.NormItemId,
                         NormItem = child
                     };
-                    temp.Children.Add(tempChild);
 
                     foreach (var grandChild in child.Children.OrderBy(x => x.Order).ToList())
                     {
@@ -48,42 +45,12 @@ namespace GAPv3.Service
                         };
                         tempChild.Children.Add(tempGrandChild);
                     }
+                    temp.Children.Add(tempChild);
                 }
+                newList.Add(temp);
             }
 
-            return reportViwModel;
-        }
-
-        public void SaveReportValues(ReportViewModel reportViwModel)
-        {
-            Report report = new Report()
-            {
-                Name = reportViwModel.Name,
-                NormId = 1,
-                OrganisationId = reportViwModel.OrganisationId
-            };
-            unitOfWork.ReportRepository.Insert(report);
-            unitOfWork.Save();
-
-            int reportId = report.ReportId;
-
-            foreach (var parent in reportViwModel.ReportValues)
-            {
-                parent.ReportId = reportId;
-                unitOfWork.ReportValueRepository.Insert(parent);
-                foreach (var child in parent.Children)
-                {
-                    child.ReportId = reportId;
-                    unitOfWork.ReportValueRepository.Insert(child);
-
-                    foreach (var grandChild in child.Children)
-                    {
-                        grandChild.ReportId = reportId;
-                        unitOfWork.ReportValueRepository.Insert(grandChild);
-                    }
-                }
-                unitOfWork.Save();
-            }
+            return newList;
         }
 
         public int GetPopunjenost(List<ReportValue> rv)
