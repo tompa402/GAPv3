@@ -64,11 +64,16 @@ namespace GAPv3.Controllers
         public ActionResult Create(int? id)
         {
             var rv = unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
-            ReportViewModel reportViwModel = service.CreateReportViewModel(rv);
+
+            Report report = new Report()
+            {
+                NormId = id.GetValueOrDefault(),
+                ReportValues = service.CreateInitialReportValuesList(rv)
+            };
 
             ViewBag.StatusId = new SelectList(db.Statuses, "StatusId", "Name");
             ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name");
-            return View(reportViwModel);
+            return View(report);
         }
 
         // POST: Reports/Create
@@ -76,10 +81,11 @@ namespace GAPv3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ReportViewModel reportViwModel)
+        public ActionResult Create(Report report)
         {
-            service.SaveReportValues(reportViwModel);
-
+            unitOfWork.ReportRepository.Insert(report);
+            unitOfWork.Save();
+            // TODO: refactor return View method, below is example
             return RedirectToAction("Index");
             /* if (ModelState.IsValid)
              {
