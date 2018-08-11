@@ -84,7 +84,13 @@ namespace GAPv3.Service
                 }
                 unitOfWork.Save();
             }
+        }
 
+        public int GetPopunjenost(List<ReportValue> rv)
+        {
+            decimal popunjenost = (decimal)rv.Count(x => x.StatusId != null) / rv.Count(x => x.NormItem.IsItem) * 100;
+            int postotakPopunjenosti = (int)Math.Round(popunjenost);
+            return postotakPopunjenosti;
         }
     }
 }

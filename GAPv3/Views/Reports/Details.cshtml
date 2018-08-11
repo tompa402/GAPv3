@@ -9,32 +9,72 @@
 <div>
     <h4>Report</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Norm.Name)
-        </dt>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Norm.Name)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Organisation.Name)</h6>
+            <p class="card-text">
+                <!-- TODO: get data from database -->
+                Ovi korisnici mogu ažurirati:
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-secondary">Secondary</span>
+            </p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
+                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.ReportValues[1].Status)</th>
+                <th>@Html.DisplayNameFor(model => model.ReportValues[1].Note)</th>
+            </tr>
+        </thead>
 
-        <dd>
-            @Html.DisplayFor(model => model.Norm.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Organisation.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Organisation.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+        <tbody>
+            @{ var parent = Model.ReportValues; }
+            @for (int i = 0; i < Model.ReportValues.Count; i++)
+            {
+                <tr class="bg-light text-dark">
+                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).</td>
+                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)</td>
+                    <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
+                    <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
+                </tr>
+                var children = Model.ReportValues[i].Children;
+                for (int j = 0; j < children.Count(); j++)
+                {
+                    <tr>
+                        <td>@parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).</td>
+                        <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)</td>
+                        @if (children[j].NormItem.IsItem)
+                        {
+                            <td class=@children[j].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Status.Name)</td>
+                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Note)</td>
+                        }
+                        else
+                        {
+                            <td>@Html.HiddenFor(model => model.ReportValues[i].Children[j].Status.Name)</td>
+                            <td>@Html.HiddenFor(model => model.ReportValues[i].Children[j].Note)</td>
+                        }
+                    </tr>
+                    var grandChildren = children[j].Children;
+                    for (int k = 0; k < grandChildren.Count(); k++)
+                    {
+                        <tr>
+                            <td>@parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).</td>
+                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)</td>
+                            <td class=@grandChildren[k].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Status.Name)</td>
+                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Note)</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |

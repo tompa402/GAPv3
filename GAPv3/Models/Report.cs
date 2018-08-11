@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GAPv3.Migrations;
+using GAPv3.Service;
 
 namespace GAPv3.Models
 {
@@ -19,6 +20,6 @@ namespace GAPv3.Models
         public int OrganisationId { get; set; }
         public virtual Organisation Organisation { get; set; }
 
-        public virtual ICollection<ReportValue> ReportValue { get; set; }
+        public virtual List<ReportValue> ReportValues { get; set; }
     }
 }

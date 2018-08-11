@@ -30,14 +30,14 @@ namespace GAPv3.Controllers
         // GET: Reports
         public ActionResult Index(int? id)
         {
-            var reports = unitOfWork.ReportRepository.Get(filter: x => x.NormId == id, includeProperties: "Norm, Organisation");
+            var reports = unitOfWork.ReportRepository.Get(filter: x => x.NormId == id);
 
             List<ReportViewModel> reportsViewModel = new List<ReportViewModel>();
 
             foreach (Report report in reports)
             {
                 var reportViewModel = Mapper.Map<Report, ReportViewModel>(report);
-                // TODO: getPopunjenost from service after initial data is inserted
+                reportViewModel.Popunjenost = service.GetPopunjenost(reportViewModel.ReportValues);
                 reportsViewModel.Add(reportViewModel);
             }
 
@@ -47,11 +47,7 @@ namespace GAPv3.Controllers
         // GET: Reports/Details/5
         public ActionResult Details(int? id)
         {
-            ReportViewModel reportViwModel = new ReportViewModel();
-            reportViwModel.ReportValues =
-                db.ReportValues.Where(x => x.NormItem.ParentId == null && x.ReportId == id).ToList();
-
-            /*if (id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -60,8 +56,8 @@ namespace GAPv3.Controllers
             {
                 return HttpNotFound();
             }
-            return View(report);*/
-            return View("Index");
+            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
+            return View(report);
         }
 
         // GET: Reports/Create
