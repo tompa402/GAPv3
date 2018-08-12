@@ -102,7 +102,7 @@ namespace GAPv3.Controllers
         // GET: Reports/Edit/5
         public ActionResult Edit(int? id)
         {
-            /*if (id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -111,10 +111,11 @@ namespace GAPv3.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
-            ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
-            return View(report);*/
-            return View();
+            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
+
+            ViewBag.StatusId = db.Statuses;
+            ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name");
+            return View(report);
         }
 
         // POST: Reports/Edit/5
@@ -122,8 +123,13 @@ namespace GAPv3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ReportId,Name,NormId,OrganisationId")] Report report)
+        public ActionResult Edit(Report report)
         {
+            unitOfWork.ReportRepository.Update(report);
+            service.UpdateReportValues(report.ReportValues);
+            unitOfWork.Save();
+            // TODO: refactor return View method, below is example
+            return RedirectToAction("Index");
             /*if (ModelState.IsValid)
             {
                 db.Entry(report).State = EntityState.Modified;
@@ -133,7 +139,6 @@ namespace GAPv3.Controllers
             ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name", report.NormId);
             ViewBag.OrganisationId = new SelectList(db.Organisations, "OrganisationId", "Name", report.OrganisationId);
             return View(report);*/
-            return View();
         }
 
         // GET: Reports/Delete/5

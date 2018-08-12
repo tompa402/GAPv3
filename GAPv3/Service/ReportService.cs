@@ -53,6 +53,23 @@ namespace GAPv3.Service
             return newList;
         }
 
+        public void UpdateReportValues(List<ReportValue> rv)
+        {
+            foreach (var parent in rv)
+            {
+                foreach (var child in parent.Children)
+                {
+                    unitOfWork.ReportValueRepository.Update(child);
+
+                    foreach (var grandChild in child.Children)
+                    {
+                        unitOfWork.ReportValueRepository.Update(grandChild);
+                    }
+                }
+            }
+        }
+
+
         public int GetPopunjenost(List<ReportValue> rv)
         {
             decimal popunjenost = (decimal)rv.Count(x => x.StatusId != null) / rv.Count(x => x.NormItem.IsItem) * 100;
