@@ -14,6 +14,8 @@ namespace GAPv3.DAL
         private GenericRepository<Report> reportRepository;
         private GenericRepository<NormItem> normItemRepository;
         private GenericRepository<ReportValue> reportValueRepository;
+        private GenericRepository<Status> statusRepository;
+        private GenericRepository<Organisation> organisationRepository;
 
         public GenericRepository<Norm> NormRepository
         {
@@ -64,6 +66,32 @@ namespace GAPv3.DAL
                     this.reportValueRepository = new GenericRepository<ReportValue>(context);
                 }
                 return reportValueRepository;
+            }
+        }
+
+        public GenericRepository<Status> StatusRepository
+        {
+            get
+            {
+
+                if (this.statusRepository == null)
+                {
+                    this.statusRepository = new GenericRepository<Status>(context);
+                }
+                return statusRepository;
+            }
+        }
+
+        public GenericRepository<Organisation> OrganisationRepository
+        {
+            get
+            {
+
+                if (this.organisationRepository == null)
+                {
+                    this.organisationRepository = new GenericRepository<Organisation>(context);
+                }
+                return organisationRepository;
             }
         }
 

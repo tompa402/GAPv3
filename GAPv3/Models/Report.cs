@@ -12,6 +12,8 @@ namespace GAPv3.Models
     {
         public int ReportId { get; set; }
         [Display(Name = "Naziv izvještaja")]
+        [Required(ErrorMessage = "Nedostaje naziv izvještaja")]
+        [StringLength(160)]
         public string Name { get; set; }
 
         public int NormId { get; set; }

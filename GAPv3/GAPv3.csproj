@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201808091749245_UpdateReportValue%28FK_selfReference%29.Designer.cs">
       <DependentUpon>201808091749245_UpdateReportValue%28FK_selfReference%29.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808171934244_UpdateReportNameLength..cs" />
+    <Compile Include="Migrations\201808171934244_UpdateReportNameLength..Designer.cs">
+      <DependentUpon>201808171934244_UpdateReportNameLength..cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Norm.cs" />
     <Compile Include="Models\NormItem.cs" />
@@ -376,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808091749245_UpdateReportValue%28FK_selfReference%29.resx">
       <DependentUpon>201808091749245_UpdateReportValue%28FK_selfReference%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808171934244_UpdateReportNameLength..resx">
+      <DependentUpon>201808171934244_UpdateReportNameLength..cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
