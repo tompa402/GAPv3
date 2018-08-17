@@ -32,3 +32,11 @@ textarea {
 .orange {
     background-color: #FFC870;
 }
+
+.fa-red {
+    color: red;
+}
+
+.fa-green {
+    color: green;
+}

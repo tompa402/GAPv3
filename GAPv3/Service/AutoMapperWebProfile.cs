@@ -13,6 +13,8 @@ namespace GAPv3.Service
         public AutoMapperWebProfile()
         {
             CreateMap<Report, ReportViewModel>();
+            CreateMap<ReportValue, ReportValueStatisticViewModel>();
+            CreateMap<Report, ReportStatisticViewModel>();
         }
 
         public static void Run()

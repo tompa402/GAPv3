@@ -7,9 +7,10 @@ using GAPv3.Models;
 
 namespace GAPv3.ViewModels
 {
-    public class ReportViewModel
+    public class ReportStatisticViewModel
     {
         public int ReportId { get; set; }
+        [Display(Name = "Naziv izvještaja")]
         public string Name { get; set; }
 
         public virtual Norm Norm { get; set; }
@@ -18,5 +19,7 @@ namespace GAPv3.ViewModels
 
         [Display(Name = "Popunjenost")]
         public int Popunjenost { get; set; }
+
+        public virtual List<ReportValueStatisticViewModel> ReportValues { get; set; }
     }
 }

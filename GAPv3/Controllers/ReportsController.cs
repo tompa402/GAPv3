@@ -37,7 +37,7 @@ namespace GAPv3.Controllers
             foreach (Report report in reports)
             {
                 var reportViewModel = Mapper.Map<Report, ReportViewModel>(report);
-                reportViewModel.Popunjenost = service.GetPopunjenost(reportViewModel.ReportValues);
+                reportViewModel.Popunjenost = service.GetPopunjenost(report.ReportValues);
                 reportsViewModel.Add(reportViewModel);
             }
 
@@ -58,6 +58,15 @@ namespace GAPv3.Controllers
             }
             report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
             return View(report);
+        }
+
+        // GET: Reports/Statistic/5
+        public ActionResult Statistic(int? id)
+        {
+            Report report = db.Reports.Find(id);
+            var reportViewModel = service.GetStatisticForReport(report);
+
+            return View(reportViewModel);
         }
 
         // GET: Reports/Create
@@ -86,7 +95,7 @@ namespace GAPv3.Controllers
             unitOfWork.ReportRepository.Insert(report);
             unitOfWork.Save();
             // TODO: refactor return View method, below is example
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = report.NormId });
             /* if (ModelState.IsValid)
              {
                  db.Reports.Add(report);
