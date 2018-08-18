@@ -132,7 +132,7 @@ namespace GAPv3.Controllers
                 _unitOfWork.ReportRepository.Update(report);
                 _service.UpdateReportValues(report.ReportValues);
                 _unitOfWork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = report.NormId });
             }
 
             var rv = _unitOfWork.NormItemRepository.Get(filter: x => x.NormId == report.NormId && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
@@ -165,7 +165,7 @@ namespace GAPv3.Controllers
             Report report = _unitOfWork.ReportRepository.GetById(id);
             _unitOfWork.ReportRepository.Delete(report);
             _unitOfWork.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = report.NormId });
         }
 
         protected override void Dispose(bool disposing)
