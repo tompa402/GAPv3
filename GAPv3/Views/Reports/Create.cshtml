@@ -42,6 +42,17 @@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
                     <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
+                    @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                    {
+                        if (property.HaveControl)
+                        {
+                            <th>@Html.DisplayNameFor(model => model.ReportValues[1].Control)</th>
+                        }
+                        if (property.HaveReason)
+                        {
+                            <th>@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</th>
+                        }
+                    }
                     <th>@Html.DisplayNameFor(model => model.ReportValues[1].Status)</th>
                     <th>@Html.DisplayNameFor(model => model.ReportValues[1].Note)</th>
                 </tr>
@@ -75,6 +86,17 @@
                             </td>
                             @if (children[j].NormItem.IsItem)
                         {
+                            foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                             {
+                                 if (property.HaveControl)
+                                 {
+                                     <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].ControlId, (SelectList)ViewBag.ControlId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
+                                 }
+                                 if (property.HaveReason)
+                                 {
+                                     <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].ReasonId, (SelectList)ViewBag.ReasonId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
+                                 }
+                             }
                                 <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
                                 <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Note, new { @class = "form-control" })</td>
                             }
@@ -96,6 +118,17 @@
                                 <td>
                                     @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)
                                 </td>
+                                @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                                {
+                                if (property.HaveControl)
+                                {
+                                <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].ControlId, (SelectList)ViewBag.ControlId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
+                                }
+                                if (property.HaveReason)
+                                {
+                                <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].ReasonId, (SelectList)ViewBag.ReasonId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
+                                }
+                                }
                                 <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
                                 <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Children[k].Note, new { @class = "form-control" })</td>
                             </tr>

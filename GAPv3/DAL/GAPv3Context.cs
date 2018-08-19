@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using GAPv3.Migrations;
 using GAPv3.Models;
+using Control = GAPv3.Models.Control;
 
 namespace GAPv3.DAL
 {
@@ -24,6 +25,10 @@ namespace GAPv3.DAL
         public DbSet<NormItem> NormItems { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<ReportValue> ReportValues { get; set; }
+        public DbSet<Control> Controls { get; set; }
+        public DbSet<Reason> Reasons { get; set; }
+        public DbSet<ReportValueAdditionalItem> ReportValueAdditionalItems { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

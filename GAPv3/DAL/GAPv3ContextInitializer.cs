@@ -33,6 +33,23 @@ namespace GAPv3.DAL
             context.Statuses.Add(new Status() { StatusId = 2, Name = "Djelomice implementiran" });
             context.Statuses.Add(new Status() { StatusId = 3, Name = "Nije implementiran" });
 
+            context.Controls.Add(new Control() { ControlId = 1, Name = "Da" });
+            context.Controls.Add(new Control() { ControlId = 2, Name = "Ne" });
+
+            context.Reasons.Add(new Reason() { ReasonId = 1, Name = "Zakonska obaveza" });
+            context.Reasons.Add(new Reason() { ReasonId = 2, Name = "Ugovorna obaveza" });
+            context.Reasons.Add(new Reason() { ReasonId = 3, Name = "Poslovna potreba" });
+            context.Reasons.Add(new Reason() { ReasonId = 4, Name = "Procjena rizika" });
+            context.Reasons.Add(new Reason() { ReasonId = 5, Name = "Dobra praksa" });
+            context.Reasons.Add(new Reason() { ReasonId = 6, Name = "Drugi razlog" });
+            context.Reasons.Add(new Reason() { ReasonId = 7, Name = "Nije primjenjivo" });
+
+            context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 1, HaveControl = false, HaveReason = false });
+            context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 2, HaveControl = true, HaveReason = true });
+
+            context.Users.Add(new User() { Email = "tnovak@vvg.hr", Password = "2" });
+            context.Users.Add(new User() { Email = "jpavlo@vvg.hr", Password = "josip" });
+
             context.NormItems.Add(new NormItem() { NormItemId = 1, Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 2, Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 3, Name = "Razumijevanje potreba i očekivanja zainteresiranih strana", IsItem = true, Order = 2, ParentId = 1, NormId = 1 });

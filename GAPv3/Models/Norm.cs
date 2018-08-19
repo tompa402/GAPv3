@@ -14,6 +14,6 @@ namespace GAPv3.Models
 
         public virtual ICollection<NormItem> NormItem { get; set; }
         public virtual ICollection<Report> Report { get; set; }
-        // public virtual ICollection<ReportAdditionalItem> ReportAdditionalItem { get; set; }
+        public virtual ICollection<ReportValueAdditionalItem> ReportValueAdditionalItem { get; set; }
     }
 }

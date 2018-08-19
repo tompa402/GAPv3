@@ -21,18 +21,16 @@ namespace GAPv3.Models
         [Display(Name = "Trenutni status")]
         public virtual Status Status { get; set; }
 
-        //public int? ControlId { get; set; }
-        //[Display(Name = "Odabir kontrole")]
-        //public Control Control { get; set; }
+        public int? ControlId { get; set; }
+        [Display(Name = "Odabir kontrole")]
+        public virtual Control Control { get; set; }
 
-        //public int? ReasonId { get; set; }
-        //[Display(Name = "Razlog odabira")]
-        //public Reason Reason { get; set; }
+        public int? ReasonId { get; set; }
+        [Display(Name = "Razlog odabira")]
+        public virtual Reason Reason { get; set; }
 
         [Display(Name = "Napomena")]
         public string Note { get; set; }
-
-        // public List<ReportAdditionalItem> AdditionalItems { get; set; }
 
         // property is virtual because of lazy loading. At this state we don't need to use include(select) in query.
         public virtual List<ReportValue> Children { get; set; }

@@ -207,13 +207,33 @@
     <Compile Include="Migrations\201808171934244_UpdateReportNameLength..Designer.cs">
       <DependentUpon>201808171934244_UpdateReportNameLength..cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808181953259_UpgradeAdditionalReportItems.cs" />
+    <Compile Include="Migrations\201808181953259_UpgradeAdditionalReportItems.Designer.cs">
+      <DependentUpon>201808181953259_UpgradeAdditionalReportItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808182002186_UpgradeAdditionalReportItems-Update1.cs" />
+    <Compile Include="Migrations\201808182002186_UpgradeAdditionalReportItems-Update1.Designer.cs">
+      <DependentUpon>201808182002186_UpgradeAdditionalReportItems-Update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808182035006_UpgradeAdditionalReportItems-Update2.cs" />
+    <Compile Include="Migrations\201808182035006_UpgradeAdditionalReportItems-Update2.Designer.cs">
+      <DependentUpon>201808182035006_UpgradeAdditionalReportItems-Update2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808190956493_UpgradeAdditionalReportItems-Update3.cs" />
+    <Compile Include="Migrations\201808190956493_UpgradeAdditionalReportItems-Update3.Designer.cs">
+      <DependentUpon>201808190956493_UpgradeAdditionalReportItems-Update3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
     <Compile Include="Models\NormItem.cs" />
     <Compile Include="Models\Organisation.cs" />
+    <Compile Include="Models\Reason.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\ReportValue.cs" />
+    <Compile Include="Models\ReportValueAdditionalItem.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\ReportService.cs" />
@@ -383,6 +403,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808171934244_UpdateReportNameLength..resx">
       <DependentUpon>201808171934244_UpdateReportNameLength..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808181953259_UpgradeAdditionalReportItems.resx">
+      <DependentUpon>201808181953259_UpgradeAdditionalReportItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808182002186_UpgradeAdditionalReportItems-Update1.resx">
+      <DependentUpon>201808182002186_UpgradeAdditionalReportItems-Update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808182035006_UpgradeAdditionalReportItems-Update2.resx">
+      <DependentUpon>201808182035006_UpgradeAdditionalReportItems-Update2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808190956493_UpgradeAdditionalReportItems-Update3.resx">
+      <DependentUpon>201808190956493_UpgradeAdditionalReportItems-Update3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

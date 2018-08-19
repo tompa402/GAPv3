@@ -74,7 +74,8 @@ namespace GAPv3.Controllers
                 NormId = id.GetValueOrDefault(),
                 ReportValues = _service.CreateInitialReportValuesList(rv)
             };
-
+            ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
+            ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
             ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
             ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
             return View(report);
@@ -96,6 +97,8 @@ namespace GAPv3.Controllers
 
             var rv = _unitOfWork.NormItemRepository.Get(filter: x => x.NormId == report.NormId && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
             report.ReportValues = _service.CreateInitialReportValuesList(rv);
+            ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
+            ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
             ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
             ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
             return View(report);
