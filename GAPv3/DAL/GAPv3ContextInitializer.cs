@@ -49,6 +49,18 @@ namespace GAPv3.DAL
 
             context.Users.Add(new User() { Email = "tnovak@vvg.hr", Password = "2" });
             context.Users.Add(new User() { Email = "jpavlo@vvg.hr", Password = "josip" });
+            context.Users.Add(new User() { Email = "test@vvg.hr", Password = "test" });
+
+            context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });
+            context.Roles.Add(new Role() { RoleId = 2, RoleName = "user" });
+            context.Roles.Add(new Role() { RoleId = 3, RoleName = "guest" });
+
+            context.UserRoles.Add(new UserRole() { RoleId = 1, UserId = 1 });
+            context.UserRoles.Add(new UserRole() { RoleId = 2, UserId = 2 });
+
+            context.UserOrganisations.Add(new UserOrganisation() { UserId = 1, OrganisationId = 1 });
+            context.UserOrganisations.Add(new UserOrganisation() { UserId = 2, OrganisationId = 1 });
+            context.UserOrganisations.Add(new UserOrganisation() { UserId = 3, OrganisationId = 2 });
 
             context.NormItems.Add(new NormItem() { NormItemId = 1, Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 2, Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });

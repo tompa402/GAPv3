@@ -29,6 +29,9 @@ namespace GAPv3.DAL
         public DbSet<Reason> Reasons { get; set; }
         public DbSet<ReportValueAdditionalItem> ReportValueAdditionalItems { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<UserOrganisation> UserOrganisations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

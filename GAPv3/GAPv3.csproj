@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201808190956493_UpgradeAdditionalReportItems-Update3.Designer.cs">
       <DependentUpon>201808190956493_UpgradeAdditionalReportItems-Update3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808191732302_AddRoles-UserRoles-UserOrganisations.cs" />
+    <Compile Include="Migrations\201808191732302_AddRoles-UserRoles-UserOrganisations.Designer.cs">
+      <DependentUpon>201808191732302_AddRoles-UserRoles-UserOrganisations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -232,8 +236,11 @@
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\ReportValue.cs" />
     <Compile Include="Models\ReportValueAdditionalItem.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserOrganisation.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\ReportService.cs" />
@@ -415,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808190956493_UpgradeAdditionalReportItems-Update3.resx">
       <DependentUpon>201808190956493_UpgradeAdditionalReportItems-Update3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808191732302_AddRoles-UserRoles-UserOrganisations.resx">
+      <DependentUpon>201808191732302_AddRoles-UserRoles-UserOrganisations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

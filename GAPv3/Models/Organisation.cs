@@ -15,5 +15,6 @@ namespace GAPv3.Models
         public string Name { get; set; }
 
         public virtual ICollection<Report> Report { get; set; }
+        public ICollection<UserOrganisation> UserOrganisations { get; set; }
     }
 }
