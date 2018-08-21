@@ -15,7 +15,9 @@ namespace GAPv3
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<GAPv3Context>(new GAPv3ContextInitializer());
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+            Database.SetInitializer(new GAPv3ContextInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
