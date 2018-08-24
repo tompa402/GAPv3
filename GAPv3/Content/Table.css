@@ -1,0 +1,31 @@
+﻿.divTable{
+	display: table;
+	width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	display: table-header-group;
+    font-weight: bold;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    text-align: inherit;
+}
+.divTableCell, .divTableHead {
+	display: table-cell;
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
