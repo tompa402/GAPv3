@@ -6,7 +6,7 @@
 
 <h2>Details</h2>
 
-<div>
+<th>
     <h4>Report</h4>
     <hr />
     <div class="card">
@@ -29,6 +29,17 @@
             <tr>
                 <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
                 <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
+                @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                {
+                    if (property.HaveControl)
+                    {
+                        <th>@Html.DisplayNameFor(model => model.ReportValues[1].Control)</th>
+                    }
+                    if (property.HaveReason)
+                    {
+                        <th>@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</th>
+                    }
+                }
                 <th>@Html.DisplayNameFor(model => model.ReportValues[1].Status)</th>
                 <th>@Html.DisplayNameFor(model => model.ReportValues[1].Note)</th>
             </tr>
@@ -38,9 +49,21 @@
             @{ var parent = Model.ReportValues; }
             @for (int i = 0; i < Model.ReportValues.Count; i++)
             {
-                <tr class="bg-light text-dark">
+                var parentCss = Model.ReportValues[i].NormItem.IsItem ? "" : "bg-light text-dark";
+                <tr class="bg-light text-dark @parentCss">
                     <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).</td>
                     <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)</td>
+                    @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                    {
+                    if (property.HaveControl)
+                    {
+                    <td>@Html.DisplayFor(model => model.ReportValues[i].Control.Name)</td>
+                    }
+                    if (property.HaveReason)
+                    {
+                    <td>@Html.DisplayFor(model => model.ReportValues[i].Reason.Name)</td>
+                    }
+                    }
                     <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
                     <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
                 </tr>
@@ -50,16 +73,21 @@
                     <tr>
                         <td>@parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).</td>
                         <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)</td>
-                        @if (children[j].NormItem.IsItem)
-                        {
+
+                            @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                             {
+                                 if (property.HaveControl)
+                                 {
+                                     <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Control.Name)</td>
+                                 }
+                                 if (property.HaveReason)
+                                 {
+                                     <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Reason.Name)</td>
+                                 }
+                             }
                             <td class=@children[j].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Status.Name)</td>
                             <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Note)</td>
-                        }
-                        else
-                        {
-                            <td>@Html.HiddenFor(model => model.ReportValues[i].Children[j].Status.Name)</td>
-                            <td>@Html.HiddenFor(model => model.ReportValues[i].Children[j].Note)</td>
-                        }
+
                     </tr>
                     var grandChildren = children[j].Children;
                     for (int k = 0; k < grandChildren.Count(); k++)
@@ -67,6 +95,17 @@
                         <tr>
                             <td>@parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).</td>
                             <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)</td>
+                            @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                            {
+                                if (property.HaveControl)
+                                {
+                                    <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Control.Name)</td>
+                                }
+                                if (property.HaveReason)
+                                {
+                                    <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Reason.Name)</td>
+                                }
+                            }
                             <td class=@grandChildren[k].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Status.Name)</td>
                             <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Note)</td>
                         </tr>
