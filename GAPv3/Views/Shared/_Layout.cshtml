@@ -19,6 +19,27 @@
             <div class="navbar-nav">
                 <a> @Html.ActionLink("Korisnici", "Index", new { controller = "Users" }, new { @class = "nav-item nav-link" })</a>
                 <a> @Html.ActionLink("Organizacije", "Index", new { controller = "Organisations" }, new { @class = "nav-item nav-link" })</a>
+                @{
+                    if (Request.IsAuthenticated)
+                    {
+                        var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
+                        <a class="nav-item nav-link">@string.Format("Dobrodošli, {0}", identity.User.Email)</a>
+                    }
+                }
+                @{
+                    if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logout","Account", FormMethod.Post,new{ id = "logoutForm"}))
+                        {
+                        
+                            <a class="nav-item nav-link", href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login","Login","Account", new { @class = "nav-item nav-link" })
+                    }
+                }
             </div>
         </div>
 
