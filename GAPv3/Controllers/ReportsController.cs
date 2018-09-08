@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoMapper;
 using GAPv3.DAL;
@@ -178,6 +179,19 @@ namespace GAPv3.Controllers
                 _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult GetRainfallChart()
+        {
+            var key = new Chart(width: 600, height: 400)
+                .AddSeries(
+                    chartType: "pie",
+                    legend: "Rainfall",
+                    xValue: new[] { "Jan", "Feb", "Mar", "Apr", "May" },
+                    yValues: new[] { "20", "20", "40", "10", "10" })
+                .Write();
+
+            return null;
         }
     }
 }
