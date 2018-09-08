@@ -174,8 +174,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="CustomIdentity.cs" />
+    <Compile Include="CustomMembershipProvider.cs" />
+    <Compile Include="CustomPrincipal.cs" />
+    <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="DAL\GAPv3Context.cs" />
     <Compile Include="DAL\GAPv3ContextInitializer.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
@@ -382,6 +387,8 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\Statistic.cshtml" />
     <Content Include="Views\Reports\EditorTemplates\_ReportValue.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
