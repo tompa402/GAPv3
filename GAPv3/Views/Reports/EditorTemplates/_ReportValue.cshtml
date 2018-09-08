@@ -1,0 +1,79 @@
+﻿@model GAPv3.Models.ReportValue
+
+@{
+    var parentCss = Model.NormItem.IsItem ? "" : "bg-light text-dark";
+    var orderLayer1 = "";
+    var orderLayer2 = "";
+    if (Model.NormItem.Parent != null)
+    {
+
+        if (Model.NormItem.Parent.Parent != null)
+        {
+            orderLayer1 = Model.NormItem.Parent.Parent.Order + ".";
+            orderLayer2 = Model.NormItem.Parent.Order + ".";
+        }
+        else
+        {
+            orderLayer1 = Model.NormItem.Parent.Order + ".";
+        }
+    }
+}
+<div class="divTableRow @parentCss">
+    @Html.HiddenFor(m => m.NormItemId, htmlAttributes: new { @data_val = "false" })
+    <div class="divTableCell">
+        @orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).
+    </div>
+    <div class="divTableCell">
+        @Html.DisplayFor(model => model.NormItem.Name)
+    </div>
+    @if (Model.NormItem.IsItem)
+    {
+        foreach (var property in Model.NormItem.Norm.ReportValueAdditionalItem)
+        {
+            if (property.HaveControl)
+            {
+                <div class="divTableCell">
+                    @foreach (var item in (SelectList)ViewBag.ControlId)
+                    {
+
+                        <label>
+                            @Html.RadioButtonFor(model => model.ControlId, item.Value, htmlAttributes: new { @data_val = "false" })
+                            @item.Text
+                        </label>
+                    }
+                </div>
+            }
+            if (property.HaveReason)
+            {
+                <div class="divTableCell">
+                    @Html.DropDownListFor(model => model.ReasonId, (SelectList)ViewBag.ReasonId, "Odaberite...", htmlAttributes: new { @data_val = "false" })
+                </div>
+            }
+        }
+
+        <div class="divTableCell">
+            @Html.DropDownListFor(model => model.StatusId, (SelectList)ViewBag.StatusId, "Odaberite...", htmlAttributes: new { @data_val = "false" })
+        </div>
+        <div class="divTableCell">
+            @Html.TextBoxFor(model => model.Note, htmlAttributes: new { @data_val = "false" })
+        </div>
+    }
+    else
+    {
+        <div class="divTableCell"></div>
+        <div class="divTableCell"></div>
+        foreach (var property in Model.NormItem.Norm.ReportValueAdditionalItem)
+        {
+            if (property.HaveControl)
+            {
+                <div class="divTableCell"></div>
+            }
+            if (property.HaveReason)
+            {
+                <div class="divTableCell"></div>
+            }
+        }
+
+    }
+
+</div>

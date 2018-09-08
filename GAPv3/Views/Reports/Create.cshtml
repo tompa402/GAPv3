@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div>
         <h4>Report</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,123 +20,64 @@
             <div class="card-body">
                 @Html.HiddenFor(m => m.NormId, new { Value = Model.NormId })
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.OrganisationId, "OrganisationId", htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.OrganisationId, "OrganisationId", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("OrganisationId", null, htmlAttributes: new {@class = "form-control"})
-                        @Html.ValidationMessageFor(model => model.OrganisationId, "", new {@class = "text-danger"})
+                        @Html.DropDownList("OrganisationId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrganisationId, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
-                    <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
+        
+        <div class="divTable">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</div>
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</div>
                     @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
                     {
                         if (property.HaveControl)
                         {
-                            <th>@Html.DisplayNameFor(model => model.ReportValues[1].Control)</th>
+                            <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Control)</div>
                         }
                         if (property.HaveReason)
                         {
-                            <th>@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</th>
+                            <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</div>
                         }
                     }
-                    <th>@Html.DisplayNameFor(model => model.ReportValues[1].Status)</th>
-                    <th>@Html.DisplayNameFor(model => model.ReportValues[1].Note)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ var parent = Model.ReportValues; }
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Status)</div>
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Note)</div>
+                </div>
+            </div>
+        
+            <div class="divTableBody">
                 @for (int i = 0; i < Model.ReportValues.Count(); i++)
                 {
-                    <tr class="bg-light text-dark">
-                        @Html.HiddenFor(m => m.ReportValues[i].NormItemId, new { Value = Model.ReportValues[i].NormItemId })
-                        <td>
-                            @Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)
-                        </td>
-                        <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
-                        <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
-                    </tr>
-                    var children = Model.ReportValues[i].Children;
-                    for (int j = 0; j < children.Count(); j++)
-                    {
-                        var parentCss = children[j].NormItem.IsItem ? "" : "bg-light text-dark";
-                        <tr class=@parentCss>
-                            @Html.HiddenFor(m => m.ReportValues[i].Children[j].NormItemId, new { Value = Model.ReportValues[i].Children[j].NormItemId })
-                            <td>
-                                @parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)
-                            </td>
-                            @if (children[j].NormItem.IsItem)
-                        {
-                            foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                             {
-                                 if (property.HaveControl)
-                                 {
-                                     <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].ControlId, (SelectList)ViewBag.ControlId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
-                                 }
-                                 if (property.HaveReason)
-                                 {
-                                     <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].ReasonId, (SelectList)ViewBag.ReasonId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
-                                 }
-                             }
-                                <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
-                                <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Note, new { @class = "form-control" })</td>
-                            }
-                            else
-                            {
-                                <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
-                                <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
-                            }
+                    @Html.EditorFor(model => model.ReportValues[i], "_ReportValue")
 
-                        </tr>
-                        var grandChildren = children[j].Children;
-                        for (int k = 0; k < grandChildren.Count(); k++)
+                    for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
+                    {
+                        @Html.EditorFor(model => model.ReportValues[i].Children[j], "_ReportValue")
+
+                        for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
                         {
-                            <tr>
-                                @Html.HiddenFor(m => m.ReportValues[i].Children[j].Children[k].NormItemId, new { Value = Model.ReportValues[i].Children[j].Children[k].NormItemId })
-                                <td>
-                                    @parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)
-                                </td>
-                                @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                                {
-                                if (property.HaveControl)
-                                {
-                                <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].ControlId, (SelectList)ViewBag.ControlId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
-                                }
-                                if (property.HaveReason)
-                                {
-                                <th>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].ReasonId, (SelectList)ViewBag.ReasonId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</th>
-                                }
-                                }
-                                <td>@Html.DropDownListFor(model => model.ReportValues[i].Children[j].Children[k].StatusId, (SelectList)ViewBag.StatusId, "- Please Select -", htmlAttributes: new { @class = "form-control" })</td>
-                                <td>@Html.TextBoxFor(model => model.ReportValues[i].Children[j].Children[k].Note, new { @class = "form-control" })</td>
-                            </tr>
+                            @Html.EditorFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValue")
                         }
                     }
                 }
-            </tbody>
-        </table>
+            </div>
+
+        </div>
+
+
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -144,7 +85,7 @@
             </div>
         </div>
     </div>
-                    }
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index", new { id = Model.NormId })

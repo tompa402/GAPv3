@@ -23,8 +23,42 @@ namespace GAPv3.DAL
                 Description = "Information technology – Security techniques – Code of practice for information security controls"
             });
 
-            context.Organisations.Add(new Organisation() { OrganisationId = 1, Name = "Test organizacija" });
-            context.Organisations.Add(new Organisation() { OrganisationId = 2, Name = "Druga test organizacija" });
+            context.Organisations.Add(new Organisation()
+            {
+                OrganisationId = 1,
+                Name = "Test organizacija",
+                Address = "Test address",
+                AssetOne = "DA",
+                AssetTwo = "asd",
+                AssetThree = "Test",
+                BuildingPossession = "Da",
+                EmployeesNumber = "160",
+                GuardService = "Da",
+                ITService = "Da",
+                Location = "Test lokacija",
+                Ownership = "Full",
+                Size = "Ne znma",
+                Type = "4",
+                VideoSurveillance = "Da"
+            });
+            context.Organisations.Add(new Organisation()
+            {
+                OrganisationId = 2,
+                Name = "Druga test organizacija",
+                Address = "Test address",
+                AssetOne = "DA",
+                AssetTwo = "asd",
+                AssetThree = "Test",
+                BuildingPossession = "Da",
+                EmployeesNumber = "160",
+                GuardService = "Da",
+                ITService = "Da",
+                Location = "Test lokacija",
+                Ownership = "Full",
+                Size = "Ne znma",
+                Type = "4",
+                VideoSurveillance = "Da"
+            });
 
             context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
             context.Reports.Add(new Report() { Name = "Custom report 2", NormId = 2, OrganisationId = 2 });
@@ -47,9 +81,30 @@ namespace GAPv3.DAL
             context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 1, HaveControl = false, HaveReason = false });
             context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 2, HaveControl = true, HaveReason = true });
 
-            context.Users.Add(new User() { Email = "tnovak@vvg.hr", Password = "2" });
-            context.Users.Add(new User() { Email = "jpavlo@vvg.hr", Password = "josip" });
-            context.Users.Add(new User() { Email = "test@vvg.hr", Password = "test" });
+            context.Users.Add(new User()
+            {
+                Email = "tnovak@vvg.hr",
+                Password = "2",
+                Name = "Tom",
+                LastName = "N",
+                JMBAG = 123456
+            });
+            context.Users.Add(new User()
+            {
+                Email = "jpavlov@vvg.hr",
+                Password = "josip",
+                Name = "J",
+                LastName = "Lo",
+                JMBAG = 123456
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test@vvg.hr",
+                Password = "test",
+                Name = "Test",
+                LastName = "Testić",
+                JMBAG = 123456
+            });
 
             context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });
             context.Roles.Add(new Role() { RoleId = 2, RoleName = "user" });
@@ -367,8 +422,8 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 37, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 38, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 39, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 38, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 39, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -381,16 +436,16 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 41, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 42, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 43, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 44, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 45, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 46, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 42, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 43, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 44, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 45, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 46, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 47, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 48, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 49, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 48, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 49, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -403,18 +458,18 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 51, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 52, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 53, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 52, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 53, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 54, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 55, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 56, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 57, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 55, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 56, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 57, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 58, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 59, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 59, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -427,22 +482,22 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 61, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 62, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 63, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 64, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 65, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 62, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 63, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 64, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 65, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 66, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 67, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 68, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 69, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 67, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 68, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 69, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 70, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 71, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 72, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 73, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 71, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 72, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 73, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -455,29 +510,29 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 75, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 76, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 77, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 76, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 77, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 78, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 79, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 80, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 81, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 82, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 83, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 84, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 79, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 80, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 81, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 82, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 83, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 84, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 85, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 86, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 86, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 87, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 88, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 89, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 90, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 91, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 92, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 88, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 89, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 90, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 91, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 92, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -490,8 +545,8 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 94, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 95, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 96, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 95, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 96, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -504,24 +559,24 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 98, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 99, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 100, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 101, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 102, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 103, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 104, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 99, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 100, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 101, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 102, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 103, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 104, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 105, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 106, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 107, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 108, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 109, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 110, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 111, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 112, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 113, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 114, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 106, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 107, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 108, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 109, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 110, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 111, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 112, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 113, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 114, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -534,38 +589,38 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 116, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 117, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 118, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 119, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 120, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 117, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 118, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 119, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 120, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 121, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 122, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 122, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 123, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 124, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 124, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 125, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 126, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 127, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 128, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 129, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 126, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 127, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 128, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 129, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 130, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 131, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 131, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 132, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 133, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 134, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 133, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 134, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 135, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 136, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 136, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -578,16 +633,16 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 138, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 139, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 140, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 141, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 139, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 140, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 141, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 142, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 143, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 144, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 145, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 146, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 143, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 144, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 145, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 146, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -600,25 +655,25 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 148, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 149, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 150, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 151, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 149, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 150, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 151, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 152, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 153, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 154, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 155, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 156, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 157, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 158, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 159, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 160, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 161, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 153, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 154, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 155, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 156, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 157, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 158, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 159, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 160, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 161, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 162, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 163, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 163, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -631,14 +686,14 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 165, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 166, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 167, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 168, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 166, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 167, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 168, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 169, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 170, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 171, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 170, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 171, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -651,13 +706,13 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 173, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 174, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 175, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 176, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 177, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 178, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 179, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 180, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 174, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 175, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 176, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 177, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 178, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 179, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 180, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -670,13 +725,13 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 182, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 183, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 184, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 185, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 183, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 184, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 185, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 186, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 187, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 187, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
@@ -689,17 +744,17 @@ namespace GAPv3.DAL
                 {
                     new ReportValue() { ReportId = 2, NormItemId = 189, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 190, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 191, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 192, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 193, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 194, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 190, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 191, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 192, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 193, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 194, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } },
                     new ReportValue() { ReportId = 2, NormItemId = 195, Children = new List<ReportValue>
                     {
-                        new ReportValue() { ReportId = 2, NormItemId = 196, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 197, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" },
-                        new ReportValue() { ReportId = 2, NormItemId = 198, /*ControlId = 1, ReasonId = 1,*/ StatusId = 1, Note = "Napomena test" }
+                        new ReportValue() { ReportId = 2, NormItemId = 196, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 197, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" },
+                        new ReportValue() { ReportId = 2, NormItemId = 198, ControlId = 1, ReasonId = 1, StatusId = 1, Note = "Napomena test" }
                     } }
                 }
             });
