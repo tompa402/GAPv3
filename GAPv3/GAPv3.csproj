@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201808191732302_AddRoles-UserRoles-UserOrganisations.Designer.cs">
       <DependentUpon>201808191732302_AddRoles-UserRoles-UserOrganisations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809081041243_UserAndOrganisationModelUpdate.cs" />
+    <Compile Include="Migrations\201809081041243_UserAndOrganisationModelUpdate.Designer.cs">
+      <DependentUpon>201809081041243_UserAndOrganisationModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -427,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808191732302_AddRoles-UserRoles-UserOrganisations.resx">
       <DependentUpon>201808191732302_AddRoles-UserRoles-UserOrganisations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809081041243_UserAndOrganisationModelUpdate.resx">
+      <DependentUpon>201809081041243_UserAndOrganisationModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -23,8 +23,42 @@ namespace GAPv3.DAL
                 Description = "Information technology – Security techniques – Code of practice for information security controls"
             });
 
-            context.Organisations.Add(new Organisation() { OrganisationId = 1, Name = "Test organizacija" });
-            context.Organisations.Add(new Organisation() { OrganisationId = 2, Name = "Druga test organizacija" });
+            context.Organisations.Add(new Organisation()
+            {
+                OrganisationId = 1,
+                Name = "Test organizacija",
+                Address = "Test address",
+                AssetOne = "DA",
+                AssetTwo = "asd",
+                AssetThree = "Test",
+                BuildingPossession = "Da",
+                EmployeesNumber = "160",
+                GuardService = "Da",
+                ITService = "Da",
+                Location = "Test lokacija",
+                Ownership = "Full",
+                Size = "Ne znma",
+                Type = "4",
+                VideoSurveillance = "Da"
+            });
+            context.Organisations.Add(new Organisation()
+            {
+                OrganisationId = 2,
+                Name = "Druga test organizacija",
+                Address = "Test address",
+                AssetOne = "DA",
+                AssetTwo = "asd",
+                AssetThree = "Test",
+                BuildingPossession = "Da",
+                EmployeesNumber = "160",
+                GuardService = "Da",
+                ITService = "Da",
+                Location = "Test lokacija",
+                Ownership = "Full",
+                Size = "Ne znma",
+                Type = "4",
+                VideoSurveillance = "Da"
+            });
 
             context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
             context.Reports.Add(new Report() { Name = "Custom report 2", NormId = 2, OrganisationId = 2 });
@@ -47,9 +81,30 @@ namespace GAPv3.DAL
             context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 1, HaveControl = false, HaveReason = false });
             context.ReportValueAdditionalItems.Add(new ReportValueAdditionalItem() { NormId = 2, HaveControl = true, HaveReason = true });
 
-            context.Users.Add(new User() { Email = "tnovak@vvg.hr", Password = "2" });
-            context.Users.Add(new User() { Email = "jpavlo@vvg.hr", Password = "josip" });
-            context.Users.Add(new User() { Email = "test@vvg.hr", Password = "test" });
+            context.Users.Add(new User()
+            {
+                Email = "tnovak@vvg.hr",
+                Password = "2",
+                Name = "Tom",
+                LastName = "N",
+                JMBAG = 123456
+            });
+            context.Users.Add(new User()
+            {
+                Email = "jpavlov@vvg.hr",
+                Password = "josip",
+                Name = "J",
+                LastName = "Lo",
+                JMBAG = 123456
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test@vvg.hr",
+                Password = "test",
+                Name = "Test",
+                LastName = "Testić",
+                JMBAG = 123456
+            });
 
             context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });
             context.Roles.Add(new Role() { RoleId = 2, RoleName = "user" });
