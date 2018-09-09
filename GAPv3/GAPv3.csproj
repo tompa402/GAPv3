@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201809081041243_UserAndOrganisationModelUpdate.Designer.cs">
       <DependentUpon>201809081041243_UserAndOrganisationModelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809091113438_UpdateUserModelForHashCode.cs" />
+    <Compile Include="Migrations\201809091113438_UpdateUserModelForHashCode.Designer.cs">
+      <DependentUpon>201809091113438_UpdateUserModelForHashCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809081041243_UserAndOrganisationModelUpdate.resx">
       <DependentUpon>201809081041243_UserAndOrganisationModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809091113438_UpdateUserModelForHashCode.resx">
+      <DependentUpon>201809091113438_UpdateUserModelForHashCode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

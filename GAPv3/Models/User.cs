@@ -24,6 +24,9 @@ namespace GAPv3.Models
 
         [Display(Name = "JMBAG")]
         public int JMBAG { get; set; }
+
+        public string Token { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
 
