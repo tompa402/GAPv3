@@ -1,0 +1,37 @@
+﻿@model GAPv3.Models.User
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-signin">
+        <div class="form-group" style="text-align: center; margin-top: 2em;">
+            <img class="align-middle" src="~/Content/images/logo.png" alt="logoimg" width="25%" height="25%" style="border-radius:20px; ">
+            <hr />
+            @Html.ValidationSummary(true, "Pogrešan email ili lozinka!", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-4" })
+                <div class="col-md-4 offset-4">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-4", id = "inputEmail" })
+                <div class="col-md-4 offset-4">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <input type="submit" value="Prijava" class="btn btn-danger" />
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
