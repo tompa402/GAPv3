@@ -28,6 +28,23 @@ namespace GAPv3
                       "~/Content/site.css",
                       "~/Content/font-awesome/css/font-awesome.css",
                       "~/Content/Table.css"));
+
+            bundles.Add(new StyleBundle("~/Content/cssAdmin").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/font-awesome/css/font-awesome.css",
+                "~/Content/sb-admin/sb-admin.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapAdmin").Include(
+                "~/Scripts/umd/popper.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery-easing").Include(
+                "~/Scripts/jquery-easing/jquery.easing.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
+                "~/Scripts/sb-admin/sb-admin.js"));
+
         }
     }
 }
