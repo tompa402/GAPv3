@@ -1,4 +1,5 @@
-﻿@model GAPv3.ViewModels.ReportStatisticViewModel
+﻿@using Highsoft.Web.Mvc.Charts
+@model GAPv3.ViewModels.ReportStatisticViewModel
 @{
     ViewBag.Title = "Statistic";
 }
@@ -25,9 +26,15 @@
             Ukupna razina sukladnosti s normom: <span class="badge badge-info">@Model.Popunjenost% - PROVJERI KALKULACIJU, ovo je test</span>
         </div>
     </div>
-    
+
     <div>
-        <img src="@Url.Action("GetRainfallChart")" alt="Chart" />
+        @for (int i = 0; i < Model.ReportValues.Count; i++)
+        {
+            var chartId = "chart" + i;
+            <div style="float: left" class="col-md-4" id="@chartId">
+                @Html.Highsoft().Highcharts(Model.ReportValues[i].Chart, chartId)
+            </div>
+        }
     </div>
 
     <table class="table">
@@ -97,3 +104,8 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
     @Html.ActionLink("Back to List", "Index", new { id = Model.Norm.NormId })
 </p>
+
+@section Scripts {
+    @Styles.Render("~/Content/HighCharts-css")
+    @Scripts.Render("~/bundles/HighCharts-js")
+}

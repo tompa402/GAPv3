@@ -28,6 +28,12 @@ namespace GAPv3
                       "~/Content/site.css",
                       "~/Content/font-awesome/css/font-awesome.css",
                       "~/Content/Table.css"));
+
+            bundles.Add(new StyleBundle("~/Content/HighCharts-css").Include(
+                "~/Content/HighCharts-css/highcharts.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/HighCharts-js").Include(
+                "~/Scripts/HighCharts-js/highcharts.js"));
         }
     }
 }
