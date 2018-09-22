@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GAPv3.Models;
+using Highsoft.Web.Mvc.Charts;
 
 namespace GAPv3.ViewModels
 {
@@ -37,6 +38,8 @@ namespace GAPv3.ViewModels
         public string IconNoImpl => StatusId == 3 ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red";
 
         public virtual List<ReportValueStatisticViewModel> Children { get; set; }
+
+        public Highcharts Chart { get; set; }
 
         public ReportValueStatisticViewModel()
         {
