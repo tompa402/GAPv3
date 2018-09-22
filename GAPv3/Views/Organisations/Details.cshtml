@@ -1,0 +1,146 @@
+﻿@model GAPv3.Models.Organisation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Organisation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ownership)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ownership)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeesNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeesNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoSurveillance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoSurveillance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingPossession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingPossession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetOne)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetOne)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetTwo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetTwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetThree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetThree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganisationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

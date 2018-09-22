@@ -1,0 +1,123 @@
+﻿@model IEnumerable<GAPv3.Models.Organisation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ownership)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeesNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardService)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoSurveillance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingPossession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITService)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetOne)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetTwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetThree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ownership)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeesNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardService)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VideoSurveillance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingPossession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITService)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetOne)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetTwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetThree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrganisationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrganisationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrganisationId })
+        </td>
+    </tr>
+}
+
+</table>
