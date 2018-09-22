@@ -175,8 +175,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomIdentity.cs" />
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomPrincipal.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\PasswordHandler.cs" />
     <Compile Include="Migrations\201808091646185_Initial.cs" />
     <Compile Include="Migrations\201808091646185_Initial.Designer.cs">
       <DependentUpon>201808091646185_Initial.cs</DependentUpon>
@@ -344,6 +347,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-easing\jquery.easing.compatibility.js" />
+    <Content Include="Scripts\jquery-easing\jquery.easing.js" />
+    <Content Include="Scripts\jquery-easing\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -357,6 +363,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sb-admin\sb-admin-charts.js" />
+    <Content Include="Scripts\sb-admin\sb-admin-charts.min.js" />
+    <Content Include="Scripts\sb-admin\sb-admin-datatables.js" />
+    <Content Include="Scripts\sb-admin\sb-admin-datatables.min.js" />
+    <Content Include="Scripts\sb-admin\sb-admin.js" />
+    <Content Include="Scripts\sb-admin\sb-admin.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -394,9 +406,13 @@
     <Content Include="Views\Reports\EditorTemplates\_ReportValue.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\sb-admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

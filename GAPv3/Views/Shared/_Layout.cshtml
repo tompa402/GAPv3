@@ -17,7 +17,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a> @Html.ActionLink("Korisnici", "Index", new { controller = "Users" }, new { @class = "nav-item nav-link" })</a>
+                <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
                 <a> @Html.ActionLink("Organizacije", "Index", new { controller = "Organisations" }, new { @class = "nav-item nav-link" })</a>
                 @{
                     if (Request.IsAuthenticated)
