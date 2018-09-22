@@ -54,6 +54,11 @@ namespace GAPv3
             bundles.Add(new StyleBundle("~/Content/login").Include(
                 "~/Content/Login.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
+                "~/Content/Chosen/chosen.jquery.js"));
+            bundles.Add(new StyleBundle("~/Content/chosen").Include(
+                "~/Content/Chosen/chosen.css"));
+
         }
     }
 }

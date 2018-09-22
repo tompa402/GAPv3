@@ -195,6 +195,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\PasswordHandler.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Migrations\201808091646185_Initial.cs" />
     <Compile Include="Migrations\201808091646185_Initial.Designer.cs">
       <DependentUpon>201808091646185_Initial.cs</DependentUpon>
@@ -275,6 +276,27 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\Chosen\chosen-sprite.png" />
+    <Content Include="Content\Chosen\chosen.css" />
+    <Content Include="Content\Chosen\chosen.jquery.js" />
+    <Content Include="Content\Chosen\chosen.jquery.min.js" />
+    <Content Include="Content\Chosen\chosen.min.css" />
+    <Content Include="Content\Chosen\chosen.proto.js" />
+    <Content Include="Content\Chosen\chosen.proto.min.js" />
+    <Content Include="Content\Chosen\docsupport\chosen.png" />
+    <Content Include="Content\Chosen\docsupport\init.js" />
+    <Content Include="Content\Chosen\docsupport\init.proto.js" />
+    <Content Include="Content\Chosen\docsupport\jquery-1.12.4.min.js" />
+    <Content Include="Content\Chosen\docsupport\jquery-3.2.1.min.js" />
+    <Content Include="Content\Chosen\docsupport\oss-credit.png" />
+    <Content Include="Content\Chosen\docsupport\prism.css" />
+    <Content Include="Content\Chosen\docsupport\prism.js" />
+    <Content Include="Content\Chosen\docsupport\prototype-1.7.0.0.js" />
+    <Content Include="Content\Chosen\docsupport\style.css" />
+    <Content Include="Content\Chosen\index.html" />
+    <Content Include="Content\Chosen\index.proto.html" />
+    <Content Include="Content\Chosen\options.html" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -403,6 +425,8 @@
     <Content Include="Scripts\HighCharts-js\themes\skies.js.map" />
     <Content Include="Scripts\HighCharts-js\themes\sunset.js.map" />
     <Content Include="Content\HighCharts-css\highcharts.scss" />
+    <Content Include="Content\Chosen\composer.json" />
+    <Content Include="Content\Chosen\LICENSE.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\HighCharts-js\es-modules\error.js" />
     <Content Include="Scripts\HighCharts-js\es-modules\masters\highcharts-3d.src.js" />
