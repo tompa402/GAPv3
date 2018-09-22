@@ -195,7 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\PasswordHandler.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Migrations\201808091646185_Initial.cs" />
     <Compile Include="Migrations\201808091646185_Initial.Designer.cs">
       <DependentUpon>201808091646185_Initial.cs</DependentUpon>
@@ -799,6 +798,7 @@
     <Content Include="Views\Organisations\Details.cshtml" />
     <Content Include="Views\Organisations\Edit.cshtml" />
     <Content Include="Views\Organisations\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

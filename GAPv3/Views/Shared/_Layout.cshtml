@@ -18,40 +18,32 @@
                 <li class="nav-item active">
                     <a>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "nav-item nav-link" })</a>
                 </li>
-                <li class="nav-item">
-                    <a> @Html.ActionLink("Organizacije", "Index", new { controller = "Organisations" }, new { @class = "nav-item nav-link" })</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Organizacije</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a> @Html.ActionLink("Dohvat", "Index", new { controller = "Organisations" }, new { @class = "dropdown-item" })</a>
+                        <a> @Html.ActionLink("Unos", "Create", new { controller = "Organisations" }, new { @class = "dropdown-item" })</a>
+                    </div>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                @{
-                    if (Request.IsAuthenticated)
-                    {
+                <li class="nav-item">
+                    <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
+                </li>
+                <li class="nav-item dropdown">
+                    @{
                         var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
-                        <li class="nav-item">
-                            <a class="nav-item nav-link">@string.Format("Dobrodošli, {0}", identity.User.Email)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
-                        </li>
+                        var mail = identity.User.Email.Substring(0, identity.User.Email.Length-7);
                     }
-                }
-                @{
-                    if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    <a class="nav-link dropdown-toggle nav-item" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@($"Dobrodošli, {mail}")</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a> @Html.ActionLink("Promijeni lozinku", "ChangePassword", new { controller = "Account" }, new { @class = "dropdown-item" })</a>
+                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new {id = "logoutForm"}))
                         {
-                            <li class="nav-item">
-                                <a class="nav-item nav-link" , href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-                            </li>
+                            <a class="dropdown-item" , href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                         }
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a> @Html.ActionLink("Login", "Login", new { controller = "Account" }, new { @class = "nav-item nav-link" })</a>
-                        </li>
-                    }
-                }
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>

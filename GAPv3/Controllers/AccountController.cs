@@ -96,5 +96,10 @@ namespace GAPv3.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
     }
 }
