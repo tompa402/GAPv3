@@ -6,60 +6,55 @@
     <title>@ViewBag.Title - GAP analiza</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
         <a> @Html.ActionLink("GAP Analiza", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
-                <a> @Html.ActionLink("Organizacije", "Index", new { controller = "Organisations" }, new { @class = "nav-item nav-link" })</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "nav-item nav-link" })</a>
+                </li>
+                <li class="nav-item">
+                    <a> @Html.ActionLink("Organizacije", "Index", new { controller = "Organisations" }, new { @class = "nav-item nav-link" })</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
                 @{
                     if (Request.IsAuthenticated)
                     {
                         var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
-                        <a class="nav-item nav-link">@string.Format("Dobrodošli, {0}", identity.User.Email)</a>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link">@string.Format("Dobrodošli, {0}", identity.User.Email)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
+                        </li>
                     }
                 }
                 @{
                     if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("Logout","Account", FormMethod.Post,new{ id = "logoutForm"}))
+                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
                         {
-                        
-                            <a class="nav-item nav-link", href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" , href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            </li>
                         }
                     }
                     else
                     {
-                        @Html.ActionLink("Login","Login","Account", new { @class = "nav-item nav-link" })
+                        <li class="nav-item">
+                            <a> @Html.ActionLink("Login", "Login", new { controller = "Account" }, new { @class = "nav-item nav-link" })</a>
+                        </li>
                     }
                 }
-            </div>
+            </ul>
         </div>
-
     </nav>
-
-    <li>
-        @{
-            if (Request.IsAuthenticated)
-            {
-                using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                {
-                    <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-                }
-            }
-            else
-            {
-                @Html.ActionLink("Login", "Login", "Account")
-            }
-        }
-    </li>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -67,7 +62,6 @@
             <p>&copy; @DateTime.Now.Year - GAP analiza - NPSolutions</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
