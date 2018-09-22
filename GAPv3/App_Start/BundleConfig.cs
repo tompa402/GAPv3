@@ -45,6 +45,12 @@ namespace GAPv3
             bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
                 "~/Scripts/sb-admin/sb-admin.js"));
 
+            bundles.Add(new StyleBundle("~/Content/HighCharts-css").Include(
+                "~/Content/HighCharts-css/highcharts.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/HighCharts-js").Include(
+                "~/Scripts/HighCharts-js/highcharts.js"));
+
         }
     }
 }
