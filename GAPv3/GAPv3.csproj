@@ -283,6 +283,7 @@
     <Content Include="Content\HighCharts-css\themes\grid-light.css" />
     <Content Include="Content\HighCharts-css\themes\sand-signika.css" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Table.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
