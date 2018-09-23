@@ -4,12 +4,20 @@ using System.Net;
 using System.Web.Mvc;
 using GAPv3.DAL;
 using GAPv3.Models;
+using GAPv3.Service;
 using GAPv3.ViewModels;
 
 namespace GAPv3.Controllers
 {
     public class OrganisationsController : Controller
     {
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private readonly OrganisationService _service;
+
+        public OrganisationsController()
+        {
+            _service = new OrganisationService(_unitOfWork);
+        }
         private GAPv3Context db = new GAPv3Context();
 
         // GET: Organisations
@@ -36,7 +44,10 @@ namespace GAPv3.Controllers
         // GET: Organisations/Create
         public ActionResult Create()
         {
-            UserOrganisationViewModel model = new UserOrganisationViewModel();
+            UserOrganisationViewModel model = new UserOrganisationViewModel()
+            {
+                UsersList = _service.GetUser(),
+            };
             return View(model);
         }
 
@@ -45,16 +56,15 @@ namespace GAPv3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrganisationId,Name,Address,Ownership,Type,EmployeesNumber,Size,GuardService,VideoSurveillance,BuildingPossession,ITService,Location,AssetOne,AssetTwo,AssetThree,Created,Modified")] Organisation organisation)
+        public ActionResult Create(UserOrganisationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Organisations.Add(organisation);
-                db.SaveChanges();
+                _service.SaveUserOrganisation(model);
                 return RedirectToAction("Index");
             }
 
-            return View(organisation);
+            return View(model);
         }
 
         // GET: Organisations/Edit/5

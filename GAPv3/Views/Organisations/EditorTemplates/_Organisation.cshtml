@@ -1,0 +1,123 @@
+﻿@model GAPv3.Models.Organisation
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Ownership, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.Ownership, "drzavno") Državno</label>
+        <label>@Html.RadioButtonFor(model => model.Ownership, "privatno") Privatno</label>
+        @Html.ValidationMessageFor(model => model.Ownership, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.Type, "nacionalna") Nacionalna</label>
+        <label>@Html.RadioButtonFor(model => model.Type, "internacionalna") Internacionalna</label>
+        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.EmployeesNumber, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.EmployeesNumber, "1-49") 1-49</label>
+        <label>@Html.RadioButtonFor(model => model.EmployeesNumber, "50-249") 50-249</label>
+        <label>@Html.RadioButtonFor(model => model.EmployeesNumber, "250+") 250+</label>
+        @Html.ValidationMessageFor(model => model.EmployeesNumber, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.Size, "mala") Mala</label>
+        <label>@Html.RadioButtonFor(model => model.Size, "srednja") Srednja</label>
+        <label>@Html.RadioButtonFor(model => model.Size, "velika") Velika</label>
+        @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.GuardService, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.GuardService, "Da") Da</label>
+        <label>@Html.RadioButtonFor(model => model.GuardService, "Ne") Ne</label>
+        @Html.ValidationMessageFor(model => model.GuardService, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.VideoSurveillance, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.VideoSurveillance, "Da") Da</label>
+        <label>@Html.RadioButtonFor(model => model.VideoSurveillance, "Ne") Ne</label>
+        @Html.ValidationMessageFor(model => model.VideoSurveillance, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.BuildingPossession, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.BuildingPossession, "Da") Da</label>
+        <label>@Html.RadioButtonFor(model => model.BuildingPossession, "Ne") Ne</label>
+        @Html.ValidationMessageFor(model => model.BuildingPossession, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.ITService, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        <label>@Html.RadioButtonFor(model => model.ITService, "Da") Da</label>
+        <label>@Html.RadioButtonFor(model => model.ITService, "Ne") Ne</label>
+        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.AssetOne, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AssetOne, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AssetOne, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.AssetTwo, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AssetTwo, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AssetTwo, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(model => model.AssetThree, htmlAttributes: new { @class = "col-form-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AssetThree, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AssetThree, "", new { @class = "text-danger" })
+    </div>
+</div>
