@@ -57,5 +57,24 @@ namespace GAPv3.Service
         {
             return unitOfWork.OrganisationRepository.GetById(id);
         }
+
+        public void UpdateUserOrganisation(Organisation model)
+        {
+            unitOfWork.OrganisationRepository.Update(model);
+            // TODO: implement update of User Organization
+            /*int organisationId = model.Organisation.OrganisationId;
+
+            foreach (int id in model.SelectedUsers)
+            {
+                var UserOrganisation = new UserOrganisation
+                {
+                    OrganisationId = organisationId,
+                    UserId = id
+                };
+                unitOfWork.UserOrganisationRepository.Update(UserOrganisation);
+            }*/
+
+            unitOfWork.Save();
+        }
     }
 }

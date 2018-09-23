@@ -76,7 +76,7 @@ namespace GAPv3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Organisation organisation = db.Organisations.Find(id);
+            Organisation organisation = _service.GetOrganisationById(id);
             if (organisation == null)
             {
                 return HttpNotFound();
@@ -93,8 +93,7 @@ namespace GAPv3.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(organisation).State = EntityState.Modified;
-                db.SaveChanges();
+                _service.UpdateUserOrganisation(organisation);
                 return RedirectToAction("Index");
             }
             return View(organisation);
