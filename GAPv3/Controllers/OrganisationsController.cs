@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -23,7 +24,8 @@ namespace GAPv3.Controllers
         // GET: Organisations
         public ActionResult Index()
         {
-            return View(db.Organisations.ToList());
+            IEnumerable<Organisation> organisation = _service.GetOrganisations();
+            return View(organisation);
         }
 
         // GET: Organisations/Details/5

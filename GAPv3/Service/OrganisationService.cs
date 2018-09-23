@@ -47,5 +47,10 @@ namespace GAPv3.Service
 
             unitOfWork.Save();
         }
+
+        public IEnumerable<Organisation> GetOrganisations()
+        {
+            return unitOfWork.OrganisationRepository.Get();
+        }
     }
 }
