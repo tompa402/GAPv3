@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using GAPv3.DAL;
 using GAPv3.Models;
+using GAPv3.ViewModels;
 
 namespace GAPv3.Controllers
 {
@@ -35,7 +36,8 @@ namespace GAPv3.Controllers
         // GET: Organisations/Create
         public ActionResult Create()
         {
-            return View();
+            UserOrganisationViewModel model = new UserOrganisationViewModel();
+            return View(model);
         }
 
         // POST: Organisations/Create

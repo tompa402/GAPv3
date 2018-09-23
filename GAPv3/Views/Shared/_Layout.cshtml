@@ -30,20 +30,24 @@
                 <li class="nav-item">
                     <a> @Html.ActionLink("Administracija", "Index", new { controller = "Admin" }, new { @class = "nav-item nav-link" })</a>
                 </li>
-                <li class="nav-item dropdown">
-                    @{
-                        var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
-                        var mail = identity.User.Email.Substring(0, identity.User.Email.Length-7);
-                    }
-                    <a class="nav-link dropdown-toggle nav-item" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@($"Dobrodošli, {mail}")</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a> @Html.ActionLink("Promijeni lozinku", "ChangePassword", new { controller = "Account" }, new { @class = "dropdown-item" })</a>
-                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new {id = "logoutForm"}))
-                        {
-                            <a class="dropdown-item" , href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+
+                        @{
+                            var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
+                            var mail = identity.User.Email.Substring(0, identity.User.Email.Length - 7);
                         }
-                    </div>
-                </li>
+                        <a class="nav-link dropdown-toggle nav-item" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@($"Dobrodošli, {mail}")</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a> @Html.ActionLink("Promijeni lozinku", "ChangePassword", new { controller = "Account" }, new { @class = "dropdown-item" })</a>
+                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a class="dropdown-item" , href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            }
+                        </div>
+                    </li>
+                            }
             </ul>
         </div>
     </nav>

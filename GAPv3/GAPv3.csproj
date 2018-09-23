@@ -267,6 +267,7 @@
     <Compile Include="ViewModels\ReportStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportValueStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\UserOrganisationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
