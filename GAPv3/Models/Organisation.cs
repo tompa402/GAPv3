@@ -52,6 +52,7 @@ namespace GAPv3.Models
         [Display(Name = "Imovina 3")]
         public string AssetThree { get; set; }
 
+        [Display(Name = "Datum organizacije")]
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
 
@@ -61,6 +62,7 @@ namespace GAPv3.Models
         }
 
         public virtual ICollection<Report> Report { get; set; }
-        public ICollection<UserOrganisation> UserOrganisations { get; set; }
+        [Display(Name = "Članovi organizacije")]
+        public virtual ICollection<UserOrganisation> UserOrganisations { get; set; }
     }
 }

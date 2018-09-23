@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GAPv3.Models.Organisation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr class="table-secondary">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserOrganisations)
+        </th>
+        <th>Akcija</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @foreach (var user in item.UserOrganisations)
+            {
+                var text = user.User.Name + " " + user.User.LastName;
+                <span class="badge badge-secondary">@text</span>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.OrganisationId })
+        </td>
+    </tr>
+}
+
+</table>

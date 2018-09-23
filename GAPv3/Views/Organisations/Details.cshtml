@@ -1,0 +1,89 @@
+﻿@model GAPv3.Models.Organisation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="card">
+    <div class="card-header">
+        Detalji organizacije
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+        <p>@Html.DisplayFor(model => model.Address)</p>
+        
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.UserOrganisations):</div>
+            <div class="col-form-label col-md-9">
+                @foreach (var user in Model.UserOrganisations)
+                {
+                    var text = user.User.Name + " " + user.User.LastName;
+                    <span class="badge badge-secondary">@text</span>
+                }
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Ownership):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Ownership)</div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Type):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Type)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.EmployeesNumber):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.EmployeesNumber)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Size):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Size)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.GuardService):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.GuardService)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.VideoSurveillance):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.VideoSurveillance)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.BuildingPossession):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.BuildingPossession)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.ITService):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.ITService)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Location):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Location)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetOne):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetOne)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetTwo):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetTwo)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetThree):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetThree)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Created):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Created)</div>
+        </div>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.OrganisationId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>
+

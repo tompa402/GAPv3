@@ -18,6 +18,8 @@ namespace GAPv3.DAL
         private GenericRepository<Organisation> organisationRepository;
         private GenericRepository<Control> controlRepository;
         private GenericRepository<Reason> reasonRepository;
+        private GenericRepository<User> userRepository;
+        private GenericRepository<UserOrganisation> userOrganisationRepository;
 
         public GenericRepository<Norm> NormRepository
         {
@@ -120,6 +122,32 @@ namespace GAPv3.DAL
                     this.controlRepository = new GenericRepository<Control>(context);
                 }
                 return controlRepository;
+            }
+        }
+
+        public GenericRepository<User> UserRepository
+        {
+            get
+            {
+
+                if (this.userRepository == null)
+                {
+                    this.userRepository = new GenericRepository<User>(context);
+                }
+                return userRepository;
+            }
+        }
+
+        public GenericRepository<UserOrganisation> UserOrganisationRepository
+        {
+            get
+            {
+
+                if (this.userOrganisationRepository == null)
+                {
+                    this.userOrganisationRepository = new GenericRepository<UserOrganisation>(context);
+                }
+                return userOrganisationRepository;
             }
         }
 
