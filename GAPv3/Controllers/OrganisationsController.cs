@@ -19,7 +19,6 @@ namespace GAPv3.Controllers
         {
             _service = new OrganisationService(_unitOfWork);
         }
-        private GAPv3Context db = new GAPv3Context();
 
         // GET: Organisations
         public ActionResult Index()
@@ -106,7 +105,7 @@ namespace GAPv3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Organisation organisation = db.Organisations.Find(id);
+            Organisation organisation = _service.GetOrganisationById(id);
             if (organisation == null)
             {
                 return HttpNotFound();
@@ -119,9 +118,8 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Organisation organisation = db.Organisations.Find(id);
-            db.Organisations.Remove(organisation);
-            db.SaveChanges();
+            Organisation organisation = _service.GetOrganisationById(id);
+            _service.DeleteOrganisation(id);
             return RedirectToAction("Index");
         }
 
@@ -129,18 +127,9 @@ namespace GAPv3.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        /*protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
                 _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
-        }*/
+        }
     }
 }

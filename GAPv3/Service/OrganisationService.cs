@@ -61,7 +61,7 @@ namespace GAPv3.Service
         public void UpdateUserOrganisation(Organisation model)
         {
             unitOfWork.OrganisationRepository.Update(model);
-            // TODO: implement update of User Organization
+            // TODO: implement update of UserOrganization
             /*int organisationId = model.Organisation.OrganisationId;
 
             foreach (int id in model.SelectedUsers)
@@ -74,6 +74,13 @@ namespace GAPv3.Service
                 unitOfWork.UserOrganisationRepository.Update(UserOrganisation);
             }*/
 
+            unitOfWork.Save();
+        }
+
+        public void DeleteOrganisation(int? id)
+        {
+            unitOfWork.OrganisationRepository.Delete(id);
+            // TODO: implement delete of UserOrganization
             unitOfWork.Save();
         }
     }
