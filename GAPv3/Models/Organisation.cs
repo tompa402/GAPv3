@@ -52,6 +52,7 @@ namespace GAPv3.Models
         [Display(Name = "Imovina 3")]
         public string AssetThree { get; set; }
 
+        [Display(Name = "Datum organizacije")]
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
 

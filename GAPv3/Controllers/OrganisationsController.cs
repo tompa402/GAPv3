@@ -35,7 +35,7 @@ namespace GAPv3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Organisation organisation = db.Organisations.Find(id);
+            Organisation organisation = _service.GetOrganisationById(id);
             if (organisation == null)
             {
                 return HttpNotFound();
@@ -134,5 +134,14 @@ namespace GAPv3.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /*protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }*/
     }
 }

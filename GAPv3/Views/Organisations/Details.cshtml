@@ -6,141 +6,84 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Organisation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="card">
+    <div class="card-header">
+        Detalji organizacije
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
+        <p>@Html.DisplayFor(model => model.Address)</p>
+        
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.UserOrganisations):</div>
+            <div class="col-form-label col-md-9">
+                @foreach (var user in Model.UserOrganisations)
+                {
+                    var text = user.User.Name + " " + user.User.LastName;
+                    <span class="badge badge-secondary">@text</span>
+                }
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Ownership):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Ownership)</div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Type):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Type)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.EmployeesNumber):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.EmployeesNumber)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Size):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Size)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.GuardService):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.GuardService)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.VideoSurveillance):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.VideoSurveillance)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.BuildingPossession):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.BuildingPossession)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.ITService):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.ITService)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Location):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Location)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetOne):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetOne)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetTwo):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetTwo)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.AssetThree):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.AssetThree)</div>
+        </div>
+        <div class="form-row">
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Created):</div>
+            <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Created)</div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ownership)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ownership)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeesNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmployeesNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GuardService)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GuardService)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VideoSurveillance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VideoSurveillance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuildingPossession)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuildingPossession)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ITService)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ITService)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetOne)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssetOne)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetTwo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssetTwo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetThree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssetThree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Modified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Modified)
-        </dd>
-
-    </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.OrganisationId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganisationId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

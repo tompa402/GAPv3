@@ -52,5 +52,10 @@ namespace GAPv3.Service
         {
             return unitOfWork.OrganisationRepository.Get();
         }
+
+        public Organisation GetOrganisationById(int? id)
+        {
+            return unitOfWork.OrganisationRepository.GetById(id);
+        }
     }
 }
