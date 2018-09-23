@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NormsController.cs" />
     <Compile Include="Controllers\OrganisationsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="CustomIdentity.cs" />
@@ -802,6 +803,11 @@
     <Content Include="Views\Organisations\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Organisations\EditorTemplates\_Organisation.cshtml" />
+    <Content Include="Views\Norms\Create.cshtml" />
+    <Content Include="Views\Norms\Delete.cshtml" />
+    <Content Include="Views\Norms\Details.cshtml" />
+    <Content Include="Views\Norms\Edit.cshtml" />
+    <Content Include="Views\Norms\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
