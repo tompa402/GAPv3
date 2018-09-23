@@ -7,41 +7,22 @@
 @Styles.Render("~/Content/login")
 @using (Html.BeginForm()){
     @Html.AntiForgeryToken()
-    <div class="container">
-        <div class="card card-container">
-            <img class="align-middle" src="~/Content/images/logo.png" alt="logoimg" style="border-radius:20px; ">
-            <p id="profile-name" class="profile-name-card"></p>
-            @Html.ValidationSummary(true, "Pogrešan email ili lozinka!", new { @class = "text-danger" })
-            <div class="form-signin">
-                <div class="form-group">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "inputEmail", type = "email", PlaceHolder = "Email address" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "inputPassword", type = "password", PlaceHolder = "Password" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-                <div id="remember" class="checkbox form-group">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-@*
-    <div class="form-signin">
+   <div class="form-signin">
         <div class="form-group col-md-4 offset-md-4" style="text-align: center; margin-top: 2em;">
             <img class="col-md-6 " src="~/Content/images/logo.png" alt="logoimg" width="25%" height="25%" style="border-radius:20px; ">
             <hr />
             @Html.ValidationSummary(true, "Pogrešan email ili lozinka!", new { @class = "text-danger" })
             <div class="form-group " >
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-4" })
-                <div class="col-md-12 ">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control " } })
+                <div class="col-md-12" >
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", Style="max-width:500px"} })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-4 ", id = "inputEmail" })
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-4 "})
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", Style = "max-width:500px" } })
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -49,15 +30,13 @@
             <input type="submit" value="Prijava" class="btn btn-danger" />
             <div class="form-group">
                 <div class="col-md-10">
-*@
+
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </div><!-- /form -->
-            <a href="#" class="forgot-password">
-                Forgot the password?
-            </a>
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+               
+            </div>
+           
+        </div>
+    </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
