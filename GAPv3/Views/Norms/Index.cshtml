@@ -8,33 +8,54 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <!-- Button trigger modal -->
+    @Html.ActionLink("Create new", "CreatePartial", "Norms", new { @class = "btn btn-primary", data_target = "#modal-container", data_toggle = "modal" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NormId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NormId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NormId })
-        </td>
-    </tr>
-}
+@{ Html.RenderPartial("_modal"); }
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NormId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.NormId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.NormId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <!-- https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html -->
+
+    @section Scripts {
+        <script>
+            // TODO: Extract to separate js file
+            $('#modal-container').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var url = button.attr("href");
+                var modal = $(this);
+
+                // note that this will replace the content of modal-content ever time the modal is opened
+                modal.find('.modal-content').load(url);
+            });
+        </script>
+    }

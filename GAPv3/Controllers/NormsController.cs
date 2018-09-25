@@ -37,9 +37,9 @@ namespace GAPv3.Controllers
         }
 
         // GET: Norms/Create
-        public ActionResult Create()
+        public ActionResult CreatePartial()
         {
-            return View();
+            return PartialView("_CreateNorm");
         }
 
         // POST: Norms/Create
