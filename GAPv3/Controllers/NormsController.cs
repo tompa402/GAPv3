@@ -53,10 +53,10 @@ namespace GAPv3.Controllers
             {
                 db.Norms.Add(norm);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
-            return View(norm);
+            return PartialView("_CreateNorm", norm);
         }
 
         // GET: Norms/Edit/5

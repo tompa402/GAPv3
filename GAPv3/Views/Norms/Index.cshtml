@@ -44,7 +44,10 @@
 
     </table>
 
-    <!-- https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html -->
+<!-- 
+    https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html 
+    https://github.com/UnLeving/ASP-MVC-Entity-CRUD-Modal-Bootstrap/blob/master/ASP%20MVC%20Entity%20CRUD%20Modal%20Bootstrap/Views/MyEntities/Create.cshtml
+-->
 
     @section Scripts {
         <script>
@@ -57,5 +60,22 @@
                 // note that this will replace the content of modal-content ever time the modal is opened
                 modal.find('.modal-content').load(url);
             });
+
+            function CreateNew() {
+                $.ajax({
+                    url: '/Norms/Create/',
+                    type: 'POST',
+                    data: $('form').serialize(),
+                    success: function (response) {
+                        if (response.success === true) {
+                            $('#modal-container').modal('hide');
+                            location.reload(false);
+                        } else {
+                            // response message
+                        }
+                    },
+                    error: function (err) { alert("Error: " + err.responseText); }
+                });
+            };
         </script>
     }

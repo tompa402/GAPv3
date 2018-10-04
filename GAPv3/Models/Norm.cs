@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GAPv3.Models;
@@ -10,6 +11,7 @@ namespace GAPv3.Models
     {
         public int NormId { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public virtual ICollection<NormItem> NormItem { get; set; }
