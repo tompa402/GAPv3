@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201810080753296_RemoveUserOrganisationModel.Designer.cs">
       <DependentUpon>201810080753296_RemoveUserOrganisationModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810080757280_UpdateUserOrganisationRelationShipOneToMany.cs" />
+    <Compile Include="Migrations\201810080757280_UpdateUserOrganisationRelationShipOneToMany.Designer.cs">
+      <DependentUpon>201810080757280_UpdateUserOrganisationRelationShipOneToMany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -866,6 +870,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810080753296_RemoveUserOrganisationModel.resx">
       <DependentUpon>201810080753296_RemoveUserOrganisationModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810080757280_UpdateUserOrganisationRelationShipOneToMany.resx">
+      <DependentUpon>201810080757280_UpdateUserOrganisationRelationShipOneToMany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
