@@ -65,7 +65,7 @@ namespace GAPv3.Controllers
             return View(reportViewModel);
         }
 
-        // GET: Reports/Create
+        // GET: Reports/New
         public ActionResult Create(int? id)
         {
             var rv = _unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
@@ -82,7 +82,7 @@ namespace GAPv3.Controllers
             return View(report);
         }
 
-        // POST: Reports/Create
+        // POST: Reports/New
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

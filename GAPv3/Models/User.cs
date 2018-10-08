@@ -25,10 +25,10 @@ namespace GAPv3.Models
         [Display(Name = "JMBAG")]
         public int JMBAG { get; set; }
 
-        public string Token { get; set; }
-
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
+
+        public bool IsActive { get; set; }
 
         public User()
         {
@@ -36,6 +36,9 @@ namespace GAPv3.Models
         }
 
         public ICollection<UserRole> UserRoles { get; set; }
-        public ICollection<UserOrganisation> UserOrganisations { get; set; }
+
+        public int? OrganisationId { get; set; }
+        public Organisation Organisation { get; set; }
+        
     }
 }

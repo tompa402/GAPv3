@@ -16,11 +16,11 @@
         <p>@Html.DisplayFor(model => model.Address)</p>
         
         <div class="form-row">
-            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.UserOrganisations):</div>
+            <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Name):</div>
             <div class="col-form-label col-md-9">
-                @foreach (var user in Model.UserOrganisations)
+                @foreach (var user in Model.Users)
                 {
-                    var text = user.User.Name + " " + user.User.LastName;
+                    var text = user.Name + " " + user.LastName;
                     <span class="badge badge-secondary">@text</span>
                 }
             </div>
