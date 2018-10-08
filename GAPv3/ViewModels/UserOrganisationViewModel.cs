@@ -8,15 +8,9 @@ namespace GAPv3.ViewModels
     public class UserOrganisationViewModel
     {
         public Organisation Organisation { get; set; }
-        
-        public int UserId { get; set; }
-        public IEnumerable<SelectListItem> UsersList { set; get; }
-        [Display(Name = "Članovi organizacije")]
-        public List<int> SelectedUsers { set; get; }
+        public IEnumerable<SelectListItem> Users { get; set; }
 
-        public UserOrganisationViewModel()
-        {
-            SelectedUsers = new List<int>();
-        }
+        [Display (Name = "Članovi organizacije")]
+        public List<int> SelectedUsers { set; get; } = new List<int>();
     }
 }

@@ -39,7 +39,8 @@ namespace GAPv3.DAL
                 Ownership = "Full",
                 Size = "Ne znma",
                 Type = "4",
-                VideoSurveillance = "Da"
+                VideoSurveillance = "Da",
+                IsActive = true
             });
             context.Organisations.Add(new Organisation()
             {
@@ -57,7 +58,8 @@ namespace GAPv3.DAL
                 Ownership = "Full",
                 Size = "Ne znma",
                 Type = "4",
-                VideoSurveillance = "Da"
+                VideoSurveillance = "Da",
+                IsActive = true
             });
 
             context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
@@ -87,7 +89,9 @@ namespace GAPv3.DAL
                 Password = "2",
                 Name = "Tom",
                 LastName = "N",
-                JMBAG = 123456
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 1
             });
             context.Users.Add(new User()
             {
@@ -95,7 +99,9 @@ namespace GAPv3.DAL
                 Password = "josip",
                 Name = "J",
                 LastName = "Lo",
-                JMBAG = 123456
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 1
             });
             context.Users.Add(new User()
             {
@@ -103,7 +109,27 @@ namespace GAPv3.DAL
                 Password = "test",
                 Name = "Test",
                 LastName = "Testić",
-                JMBAG = 123456
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 2
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test2@vvg.hr",
+                Password = "test",
+                Name = "Test22",
+                LastName = "Testić2",
+                JMBAG = 123456,
+                IsActive = true
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test3@vvg.hr",
+                Password = "test",
+                Name = "Test33",
+                LastName = "Testić3",
+                JMBAG = 123456,
+                IsActive = true
             });
 
             context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });

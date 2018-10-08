@@ -256,6 +256,18 @@
     <Compile Include="Migrations\201810080757280_UpdateUserOrganisationRelationShipOneToMany.Designer.cs">
       <DependentUpon>201810080757280_UpdateUserOrganisationRelationShipOneToMany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810080935296_UpdateOrganisationRequiredFields.cs" />
+    <Compile Include="Migrations\201810080935296_UpdateOrganisationRequiredFields.Designer.cs">
+      <DependentUpon>201810080935296_UpdateOrganisationRequiredFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810080940323_UpdateOrganisationRequiredFields2.cs" />
+    <Compile Include="Migrations\201810080940323_UpdateOrganisationRequiredFields2.Designer.cs">
+      <DependentUpon>201810080940323_UpdateOrganisationRequiredFields2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810081146357_AddIsActivePropertyForOrganisationAndUser.cs" />
+    <Compile Include="Migrations\201810081146357_AddIsActivePropertyForOrganisationAndUser.Designer.cs">
+      <DependentUpon>201810081146357_AddIsActivePropertyForOrganisationAndUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -803,14 +815,12 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Organisations\Create.cshtml" />
     <Content Include="Views\Organisations\Delete.cshtml" />
     <Content Include="Views\Organisations\Details.cshtml" />
-    <Content Include="Views\Organisations\Edit.cshtml" />
     <Content Include="Views\Organisations\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Organisations\EditorTemplates\_Organisation.cshtml" />
-    <Content Include="Views\Organisations\UserOrganisationForm.cshtml" />
+    <Content Include="Views\Organisations\OrganisationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -873,6 +883,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810080757280_UpdateUserOrganisationRelationShipOneToMany.resx">
       <DependentUpon>201810080757280_UpdateUserOrganisationRelationShipOneToMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810080935296_UpdateOrganisationRequiredFields.resx">
+      <DependentUpon>201810080935296_UpdateOrganisationRequiredFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810080940323_UpdateOrganisationRequiredFields2.resx">
+      <DependentUpon>201810080940323_UpdateOrganisationRequiredFields2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810081146357_AddIsActivePropertyForOrganisationAndUser.resx">
+      <DependentUpon>201810081146357_AddIsActivePropertyForOrganisationAndUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
