@@ -7,15 +7,15 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { id = (int) ViewBag.NormId })
+    @Html.ActionLink("Create New", "Create", new { Model.ElementAt(0).ReportId })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Norm.Name)
+            @Html.DisplayNameFor(model => model.NormName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Organisation.Name)
+            @Html.DisplayNameFor(model => model.OrgName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -26,27 +26,28 @@
         <th>Action</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Norm.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Organisation.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Popunjenost)%
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReportId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReportId }) |
-            @Html.ActionLink("Statistic", "Statistic", new { id = item.ReportId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReportId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrgName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Popunjenost)%
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReportId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
+                @Html.ActionLink("Statistic", "Statistic", new { id = item.ReportId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReportId })
+            </td>
+        </tr>
+    }
 
 </table>

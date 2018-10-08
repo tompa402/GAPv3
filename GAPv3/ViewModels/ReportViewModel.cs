@@ -10,11 +10,17 @@ namespace GAPv3.ViewModels
     public class ReportViewModel
     {
         public int ReportId { get; set; }
+
+        public int NormId { get; set; }
+
+        [Display(Name = "Izvještaj")]
         public string Name { get; set; }
 
-        public virtual Norm Norm { get; set; }
+        [Display(Name="Norma")]
+        public string NormName { get; set; }
 
-        public virtual Organisation Organisation { get; set; }
+        [Display(Name = "Organizacija")]
+        public string OrgName { get; set; }
 
         [Display(Name = "Popunjenost")]
         public int Popunjenost { get; set; }

@@ -17,11 +17,11 @@ namespace GAPv3.Models
         public string Name { get; set; }
 
         public int NormId { get; set; }
-        public virtual Norm Norm { get; set; }
+        public Norm Norm { get; set; }
 
         public int OrganisationId { get; set; }
-        public virtual Organisation Organisation { get; set; }
+        public Organisation Organisation { get; set; }
 
-        public virtual List<ReportValue> ReportValues { get; set; }
+        public List<ReportValue> ReportValues { get; set; }
     }
 }

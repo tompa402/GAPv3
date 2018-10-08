@@ -13,33 +13,26 @@ namespace GAPv3.Controllers
 {
     public class ReportsController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private GAPv3Context _context;
         private readonly ReportService _service;
 
         public ReportsController()
         {
-            _service = new ReportService(_unitOfWork);
+            _context = new GAPv3Context();
+            _service = new ReportService(_context);
         }
 
         // GET: Reports
         public ActionResult Index(int? id)
         {
-            var reports = _unitOfWork.ReportRepository.Get(filter: x => x.NormId == id);
+            var models = _service.GetReportsForNorm(id);
+            if (!models.Any())
+                return HttpNotFound();
 
-            List<ReportViewModel> reportsViewModel = new List<ReportViewModel>();
-
-            foreach (Report report in reports)
-            {
-                var reportViewModel = Mapper.Map<Report, ReportViewModel>(report);
-                reportViewModel.Popunjenost = _service.GetPopunjenost(report.ReportValues);
-                reportsViewModel.Add(reportViewModel);
-            }
-
-            ViewBag.NormId = id;
-            return View(reportsViewModel);
+            return View(models);
         }
 
-        // GET: Reports/Details/5
+        /*// GET: Reports/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -171,17 +164,8 @@ namespace GAPv3.Controllers
             _unitOfWork.Save();
             return RedirectToAction("Index", new { id = report.NormId });
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _unitOfWork.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        public ActionResult GetRainfallChart()
+        
+            public ActionResult GetRainfallChart()
         {
             var key = new Chart(width: 600, height: 400)
                 .AddSeries(
@@ -192,6 +176,18 @@ namespace GAPv3.Controllers
                 .Write();
 
             return null;
+        } 
+        */
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
+
+        
     }
 }
