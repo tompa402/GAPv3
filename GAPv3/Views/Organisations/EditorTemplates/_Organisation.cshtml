@@ -3,7 +3,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextBoxFor(model => model.Address, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -93,7 +93,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextBoxFor(model => model.Location, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -101,7 +101,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.AssetOne, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.AssetOne, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextAreaFor(model => model.AssetOne, htmlAttributes: new { @class = "form-control", rows = 3 })
         @Html.ValidationMessageFor(model => model.AssetOne, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -109,7 +109,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.AssetTwo, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.AssetTwo, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextAreaFor(model => model.AssetTwo, htmlAttributes: new { @class = "form-control", rows = 3 })
         @Html.ValidationMessageFor(model => model.AssetTwo, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -117,7 +117,7 @@
 <div class="form-group row">
     @Html.LabelFor(model => model.AssetThree, htmlAttributes: new { @class = "col-form-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.AssetThree, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextAreaFor(model => model.AssetThree, htmlAttributes: new { @class = "form-control", rows = 3 })
         @Html.ValidationMessageFor(model => model.AssetThree, "", new { @class = "text-danger" })
     </div>
 </div>
