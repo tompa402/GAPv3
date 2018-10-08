@@ -285,7 +285,9 @@
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\OrganisationService.cs" />
     <Compile Include="Service\ReportService.cs" />
+    <Compile Include="ViewModels\ReportFormViewModel.cs" />
     <Compile Include="ViewModels\ReportStatisticViewModel.cs" />
+    <Compile Include="ViewModels\ReportValueFormViewModel.cs" />
     <Compile Include="ViewModels\ReportValueStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\UserOrganisationViewModel.cs" />
@@ -821,6 +823,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Organisations\EditorTemplates\_Organisation.cshtml" />
     <Content Include="Views\Organisations\OrganisationForm.cshtml" />
+    <Content Include="Views\Reports\ReportsForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

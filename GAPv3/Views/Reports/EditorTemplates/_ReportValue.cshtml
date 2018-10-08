@@ -1,4 +1,4 @@
-﻿@model GAPv3.Models.ReportValue
+﻿@model GAPv3.ViewModels.ReportValueFormViewModel
 
 @{
     var parentCss = Model.NormItem.IsItem ? "" : "bg-light text-dark";
@@ -33,7 +33,7 @@
             if (property.HaveControl)
             {
                 <div class="divTableCell">
-                    @foreach (var item in (SelectList)ViewBag.ControlId)
+                    @foreach (var item in new SelectList(Model.Controls))
                     {
 
                         <label>
@@ -46,13 +46,13 @@
             if (property.HaveReason)
             {
                 <div class="divTableCell">
-                    @Html.DropDownListFor(model => model.ReasonId, (SelectList)ViewBag.ReasonId, "Odaberite...", htmlAttributes: new { @data_val = "false" })
+                    @Html.DropDownListFor(model => model.ReasonId, new SelectList(Model.Reasons), "Odaberite...", htmlAttributes: new { @data_val = "false" })
                 </div>
             }
         }
 
         <div class="divTableCell">
-            @Html.DropDownListFor(model => model.StatusId, (SelectList)ViewBag.StatusId, "Odaberite...", htmlAttributes: new { @data_val = "false" })
+            @Html.DropDownListFor(model => model.StatusId, new SelectList(Model.Statuses), "Odaberite...", htmlAttributes: new { @data_val = "false" })
         </div>
         <div class="divTableCell">
             @Html.TextBoxFor(model => model.Note, htmlAttributes: new { @data_val = "false" })

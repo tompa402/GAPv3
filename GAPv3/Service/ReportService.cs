@@ -21,17 +21,17 @@ namespace GAPv3.Service
         {
             _context = context;
         }
-        public int GetPopunjenost(List<ReportValue> rv)
-        {
-            decimal popunjenost = (decimal)rv.Count(x => x.StatusId != null) / rv.Count(x => x.NormItem.IsItem) * 100;
-            int postotakPopunjenosti = (int)Math.Round(popunjenost);
-            return postotakPopunjenosti;
-        }
 
         public IEnumerable<ReportViewModel> GetReportsForNorm(int? normId)
         {
             var reportsViewModels = new List<ReportViewModel>();
-            var reports = _context.Reports.Where(r => r.NormId == normId).Include(o => o.Organisation).Include(n => n.Norm).Include(rv => rv.ReportValues);
+            var reports = _context.Reports
+                .Where(r => r.NormId == normId)
+                .Include(o => o.Organisation)
+                .Include(n => n.Norm)
+                .Include(rv => rv.ReportValues.Select(s => s.Status))
+                .Include(rv => rv.ReportValues.Select(x => x.NormItem));
+
             foreach (var report in reports)
             {
                 var reportViewModel = new ReportViewModel
@@ -48,41 +48,79 @@ namespace GAPv3.Service
             return reportsViewModels;
         }
 
-        /* public List<ReportValue> CreateInitialReportValuesList(List<NormItem> rv)
-         {
-             List<ReportValue> newList = new List<ReportValue>();
-             foreach (var parent in rv)
-             {
-                 ReportValue temp = new ReportValue()
-                 {
-                     NormItemId = parent.NormItemId,
-                     NormItem = parent
-                 };
+        public ReportFormViewModel CreateReportViewModel(int id)
+        {
+            var normItems = _context.NormItems
+                .Where(x => x.NormId == id && x.ParentId == null)
+                .OrderBy(x => x.Order)
+                .ToList();
 
-                 foreach (var child in parent.Children.OrderBy(x => x.Order).ToList())
-                 {
-                     ReportValue tempChild = new ReportValue()
-                     {
-                         NormItemId = child.NormItemId,
-                         NormItem = child
-                     };
+            var reportViewModel = new ReportFormViewModel
+            {
+                NormId = id,
+                Organisations = _context.Organisations.ToList(),
+                ReportValues = CreateInitialReportValuesList(normItems)
+            };
+            return reportViewModel;
+        }
 
-                     foreach (var grandChild in child.Children.OrderBy(x => x.Order).ToList())
-                     {
-                         ReportValue tempGrandChild = new ReportValue()
-                         {
-                             NormItemId = grandChild.NormItemId,
-                             NormItem = grandChild
-                         };
-                         tempChild.Children.Add(tempGrandChild);
-                     }
-                     temp.Children.Add(tempChild);
-                 }
-                 newList.Add(temp);
-             }
+        public int GetPopunjenost(List<ReportValue> rv)
+        {
+            decimal popunjenost = (decimal)rv.Count(x => x.StatusId != null) / rv.Count(x => x.NormItem.IsItem) * 100;
+            int postotakPopunjenosti = (int)Math.Round(popunjenost);
+            return postotakPopunjenosti;
+        }
 
-             return newList;
-         }
+        public List<ReportValueFormViewModel> CreateInitialReportValuesList(List<NormItem> rv)
+        {
+            var statuses = _context.Statuses.ToList();
+            var reasons = _context.Reasons.ToList();
+            var controls = _context.Controls.ToList();
+            var newList = new List<ReportValueFormViewModel>();
+            foreach (var parent in rv)
+            {
+                var temp = new ReportValueFormViewModel()
+                {
+                    NormItemId = parent.NormItemId,
+                    NormItem = parent,
+                    Statuses = statuses,
+                    Reasons = reasons,
+                    Controls = controls
+                };
+
+                foreach (var child in parent.Children.OrderBy(x => x.Order).ToList())
+                {
+                    var tempChild = new ReportValueFormViewModel()
+                    {
+                        NormItemId = child.NormItemId,
+                        NormItem = child,
+                        Statuses = statuses,
+                        Reasons = reasons,
+                        Controls = controls
+                    };
+
+                    foreach (var grandChild in child.Children.OrderBy(x => x.Order).ToList())
+                    {
+                        var tempGrandChild = new ReportValueFormViewModel()
+                        {
+                            NormItemId = grandChild.NormItemId,
+                            NormItem = grandChild,
+                            Statuses = statuses,
+                            Reasons = reasons,
+                            Controls = controls
+                        };
+                        tempChild.Children.Add(tempGrandChild);
+                    }
+                    temp.Children.Add(tempChild);
+                }
+                newList.Add(temp);
+            }
+            return newList;
+        }
+
+        
+
+        /* 
 
          public void UpdateReportValues(List<ReportValue> rv)
          {
