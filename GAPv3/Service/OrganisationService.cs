@@ -32,20 +32,6 @@ namespace GAPv3.Service
 
         public void SaveUserOrganisation(UserOrganisationViewModel model)
         {
-            unitOfWork.OrganisationRepository.Insert(model.Organisation);
-            int organisationId = model.Organisation.OrganisationId;
-
-            foreach (int id in model.SelectedUsers)
-            {
-                var UserOrganisation = new UserOrganisation
-                {
-                    OrganisationId = organisationId,
-                    UserId = id
-                };
-                unitOfWork.UserOrganisationRepository.Insert(UserOrganisation);
-            }
-
-            unitOfWork.Save();
         }
 
         public IEnumerable<Organisation> GetOrganisations()

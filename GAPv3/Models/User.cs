@@ -36,6 +36,5 @@ namespace GAPv3.Models
         }
 
         public ICollection<UserRole> UserRoles { get; set; }
-        public ICollection<UserOrganisation> UserOrganisations { get; set; }
     }
 }

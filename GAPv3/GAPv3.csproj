@@ -248,6 +248,10 @@
     <Compile Include="Migrations\201809091113438_UpdateUserModelForHashCode.Designer.cs">
       <DependentUpon>201809091113438_UpdateUserModelForHashCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810080753296_RemoveUserOrganisationModel.cs" />
+    <Compile Include="Migrations\201810080753296_RemoveUserOrganisationModel.Designer.cs">
+      <DependentUpon>201810080753296_RemoveUserOrganisationModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -260,7 +264,6 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserOrganisation.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
@@ -860,6 +863,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809091113438_UpdateUserModelForHashCode.resx">
       <DependentUpon>201809091113438_UpdateUserModelForHashCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810080753296_RemoveUserOrganisationModel.resx">
+      <DependentUpon>201810080753296_RemoveUserOrganisationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

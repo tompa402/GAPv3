@@ -113,10 +113,6 @@ namespace GAPv3.DAL
             context.UserRoles.Add(new UserRole() { RoleId = 1, UserId = 1 });
             context.UserRoles.Add(new UserRole() { RoleId = 2, UserId = 2 });
 
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 1, OrganisationId = 1 });
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 2, OrganisationId = 1 });
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 3, OrganisationId = 2 });
-
             context.NormItems.Add(new NormItem() { NormItemId = 1, Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 2, Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 3, Name = "Razumijevanje potreba i očekivanja zainteresiranih strana", IsItem = true, Order = 2, ParentId = 1, NormId = 1 });
