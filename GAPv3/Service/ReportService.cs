@@ -166,6 +166,35 @@ namespace GAPv3.Service
             return reportViewModel;
         }
 
+        public void InsertOrUpdate(Report report)
+        {
+            if (report.ReportId != 0)
+            {
+                report.Modified = DateTime.Now;
+
+                _context.Entry(report).State = EntityState.Modified;
+
+                foreach (var parent in report.ReportValues)
+                {
+                    foreach (var child in parent.Children)
+                    {
+                        if (!child.Children.Any())
+                            _context.Entry(child).State = EntityState.Modified;
+
+                        foreach (var item in child.Children)
+                        {
+                            _context.Entry(item).State = EntityState.Modified;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                _context.Entry(report).State = EntityState.Added;
+            }
+            _context.SaveChanges();
+        }
+
 
 
         /* 

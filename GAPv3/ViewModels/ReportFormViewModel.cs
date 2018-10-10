@@ -11,6 +11,7 @@ namespace GAPv3.ViewModels
     {
         public int ReportId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public int NormId { get; set; }

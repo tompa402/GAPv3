@@ -20,6 +20,7 @@
 }
 <div class="divTableRow @parentCss">
     @Html.HiddenFor(m => m.NormItemId)
+    @Html.HiddenFor(m => m.ReportId)
     <div class="divTableCell">
         @orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).
     </div>

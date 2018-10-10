@@ -61,10 +61,8 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Report report)
         {
-            if (ModelState.IsValid)
-            {
-            }
-            return View("Index");
+            _service.InsertOrUpdate(report);
+            return RedirectToAction("Index", "Reports");
         }
 
         /*// GET: Reports/Details/5
