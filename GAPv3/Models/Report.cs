@@ -23,5 +23,16 @@ namespace GAPv3.Models
         public Organisation Organisation { get; set; }
 
         public List<ReportValue> ReportValues { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime? Modified { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public Report()
+        {
+            Created = DateTime.Now;
+        }
     }
 }
