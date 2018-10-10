@@ -43,11 +43,11 @@ namespace GAPv3.Models
                 switch (StatusId)
                 {
                     case 1:
-                        return "blue";
+                        return "green";
                     case 2:
                         return "orange";
                     case 3:
-                        return "red";
+                        return "yellow";
                     default:
                         return "";
                 }
