@@ -118,7 +118,55 @@ namespace GAPv3.Service
             return newList;
         }
 
-        
+        public List<ReportValueFormViewModel> CreateEditReportValuesList(List<ReportValueFormViewModel> rv)
+        {
+            var statuses = _context.Statuses.ToList();
+            var reasons = _context.Reasons.ToList();
+            var controls = _context.Controls.ToList();
+
+            foreach (var parent in rv)
+            {
+                parent.Statuses = statuses;
+                parent.Reasons = reasons;
+                parent.Controls = controls;
+
+                foreach (var child in parent.Children.OrderBy(x => x.NormItem.Order).ToList())
+                {
+                    child.Statuses = statuses;
+                    child.Reasons = reasons;
+                    child.Controls = controls;
+
+                    foreach (var grandChild in child.Children.OrderBy(x => x.NormItem.Order).ToList())
+                    {
+                        grandChild.Statuses = statuses;
+                        grandChild.Reasons = reasons;
+                        grandChild.Controls = controls;
+                    }
+                }
+            }
+            return rv;
+        }
+
+        public Report GetById(int id)
+        {
+            return _context.Reports
+                .Include(x => x.ReportValues.Select(ni => ni.NormItem))
+                .Include(x => x.ReportValues.Select(ni => ni.Status))
+                .Include(x => x.ReportValues.Select(ni => ni.Control))
+                .Include(x => x.ReportValues.Select(ni => ni.Reason))
+                .SingleOrDefault(r => r.ReportId == id);
+        }
+
+        public ReportFormViewModel EditViewModel(Report report)
+        {
+            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
+            var reportViewModel = Mapper.Map<Report, ReportFormViewModel>(report);
+            reportViewModel.ReportValues = CreateEditReportValuesList(reportViewModel.ReportValues);
+            reportViewModel.Organisations = _context.Organisations.ToList();
+            return reportViewModel;
+        }
+
+
 
         /* 
 

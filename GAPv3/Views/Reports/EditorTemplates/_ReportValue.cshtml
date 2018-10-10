@@ -19,7 +19,7 @@
     }
 }
 <div class="divTableRow @parentCss">
-    @Html.HiddenFor(m => m.NormItemId, htmlAttributes: new { @data_val = "false" })
+    @Html.HiddenFor(m => m.NormItemId)
     <div class="divTableCell">
         @orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).
     </div>
@@ -33,11 +33,11 @@
             if (property.HaveControl)
             {
                 <div class="divTableCell">
-                    @foreach (var item in new SelectList(Model.Controls))
+                    @foreach (var item in new SelectList(Model.Controls, "ControlId", "Name"))
                     {
 
                         <label>
-                            @Html.RadioButtonFor(model => model.ControlId, item.Value, htmlAttributes: new { @data_val = "false" })
+                            @Html.RadioButtonFor(model => model.ControlId, item.Value)
                             @item.Text
                         </label>
                     }
@@ -46,16 +46,16 @@
             if (property.HaveReason)
             {
                 <div class="divTableCell">
-                    @Html.DropDownListFor(model => model.ReasonId, new SelectList(Model.Reasons), "Odaberite...", htmlAttributes: new { @data_val = "false" })
+                    @Html.DropDownListFor(model => model.ReasonId, new SelectList(Model.Reasons, "ReasonId", "Name"), "Odaberite...", new { @class = "form-control" })
                 </div>
             }
         }
 
         <div class="divTableCell">
-            @Html.DropDownListFor(model => model.StatusId, new SelectList(Model.Statuses), "Odaberite...", htmlAttributes: new { @data_val = "false" })
+            @Html.DropDownListFor(model => model.StatusId, new SelectList(Model.Statuses, "StatusId", "Name"), "Odaberite...", new { @class = "form-control" })
         </div>
         <div class="divTableCell">
-            @Html.TextBoxFor(model => model.Note, htmlAttributes: new { @data_val = "false" })
+            @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "form-control", rows = 3 })
         </div>
     }
     else

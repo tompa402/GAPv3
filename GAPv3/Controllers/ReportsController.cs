@@ -35,20 +35,23 @@ namespace GAPv3.Controllers
         // GET: Reports/New
         public ActionResult New(int id)
         {
+            var norm = _context.Norms.SingleOrDefault(n => n.NormId == id);
+            if (norm == null)
+                return HttpNotFound();
+
             var report = _service.CreateReportViewModel(id);
 
-            /*var rv = _unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
-
-            Report report = new Report()
-            {
-                NormId = id.GetValueOrDefault(),
-                ReportValues = _service.CreateInitialReportValuesList(rv)
-            };
-            ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
-            ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
-            ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
-            ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");*/
             return View("ReportsForm", report);
+        }
+
+        // GET: Reports/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var report = _service.GetById(id);
+            if (report == null)
+                return HttpNotFound();
+
+            return View("ReportsForm", _service.EditViewModel(report));
         }
 
         /*// GET: Reports/Details/5
@@ -98,25 +101,6 @@ namespace GAPv3.Controllers
             ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
             ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
             ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
-            ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
-            return View(report);
-        }
-
-        // GET: Reports/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Report report = _unitOfWork.ReportRepository.GetById(id);
-            if (report == null)
-            {
-                return HttpNotFound();
-            }
-            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
-
-            ViewBag.StatusId = _unitOfWork.StatusRepository.Get();
             ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
             return View(report);
         }
