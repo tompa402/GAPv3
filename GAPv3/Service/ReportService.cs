@@ -166,6 +166,21 @@ namespace GAPv3.Service
             return reportViewModel;
         }
 
+        public ReportDetailsViewModel DetailsViewModel(Report report)
+        {
+            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
+            var reportViewModel = Mapper.Map<Report, ReportDetailsViewModel>(report);
+
+            var norm = _context.Norms.SingleOrDefault(n => n.NormId == report.NormId);
+
+            reportViewModel.OrganisationName = _context.Organisations.SingleOrDefault(o => o.OrganisationId == report.OrganisationId)?.Name;
+            reportViewModel.NormId = norm?.NormId;
+            reportViewModel.NormName = norm?.Name;
+            reportViewModel.AssignedUsers = _context.Users.Where(u => u.OrganisationId == report.OrganisationId).ToList();
+
+            return reportViewModel;
+        }
+
         public void InsertOrUpdate(Report report)
         {
             if (report.ReportId != 0)

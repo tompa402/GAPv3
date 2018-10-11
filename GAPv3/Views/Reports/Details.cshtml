@@ -1,4 +1,4 @@
-﻿@model GAPv3.Models.Report
+﻿@model GAPv3.ViewModels.ReportDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -12,110 +12,58 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Norm.Name)</h6>
-            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Organisation.Name)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.NormName)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.OrganisationName)</h6>
             <p class="card-text">
-                <!-- TODO: get data from database -->
                 Ovi korisnici mogu ažurirati:
-                <span class="badge badge-primary">Primary</span>
-                <span class="badge badge-secondary">Secondary</span>
-                <span class="badge badge-secondary">Secondary</span>
-                <span class="badge badge-secondary">Secondary</span>
+                @foreach (var user in Model.AssignedUsers)
+                {
+                    var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
+                    var name = user.Name + " " + user.LastName;
+                    <span class="@badge">@name</span>
+                }
             </p>
         </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
+    <div class="divTable">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</div>
                 @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
                 {
                     if (property.HaveControl)
                     {
-                        <th>@Html.DisplayNameFor(model => model.ReportValues[1].Control)</th>
+                        <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Control)</div>
                     }
                     if (property.HaveReason)
                     {
-                        <th>@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</th>
+                        <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Reason)</div>
                     }
                 }
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].Status)</th>
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].Note)</th>
-            </tr>
-        </thead>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Status)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Note)</div>
+            </div>
+        </div>
 
-        <tbody>
-            @{ var parent = Model.ReportValues; }
-            @for (int i = 0; i < Model.ReportValues.Count; i++)
+        <div class="divTableBody">
+            @for (int i = 0; i < Model.ReportValues.Count(); i++)
             {
-                var parentCss = Model.ReportValues[i].NormItem.IsItem ? "" : "bg-light text-dark";
-                <tr class="bg-light text-dark @parentCss">
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).</td>
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)</td>
-                    @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                    {
-                    if (property.HaveControl)
-                    {
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].Control.Name)</td>
-                    }
-                    if (property.HaveReason)
-                    {
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].Reason.Name)</td>
-                    }
-                    }
-                    <td>@Html.HiddenFor(model => model.ReportValues[i].StatusId)</td>
-                    <td>@Html.HiddenFor(model => model.ReportValues[i].Note)</td>
-                </tr>
-                var children = Model.ReportValues[i].Children;
-                for (int j = 0; j < children.Count(); j++)
+                @Html.DisplayFor(model => model.ReportValues[i], "_ReportValue")
+
+                for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
                 {
-                    <tr>
-                        <td>@parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).</td>
-                        <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)</td>
+                    @Html.DisplayFor(model => model.ReportValues[i].Children[j], "_ReportValue")
 
-                            @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                             {
-                                 if (property.HaveControl)
-                                 {
-                                     <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Control.Name)</td>
-                                 }
-                                 if (property.HaveReason)
-                                 {
-                                     <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Reason.Name)</td>
-                                 }
-                             }
-                            <td class=@children[j].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Status.Name)</td>
-                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Note)</td>
-
-                    </tr>
-                    var grandChildren = children[j].Children;
-                    for (int k = 0; k < grandChildren.Count(); k++)
+                    for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
                     {
-                        <tr>
-                            <td>@parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).</td>
-                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)</td>
-                            @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                            {
-                                if (property.HaveControl)
-                                {
-                                    <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Control.Name)</td>
-                                }
-                                if (property.HaveReason)
-                                {
-                                    <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Reason.Name)</td>
-                                }
-                            }
-                            <td class=@grandChildren[k].Color>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Status.Name)</td>
-                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].Note)</td>
-                        </tr>
+                        @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValue")
                     }
                 }
             }
-        </tbody>
-    </table>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
-    @Html.ActionLink("Back to List", "Index", new { id = Model.NormId })
-</p>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
+        @Html.ActionLink("Back to List", "Index", new { id = Model.NormId })
+    </p>

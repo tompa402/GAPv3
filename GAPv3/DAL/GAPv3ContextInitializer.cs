@@ -91,7 +91,8 @@ namespace GAPv3.DAL
                 LastName = "N",
                 JMBAG = 123456,
                 IsActive = true,
-                OrganisationId = 1
+                OrganisationId = 1,
+                IsOrganisationLeader = true
             });
             context.Users.Add(new User()
             {
@@ -101,7 +102,8 @@ namespace GAPv3.DAL
                 LastName = "Lo",
                 JMBAG = 123456,
                 IsActive = true,
-                OrganisationId = 1
+                OrganisationId = 1,
+                IsOrganisationLeader = false
             });
             context.Users.Add(new User()
             {
@@ -111,7 +113,8 @@ namespace GAPv3.DAL
                 LastName = "Testić",
                 JMBAG = 123456,
                 IsActive = true,
-                OrganisationId = 2
+                OrganisationId = 2,
+                IsOrganisationLeader = true
             });
             context.Users.Add(new User()
             {
@@ -120,7 +123,8 @@ namespace GAPv3.DAL
                 Name = "Test22",
                 LastName = "Testić2",
                 JMBAG = 123456,
-                IsActive = true
+                IsActive = true,
+                IsOrganisationLeader = false
             });
             context.Users.Add(new User()
             {

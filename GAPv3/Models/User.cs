@@ -39,6 +39,8 @@ namespace GAPv3.Models
 
         public int? OrganisationId { get; set; }
         public Organisation Organisation { get; set; }
-        
+
+        public bool IsOrganisationLeader { get; set; }
+
     }
 }

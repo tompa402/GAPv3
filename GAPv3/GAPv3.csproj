@@ -272,6 +272,10 @@
     <Compile Include="Migrations\201810101557487_AddDateAndIsActiveToReportModel.Designer.cs">
       <DependentUpon>201810101557487_AddDateAndIsActiveToReportModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810110409109_AddIsOrganisationLeaderToUserModel.cs" />
+    <Compile Include="Migrations\201810110409109_AddIsOrganisationLeaderToUserModel.Designer.cs">
+      <DependentUpon>201810110409109_AddIsOrganisationLeaderToUserModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -289,6 +293,7 @@
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\OrganisationService.cs" />
     <Compile Include="Service\ReportService.cs" />
+    <Compile Include="ViewModels\ReportDetailsViewModel.cs" />
     <Compile Include="ViewModels\ReportFormViewModel.cs" />
     <Compile Include="ViewModels\ReportStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportValueFormViewModel.cs" />
@@ -826,6 +831,7 @@
     <Content Include="Views\Organisations\EditorTemplates\_Organisation.cshtml" />
     <Content Include="Views\Organisations\OrganisationForm.cshtml" />
     <Content Include="Views\Reports\ReportsForm.cshtml" />
+    <Content Include="Views\Reports\DisplayTemplates\_ReportValue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -900,6 +906,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810101557487_AddDateAndIsActiveToReportModel.resx">
       <DependentUpon>201810101557487_AddDateAndIsActiveToReportModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110409109_AddIsOrganisationLeaderToUserModel.resx">
+      <DependentUpon>201810110409109_AddIsOrganisationLeaderToUserModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

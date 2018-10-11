@@ -54,7 +54,7 @@ namespace GAPv3.Controllers
             return View("ReportsForm", _service.EditViewModel(report));
         }
 
-        // POST: Reports/New
+        // POST: Reports/Save
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,22 +65,17 @@ namespace GAPv3.Controllers
             return RedirectToAction("Index", "Reports");
         }
 
-        /*// GET: Reports/Details/5
-        public ActionResult Details(int? id)
+        // GET: Reports/Details/5
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Report report = _unitOfWork.ReportRepository.GetById(id);
+            var report = _service.GetById(id);
             if (report == null)
-            {
                 return HttpNotFound();
-            }
-            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
-            return View(report);
+            
+            return View(_service.DetailsViewModel(report));
         }
+
+        /*
 
         // GET: Reports/Statistic/5
         public ActionResult Statistic(int? id)

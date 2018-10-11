@@ -45,7 +45,7 @@ namespace GAPv3.Models
                     case 1:
                         return "green";
                     case 2:
-                        return "orange";
+                        return "red";
                     case 3:
                         return "yellow";
                     default:
