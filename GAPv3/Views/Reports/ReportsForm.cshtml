@@ -7,86 +7,135 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Save", "Reports"))
+@using (Html.BeginForm("Save", "Reports", new { @id = string.Empty }, FormMethod.Post, new { @id = "inputForm" }))
 {
     @Html.AntiForgeryToken()
 
-<div>
-    <h4>Report</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div>
+        <h4>Report</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="card">
-        <div class="card-body">
-            @Html.HiddenFor(m => m.NormId)
-            <div class="form-group row">
-                @Html.LabelFor(model => model.OrganisationId, "OrganisationId", htmlAttributes: new { @class = "col-form-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.OrganisationId, new SelectList(Model.Organisations, "OrganisationId", "Name"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.OrganisationId, "", new { @class = "text-danger" })
+        <div class="card">
+            <div class="card-body">
+                @Html.HiddenFor(m => m.NormId)
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.OrganisationId, "OrganisationId", htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.OrganisationId, new SelectList(Model.Organisations, "OrganisationId", "Name"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrganisationId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Name,  new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="divTable">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</div>
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</div>
+                    @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
+                    {
+                        if (property.HaveControl)
+                        {
+                            <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Controls)</div>
+                        }
+                        if (property.HaveReason)
+                        {
+                            <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Reasons)</div>
+                        }
+                    }
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Statuses)</div>
+                    <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Note)</div>
                 </div>
+            </div>
+
+            <div class="divTableBody">
+                @for (int i = 0; i < Model.ReportValues.Count(); i++)
+                {
+                    @Html.EditorFor(model => model.ReportValues[i], "_ReportValue")
+
+                    for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
+                    {
+                        @Html.EditorFor(model => model.ReportValues[i].Children[j], "_ReportValue")
+
+                        for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
+                        {
+                            @Html.EditorFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValue")
+                        }
+                    }
+                }
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.ReportId)
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" id="submitBtn" />
             </div>
         </div>
     </div>
+}
 
-    <div class="divTable">
-        <div class="divTableHeading">
-            <div class="divTableRow">
-                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</div>
-                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</div>
-                @foreach (var property in Model.ReportValues[1].NormItem.Norm.ReportValueAdditionalItem)
-                {
-                    if (property.HaveControl)
-                    {
-                        <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Controls)</div>
-                    }
-                    if (property.HaveReason)
-                    {
-                        <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Reasons)</div>
-                    }
-                }
-                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Statuses)</div>
-                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].Note)</div>
-            </div>
-        </div>
-
-        <div class="divTableBody">
-            @for (int i = 0; i < Model.ReportValues.Count(); i++)
-            {
-                @Html.EditorFor(model => model.ReportValues[i], "_ReportValue")
-
-                for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
-                {
-                    @Html.EditorFor(model => model.ReportValues[i].Children[j], "_ReportValue")
-
-                    for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
-                    {
-                        @Html.EditorFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValue")
-                    }
-                }
-            }
-        </div>
-    </div>
-    @Html.HiddenFor(m => m.ReportId)
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
-        </div>
+<div id="loading">
+    <div id="loadingcontent">
+        <p id="loadingspinner">
+            Saving things...
+        </p>
     </div>
 </div>
-}
 
 <div>
     @Html.ActionLink("Back to List", "Index", new { id = Model.NormId })
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @* jquery validation is disabled for now - performance
+        @Scripts.Render("~/bundles/jqueryval")
+    *@
+
+    <style type="text/css">
+        #loading {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            z-index: 1000;
+        }
+
+        #loadingcontent {
+            display: table;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #loadingspinner {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100%;
+            text-align: center;
+            font-size: larger;
+            padding-top: 80px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#submitBtn").click(function () {
+                $("#loading").fadeIn();
+            });
+        });
+    </script>
 }
