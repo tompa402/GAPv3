@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GAPv3.Models;
 
 namespace GAPv3.ViewModels
 {
-    public class ReportStatisticViewModel
+    public class ReportDetailsViewModel
     {
         public int ReportId { get; set; }
 
@@ -21,9 +20,6 @@ namespace GAPv3.ViewModels
 
         public List<User> AssignedUsers { get; set; }
 
-        [Display(Name = "Popunjenost")]
-        public int Popunjenost { get; set; }
-
-        public List<ReportValueStatisticViewModel> ReportValues { get; set; }
+        public List<ReportValue> ReportValues { get; set; }
     }
 }
