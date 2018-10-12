@@ -27,15 +27,15 @@
         </div>
     </div>
 
-    <div>
-        @for (int i = 0; i < Model.ReportValues.Count; i++)
-        {
-            var chartId = "chart" + i;
-            <div style="float: left" class="col-md-4" id="@chartId">
-                @Html.Highsoft().Highcharts(Model.ReportValues[i].Chart, chartId)
-            </div>
-        }
-    </div>
+    @*<div>
+            @for (int i = 0; i < Model.ReportValues.Count; i++)
+            {
+                var chartId = "chart" + i;
+                <div style="float: left" class="col-md-4" id="@chartId">
+                    @Html.Highsoft().Highcharts(Model.ReportValues[i].Chart, chartId)
+                </div>
+            }
+        </div>*@
 
     <table class="table">
         <thead>
@@ -100,12 +100,12 @@
         </tbody>
     </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
-    @Html.ActionLink("Back to List", "Index", new { id = Model.Norm.NormId })
-</p>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
+            @*@Html.ActionLink("Back to List", "Index", new { id = Model.NormId })*@
+            </p>
 
-@section Scripts {
-    @Styles.Render("~/Content/HighCharts-css")
-    @Scripts.Render("~/bundles/HighCharts-js")
-}
+            @section Scripts {
+                @Styles.Render("~/Content/HighCharts-css")
+                @Scripts.Render("~/bundles/HighCharts-js")
+            }

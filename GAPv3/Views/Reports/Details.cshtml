@@ -49,15 +49,15 @@
         <div class="divTableBody">
             @for (int i = 0; i < Model.ReportValues.Count(); i++)
             {
-                @Html.DisplayFor(model => model.ReportValues[i], "_ReportValue")
+                @Html.DisplayFor(model => model.ReportValues[i], "_ReportValueDetails")
 
                 for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
                 {
-                    @Html.DisplayFor(model => model.ReportValues[i].Children[j], "_ReportValue")
+                    @Html.DisplayFor(model => model.ReportValues[i].Children[j], "_ReportValueDetails")
 
                     for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
                     {
-                        @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValue")
+                        @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValueDetails")
                     }
                 }
             }

@@ -212,23 +212,9 @@ namespace GAPv3.Service
 
 
 
-        /* 
+        
 
-         public void UpdateReportValues(List<ReportValue> rv)
-         {
-             foreach (var parent in rv)
-             {
-                 foreach (var child in parent.Children)
-                 {
-                     unitOfWork.ReportValueRepository.Update(child);
-
-                     foreach (var grandChild in child.Children)
-                     {
-                         unitOfWork.ReportValueRepository.Update(grandChild);
-                     }
-                 }
-             }
-         }
+         
 
          public ReportStatisticViewModel GetStatisticForReport(Report report)
          {
@@ -306,9 +292,7 @@ namespace GAPv3.Service
              return result;
          }
 
-         
-
-         public Highcharts CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
+        public Highcharts CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
          {
              Highcharts chart = new Highcharts
              {
@@ -380,7 +364,7 @@ namespace GAPv3.Service
              return columnSeriesData;
          }
 
-         public Highcharts CreateChartTest()
+         /*public Highcharts CreateChartTest()
          {
              Highcharts chart = new Highcharts
              {
@@ -409,6 +393,22 @@ namespace GAPv3.Service
              };
 
              return chart;
+         }
+         
+         public void UpdateReportValues(List<ReportValue> rv)
+         {
+             foreach (var parent in rv)
+             {
+                 foreach (var child in parent.Children)
+                 {
+                     unitOfWork.ReportValueRepository.Update(child);
+
+                     foreach (var grandChild in child.Children)
+                     {
+                         unitOfWork.ReportValueRepository.Update(grandChild);
+                     }
+                 }
+             }
          }*/
     }
 }

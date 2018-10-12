@@ -63,10 +63,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Highcharts.Web.Mvc, Version=6.1.1.0, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Highsoft.Highcharts.6.1.1.34\lib\net40\Highcharts.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -831,7 +827,7 @@
     <Content Include="Views\Organisations\EditorTemplates\_Organisation.cshtml" />
     <Content Include="Views\Organisations\OrganisationForm.cshtml" />
     <Content Include="Views\Reports\ReportsForm.cshtml" />
-    <Content Include="Views\Reports\DisplayTemplates\_ReportValue.cshtml" />
+    <Content Include="Views\Reports\DisplayTemplates\_ReportValueDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

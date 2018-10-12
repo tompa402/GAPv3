@@ -62,7 +62,7 @@ namespace GAPv3.Controllers
         public ActionResult Save(Report report)
         {
             _service.InsertOrUpdate(report);
-            return RedirectToAction("Index", "Reports");
+            return RedirectToAction("Index", "Reports", new {id = report.NormId});
         }
 
         // GET: Reports/Details/5
@@ -75,19 +75,28 @@ namespace GAPv3.Controllers
             return View(_service.DetailsViewModel(report));
         }
 
-        /*
-
         // GET: Reports/Statistic/5
-        public ActionResult Statistic(int? id)
+        public ActionResult Statistic(int id)
         {
-            Report report = _unitOfWork.ReportRepository.GetById(id);
-            var reportViewModel = _service.GetStatisticForReport(report);
+            var report = _service.GetById(id);
+            if (report == null)
+                return HttpNotFound();
 
-            return View(reportViewModel);
+            return View(_service.GetStatisticForReport(report));
         }
 
-        
+        // TODO: implement activation/deactivation module
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        /*
         // POST: Reports/New
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -170,18 +179,6 @@ namespace GAPv3.Controllers
                 .Write();
 
             return null;
-        } 
-        */
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        
+        }*/
     }
 }
