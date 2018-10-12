@@ -1,5 +1,4 @@
-﻿@using Highsoft.Web.Mvc.Charts
-@model GAPv3.ViewModels.ReportStatisticViewModel
+﻿@model GAPv3.ViewModels.ReportStatisticViewModel
 @{
     ViewBag.Title = "Statistic";
 }
@@ -27,85 +26,39 @@
         </div>
     </div>
 
-    @*<div>
-            @for (int i = 0; i < Model.ReportValues.Count; i++)
-            {
-                var chartId = "chart" + i;
-                <div style="float: left" class="col-md-4" id="@chartId">
-                    @Html.Highsoft().Highcharts(Model.ReportValues[i].Chart, chartId)
-                </div>
-            }
-        </div>*@
+    <div class="divTable">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].FullImpl)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].PartImpl)</div>
+                <div class="divTableHead">@Html.DisplayNameFor(model => model.ReportValues[1].NoImpl)</div>
+            </div>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Order)</th>
-                <th>@Html.DisplayNameFor(model => model.ReportValues[1].NormItem.Name)</th>
-                <th colspan="2">@Html.DisplayNameFor(model => model.ReportValues[1].FullImpl)</th>
-                <th colspan="2">@Html.DisplayNameFor(model => model.ReportValues[1].PartImpl)</th>
-                <th colspan="2">@Html.DisplayNameFor(model => model.ReportValues[1].NoImpl)</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @{ var parent = Model.ReportValues; }
-            @for (int i = 0; i < Model.ReportValues.Count; i++)
+        <div class="divTableBody">
+            @for (int i = 0; i < Model.ReportValues.Count(); i++)
             {
-                <tr class="bg-light text-dark">
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Order).</td>
-                    <td>@Html.DisplayFor(model => model.ReportValues[i].NormItem.Name)</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorFullImpl)">@Html.DisplayFor(model => model.ReportValues[i].FullImplCount)</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorFullImpl)">@Html.DisplayFor(model => model.ReportValues[i].FullImpl)%</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorPartImpl)">@Html.DisplayFor(model => model.ReportValues[i].PartImplCount)</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorPartImpl)">@Html.DisplayFor(model => model.ReportValues[i].PartImpl)%</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorNoImpl)">@Html.DisplayFor(model => model.ReportValues[i].NoImplCount)</td>
-                    <td class="@Html.DisplayFor(model => model.ReportValues[i].ColorNoImpl)">@Html.DisplayFor(model => model.ReportValues[i].NoImpl)%</td>
-                </tr>
-                var children = Model.ReportValues[i].Children;
-                for (int j = 0; j < children.Count(); j++)
+                @Html.DisplayFor(model => model.ReportValues[i], "_ReportValueStatistic")
+
+                for (int j = 0; j < Model.ReportValues[i].Children.Count(); j++)
                 {
-                    <tr>
-                        <td>@parent[i].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Order).</td>
-                        <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].NormItem.Name)</td>
-                        @if (children[j].NormItem.IsItem)
-                        {
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].IconFullImpl)"></i></td>
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].IconPartImpl)"></i></td>
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].IconNoImpl)"></i></td>
-                        }
-                        else
-                        {
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorFullImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].FullImplCount)</td>
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorFullImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].FullImpl)%</td>
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorPartImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].PartImplCount)</td>
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorPartImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].PartImpl)%</td>
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorNoImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].NoImplCount)</td>
-                            <td class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].ColorNoImpl)">@Html.DisplayFor(model => model.ReportValues[i].Children[j].NoImpl)%</td>
-                        }
-                    </tr>
-                    var grandChildren = children[j].Children;
-                    for (int k = 0; k < grandChildren.Count(); k++)
+                    @Html.DisplayFor(model => model.ReportValues[i].Children[j], "_ReportValueStatistic")
+
+                    for (int k = 0; k < Model.ReportValues[i].Children[j].Children.Count(); k++)
                     {
-                        <tr>
-                            <td>@parent[i].NormItem.Order.@children[j].NormItem.Order.@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Order).</td>
-                            <td>@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].NormItem.Name)</td>
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].IconFullImpl)"></i></td>
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].IconPartImpl)"></i></td>
-                            <td class="text-center" colspan="2"><i class="@Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k].IconNoImpl)"></i></td>
-                        </tr>
+                        @Html.DisplayFor(model => model.ReportValues[i].Children[j].Children[k], "_ReportValueStatistic")
                     }
                 }
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
-            @*@Html.ActionLink("Back to List", "Index", new { id = Model.NormId })*@
-            </p>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
+    @*@Html.ActionLink("Back to List", "Index", new { id = Model.NormId })*@
+</p>
 
-            @section Scripts {
-                @Styles.Render("~/Content/HighCharts-css")
-                @Scripts.Render("~/bundles/HighCharts-js")
-            }
+@section Scripts {
+}

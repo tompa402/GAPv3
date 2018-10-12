@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using GAPv3.Models;
-using Highsoft.Web.Mvc.Charts;
 
 namespace GAPv3.ViewModels
 {
@@ -28,8 +27,8 @@ namespace GAPv3.ViewModels
         public int? NoImplCount { get; set; }
 
         // These properties are used for coloring if they are not Items in ReportValues
-        public string ColorFullImpl => FullImplCount > 0 ? "blue" : "";
-        public string ColorPartImpl => PartImplCount > 0 ? "orange" : "";
+        public string ColorFullImpl => FullImplCount > 0 ? "green" : "";
+        public string ColorPartImpl => PartImplCount > 0 ? "yellow" : "";
         public string ColorNoImpl => NoImplCount > 0 ? "red" : "";
 
         // These properties are used for placing icon for Item ReportValues
@@ -39,7 +38,7 @@ namespace GAPv3.ViewModels
 
         public virtual List<ReportValueStatisticViewModel> Children { get; set; }
 
-        public Highcharts Chart { get; set; }
+        //public Highcharts Chart { get; set; }
 
         public ReportValueStatisticViewModel()
         {

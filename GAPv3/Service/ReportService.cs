@@ -8,7 +8,7 @@ using AutoMapper;
 using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.ViewModels;
-using Highsoft.Web.Mvc.Charts;
+//using Highsoft.Web.Mvc.Charts;
 using Microsoft.Ajax.Utilities;
 
 namespace GAPv3.Service
@@ -281,7 +281,7 @@ namespace GAPv3.Service
                  parent.PartImpl = GetPostotak(parent.PartImplCount, childCountItemsAll);
                  parent.NoImpl = GetPostotak(parent.NoImplCount, childCountItemsAll);
 
-                 parent.Chart = CreateChart(parent.Children, parent.NormItem.Name);
+                 //parent.Chart = CreateChart(parent.Children, parent.NormItem.Name);
              }
              return rvStatList;
          }
@@ -292,7 +292,7 @@ namespace GAPv3.Service
              return result;
          }
 
-        public Highcharts CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
+        /*public Highcharts CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
          {
              Highcharts chart = new Highcharts
              {

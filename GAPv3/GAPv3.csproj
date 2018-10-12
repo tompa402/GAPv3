@@ -472,6 +472,7 @@
     <Content Include="Views\Organisations\OrganisationForm.cshtml" />
     <Content Include="Views\Reports\ReportsForm.cshtml" />
     <Content Include="Views\Reports\DisplayTemplates\_ReportValueDetails.cshtml" />
+    <Content Include="Views\Reports\DisplayTemplates\_ReportValueStatistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

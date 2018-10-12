@@ -1,0 +1,29 @@
+﻿@model GAPv3.ViewModels.ReportValueStatisticViewModel
+@{
+    var parentCss = Model.NormItem.IsItem ? "" : "bg-light text-dark";
+    var orderLayer1 = "";
+    var orderLayer2 = "";
+    if (Model.NormItem.Parent != null)
+    {
+
+        if (Model.NormItem.Parent.Parent != null)
+        {
+            orderLayer1 = Model.NormItem.Parent.Parent.Order + ".";
+            orderLayer2 = Model.NormItem.Parent.Order + ".";
+        }
+        else
+        {
+            orderLayer1 = Model.NormItem.Parent.Order + ".";
+        }
+    }
+}
+<div class="divTableRow @parentCss">
+    <div class="divTableCell">@orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).</div>
+    <div class="divTableCell">@Html.DisplayFor(model => model.NormItem.Name)</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorFullImpl)">@Html.DisplayFor(model => model.FullImplCount)</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorFullImpl)">@Html.DisplayFor(model => model.FullImpl)%</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorPartImpl)">@Html.DisplayFor(model => model.PartImplCount)</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorPartImpl)">@Html.DisplayFor(model => model.PartImpl)%</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorNoImpl)">@Html.DisplayFor(model => model.NoImplCount)</div>
+    <div class="divTableCell @Html.DisplayFor(model => model.ColorNoImpl)">@Html.DisplayFor(model => model.NoImpl)%</div>
+</div>
