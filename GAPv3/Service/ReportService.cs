@@ -232,6 +232,8 @@ namespace GAPv3.Service
 
             reportViewModel.ReportValues = PrepareReportValuesForStatistic(reportViewModel.ReportValues.Where(x => x.NormItem.ParentId == null).ToList());
 
+            reportViewModel.ChartViewModels = reportViewModel.ReportValues.Select(c => c.Chart).ToList();
+
             return reportViewModel;
         }
 
@@ -289,7 +291,7 @@ namespace GAPv3.Service
                 parent.PartImpl = GetPostotak(parent.PartImplCount, childCountItemsAll);
                 parent.NoImpl = GetPostotak(parent.NoImplCount, childCountItemsAll);
 
-                //parent.Chart = CreateChart(parent.Children, parent.NormItem.Name);
+                parent.Chart = CreateChart(parent.Children, parent.NormItem.Name);
             }
             return rvList;
         }
@@ -300,107 +302,60 @@ namespace GAPv3.Service
             return result;
         }
 
-        /*public Highcharts CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
-         {
-             Highcharts chart = new Highcharts
-             {
-                 Title = new Title
-                 {
-                     Text = parentName
-                 },
-                 XAxis = new List<XAxis>
-                 {
-                     new XAxis
-                     {
-                         Categories =  childList.Select(x => x.NormItem.Name).ToList()
-                     }
-                 },
-                 YAxis = new List<YAxis>
-                 {
-                     new YAxis
-                     {
-                         Min = 0,
-                         Title = new YAxisTitle
-                         {
-                             Text = "Total (in percent)"
-                         },
-                         StackLabels = new YAxisStackLabels
-                         {
-                             Enabled = true,
-                             Style = new YAxisStackLabelsStyle() { FontWeight = "bold" }
-                         }
-                     }
-                 },
-                 Tooltip = new Tooltip
-                 {
-                     PointFormat = "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
-                     Shared = true
-                 },
-                 PlotOptions = new PlotOptions
-                 {
-                     Column = new PlotOptionsColumn
-                     {
-                         Stacking = PlotOptionsColumnStacking.Percent
-                     }
-                 },
-                 Series = new List<Series>
-                 {
-                     new ColumnSeries
-                     {
-                         Name = "Potpuno implementirano",
-                         Data = GenerateColumnSeriesData(childList.Select(x => x.FullImplCount).ToList())
-                     },
-                     new ColumnSeries
-                     {
-                         Name = "Djelomice implementirano",
-                         Data = GenerateColumnSeriesData(childList.Select(x => x.PartImplCount).ToList())
-                     },
-                     new ColumnSeries
-                     {
-                         Name = "Nije implementirano",
-                         Data = GenerateColumnSeriesData(childList.Select(x => x.NoImplCount).ToList())
-                     }
-                 }
-             };
+        public ChartViewModel CreateChart(List<ReportValueStatisticViewModel> childList, string parentName)
+        {
+            ChartViewModel chart = new ChartViewModel
+            {
+                TitleParentName = parentName,
+                CategoriesNormItemName = childList.Select(x => x.NormItem.Name).ToList(),
+                ColumnSeriesImplName = "Potpuno implementirano",
+                ColumnSeriesImplData = childList.Select(x => x.FullImplCount).ToList(),
+                ColumnSeriesPartImplName = "Djelomice implementirano",
+                ColumnSeriesPartImplData = childList.Select(x => x.PartImplCount).ToList(),
+                ColumnSeriesNoImplName = "Nije implementirano",
+                ColumnSeriesNoImplData = childList.Select(x => x.NoImplCount).ToList()
+
+
+            };
              return chart;
          }
 
-         public List<ColumnSeriesData> GenerateColumnSeriesData(List<int?> data)
-         {
-             List<ColumnSeriesData> columnSeriesData = new List<ColumnSeriesData>();
-             data.ForEach(p => columnSeriesData.Add(new ColumnSeriesData { Y = p }));
-             return columnSeriesData;
-         }
-
-         /*public Highcharts CreateChartTest()
-         {
-             Highcharts chart = new Highcharts
-             {
-                 Chart = new Chart
-                 {
-                     Height = 400,
-                     Type = ChartType.Column
-                 },
-                 Series = new List<Series>
-                 {
-                     new ColumnSeries
-                     {
-                         Name = "Brands",
-                         ColorByPoint = true,
-                         Data = new List<ColumnSeriesData>
-                         {
-                             new ColumnSeriesData { Name = "Microsoft Internet Explorer", Y = 56.3, Drilldown = "Microsoft Internet Explorer" },
-                             new ColumnSeriesData { Name = "Chrome", Y = 24.03, Drilldown = "Chrome" },
-                             new ColumnSeriesData { Name = "Firefox", Y = 10.3, Drilldown = "Firefox" },
-                             new ColumnSeriesData { Name = "Safari", Y = 4.77, Drilldown = "Safari" },
-                             new ColumnSeriesData { Name = "Opera", Y = 0.91, Drilldown = "Opera" },
-                             new ColumnSeriesData { Name = "Proprietary or Undetectable", Y = 0.2, Drilldown = null }
-                         }
-                     }
-                 }
-             };
-
-             return chart;
-        }*/
+    /*public List<ColumnSeriesData> GenerateColumnSeriesData(List<int?> data)
+    {
+        List<ColumnSeriesData> columnSeriesData = new List<ColumnSeriesData>();
+        data.ForEach(p => columnSeriesData.Add(new ColumnSeriesData { Y = p }));
+        return columnSeriesData;
     }
+
+    public Highcharts CreateChartTest()
+    {
+        Highcharts chart = new Highcharts
+        {
+            Chart = new Chart
+            {
+                Height = 400,
+                Type = ChartType.Column
+            },
+            Series = new List<Series>
+            {
+                new ColumnSeries
+                {
+                    Name = "Brands",
+                    ColorByPoint = true,
+                    Data = new List<ColumnSeriesData>
+                    {
+                        new ColumnSeriesData { Name = "Microsoft Internet Explorer", Y = 56.3, Drilldown = "Microsoft Internet Explorer" },
+                        new ColumnSeriesData { Name = "Chrome", Y = 24.03, Drilldown = "Chrome" },
+                        new ColumnSeriesData { Name = "Firefox", Y = 10.3, Drilldown = "Firefox" },
+                        new ColumnSeriesData { Name = "Safari", Y = 4.77, Drilldown = "Safari" },
+                        new ColumnSeriesData { Name = "Opera", Y = 0.91, Drilldown = "Opera" },
+                        new ColumnSeriesData { Name = "Proprietary or Undetectable", Y = 0.2, Drilldown = null }
+                    }
+                }
+            }
+        };
+
+        return chart;
+   }*/
+}
 }
