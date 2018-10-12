@@ -10,19 +10,20 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">@Html.DisplayFor(model => model.Name)</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Norm.Name)</h6>
-            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.Organisation.Name)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.NormName)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(model => model.OrganisationName)</h6>
             <p class="card-text">
-                <!-- TODO: get data from database -->
                 Ovi korisnici mogu ažurirati:
-                <span class="badge badge-primary">Primary</span>
-                <span class="badge badge-secondary">Secondary</span>
-                <span class="badge badge-secondary">Secondary</span>
-                <span class="badge badge-secondary">Secondary</span>
+                @foreach (var user in Model.AssignedUsers)
+                {
+                    var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
+                    var name = user.Name + " " + user.LastName;
+                    <span class="@badge">@name</span>
+                }
             </p>
         </div>
         <div class="card-footer">
-            Ukupna razina sukladnosti s normom: <span class="badge badge-info">@Model.Popunjenost% - PROVJERI KALKULACIJU, ovo je test</span>
+            Ukupna razina sukladnosti s normom: <span class="badge badge-info">@Model.Popunjenost%</span>
         </div>
     </div>
 
@@ -57,7 +58,7 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
-    @*@Html.ActionLink("Back to List", "Index", new { id = Model.NormId })*@
+    @Html.ActionLink("Back to List", "Index", new { id = Model.NormId })
 </p>
 
 @section Scripts {

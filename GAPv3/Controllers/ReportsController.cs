@@ -86,6 +86,7 @@ namespace GAPv3.Controllers
         }
 
         // TODO: implement activation/deactivation module
+        // TODO: implement chart statistic
 
         protected override void Dispose(bool disposing)
         {

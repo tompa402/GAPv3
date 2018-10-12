@@ -10,16 +10,20 @@ namespace GAPv3.ViewModels
     public class ReportStatisticViewModel
     {
         public int ReportId { get; set; }
-        [Display(Name = "Naziv izvještaja")]
+
         public string Name { get; set; }
 
-        public virtual Norm Norm { get; set; }
+        public int? NormId { get; set; }
 
-        public virtual Organisation Organisation { get; set; }
+        public string NormName { get; set; }
+
+        public string OrganisationName { get; set; }
+
+        public List<User> AssignedUsers { get; set; }
 
         [Display(Name = "Popunjenost")]
         public int Popunjenost { get; set; }
 
-        public virtual List<ReportValueStatisticViewModel> ReportValues { get; set; }
+        public List<ReportValueStatisticViewModel> ReportValues { get; set; }
     }
 }

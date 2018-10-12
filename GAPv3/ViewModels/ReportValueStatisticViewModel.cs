@@ -12,6 +12,7 @@ namespace GAPv3.ViewModels
         public virtual NormItem NormItem { get; set; }
 
         public int? StatusId { get; set; }
+        public int? ControlId { get; set; }
 
         [Display(Name = "Potpuno implementiran")]
         public int FullImpl { get; set; }
@@ -36,13 +37,8 @@ namespace GAPv3.ViewModels
         public string IconPartImpl => StatusId == 2 ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red";
         public string IconNoImpl => StatusId == 3 ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red";
 
-        public virtual List<ReportValueStatisticViewModel> Children { get; set; }
+        public List<ReportValueStatisticViewModel> Children { get; set; }
 
         //public Highcharts Chart { get; set; }
-
-        public ReportValueStatisticViewModel()
-        {
-            this.Children = new List<ReportValueStatisticViewModel>();
-        }
     }
 }

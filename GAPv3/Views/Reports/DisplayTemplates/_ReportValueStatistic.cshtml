@@ -20,22 +20,31 @@
 <div class="divTableRow @parentCss">
     <div class="divTableCell">@orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).</div>
     <div class="divTableCell">@Html.DisplayFor(model => model.NormItem.Name)</div>
-    <div class="divTableCell @Html.DisplayFor(model => model.ColorFullImpl)">
-        <div class="row">
-            <span class="col-md-6">@Html.DisplayFor(model => model.FullImplCount)</span>
-            <span class="col-md-6">@Html.DisplayFor(model => model.FullImpl)%</span>
+    @if (Model.NormItem.IsItem)
+    {
+        <div class="divTableCell text-center"><i class="@Html.DisplayFor(model => model.IconFullImpl)"></i></div>
+        <div class="divTableCell text-center"><i class="@Html.DisplayFor(model => model.IconPartImpl)"></i></div>
+        <div class="divTableCell text-center"><i class="@Html.DisplayFor(model => model.IconNoImpl)"></i></div>
+    }
+    else
+    {
+        <div class="divTableCell @Html.DisplayFor(model => model.ColorFullImpl)">
+            <div class="row">
+                <span class="col-md-6">@Html.DisplayFor(model => model.FullImplCount)</span>
+                <span class="col-md-6">@Html.DisplayFor(model => model.FullImpl)%</span>
+            </div>
         </div>
-    </div>
-    <div class="divTableCell @Html.DisplayFor(model => model.ColorPartImpl)">
-        <div class="row">
-            <span class="col-md-6">@Html.DisplayFor(model => model.PartImplCount)</span>
-            <span class="col-md-6">@Html.DisplayFor(model => model.PartImpl)%</span>
+        <div class="divTableCell @Html.DisplayFor(model => model.ColorPartImpl)">
+            <div class="row">
+                <span class="col-md-6">@Html.DisplayFor(model => model.PartImplCount)</span>
+                <span class="col-md-6">@Html.DisplayFor(model => model.PartImpl)%</span>
+            </div>
         </div>
-    </div>
-    <div class="divTableCell @Html.DisplayFor(model => model.ColorNoImpl)">
-        <div class="row">
-            <div class="col-md-6">@Html.DisplayFor(model => model.NoImplCount)</div>
-            <div class="col-md-6">@Html.DisplayFor(model => model.NoImpl)%</div>
+        <div class="divTableCell @Html.DisplayFor(model => model.ColorNoImpl)">
+            <div class="row">
+                <div class="col-md-6">@Html.DisplayFor(model => model.NoImplCount)</div>
+                <div class="col-md-6">@Html.DisplayFor(model => model.NoImpl)%</div>
+            </div>
         </div>
-    </div>
+    }
 </div>
