@@ -1,4 +1,5 @@
-﻿@model GAPv3.ViewModels.ReportStatisticViewModel
+﻿@using GAPv3.ViewModels
+@model GAPv3.ViewModels.ReportStatisticViewModel
 @{
     ViewBag.Title = "Statistic";
 }
@@ -25,6 +26,9 @@
         <div class="card-footer">
             Ukupna razina sukladnosti s normom: <span class="badge badge-info">@Model.Popunjenost%</span>
         </div>
+    </div>
+
+    <div id="chartContainer" class="container">
     </div>
 
     <div class="divTable">
@@ -62,4 +66,59 @@
 </p>
 
 @section Scripts {
+    @Styles.Render("~/Content/HighCharts-css")
+    @Scripts.Render("~/bundles/HighCharts-js")
+
+    <script type="text/javascript">
+        var charts = @Html.Raw(Json.Encode(Model.ChartViewModels));
+
+        $(document).ready(function () {
+            console.log("ready!");
+            var chartContainer = $('#chartContainer');
+            for (var i = 0; i < charts.length; i++) {
+                var newChartId = "chart" + i;
+                $("<div style='float: left' class='col-md-4' id='" + newChartId + "'></div>").appendTo(chartContainer);
+                createChart(charts[i], newChartId);
+            }
+        });
+
+        function createChart(chart, containerId) {
+            Highcharts.chart(containerId, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: chart.TitleParentName
+                },
+                xAxis: {
+                    categories: chart.CategoriesNormItemName
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total (in percent)'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                series: [{
+                    name: chart.ColumnSeriesImplName,
+                    data: chart.ColumnSeriesImplData
+                }, {
+                    name: chart.ColumnSeriesPartImplName,
+                    data: chart.ColumnSeriesPartImplData
+                }, {
+                    name: chart.ColumnSeriesNoImplName,
+                    data: chart.ColumnSeriesNoImplData
+                }]
+            });
+        };
+    </script>
 }

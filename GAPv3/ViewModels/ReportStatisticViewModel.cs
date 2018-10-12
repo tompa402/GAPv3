@@ -25,5 +25,7 @@ namespace GAPv3.ViewModels
         public int Popunjenost { get; set; }
 
         public List<ReportValueStatisticViewModel> ReportValues { get; set; }
+
+        public List<ChartViewModel> ChartViewModels { get; set; }
     }
 }

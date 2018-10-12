@@ -39,6 +39,6 @@ namespace GAPv3.ViewModels
 
         public List<ReportValueStatisticViewModel> Children { get; set; }
 
-        //public Highcharts Chart { get; set; }
+        public ChartViewModel Chart { get; set; }
     }
 }
