@@ -24,16 +24,16 @@ namespace GAPv3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User UserInput, string returnUrl = "")
+        public ActionResult Login(User userInput, string returnUrl = "")
         {
             if (ModelState.IsValid)
             {
                 bool isValidUser =
-                    Membership.ValidateUser(UserInput.Email, PasswordHandler.EncryptPassword(UserInput.Password));
+                    Membership.ValidateUser(userInput.Email, PasswordHandler.EncryptPassword(userInput.Password));
 
                 if (isValidUser)
                 {
-                    if (CredentialsManager.IsIdentical(UserInput.Email, UserInput.Password))
+                    if (CredentialsManager.IsIdentical(userInput.Email, userInput.Password))
                     {
                         return RedirectToAction("ChangePassword");
                     }
@@ -41,7 +41,7 @@ namespace GAPv3.Controllers
                     User user = null;
                     using (GAPv3Context dc = new GAPv3Context())
                     {
-                        user = dc.Users.Where(a => a.Email.Equals(UserInput.Email)).FirstOrDefault();
+                        user = dc.Users.Where(a => a.Email.Equals(userInput.Email)).FirstOrDefault();
                     }
 
                     if (user != null)
