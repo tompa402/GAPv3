@@ -186,7 +186,6 @@
     <Compile Include="CustomPrincipal.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="DAL\GAPv3Context.cs" />
-    <Compile Include="DAL\GAPv3ContextInitializer.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
@@ -277,6 +276,10 @@
     <Compile Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.cs" />
     <Compile Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.Designer.cs">
       <DependentUpon>201810151836379_UpdateUserPropertiesRequierd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810151950230_InsertLookUpDataInDb.cs" />
+    <Compile Include="Migrations\201810151950230_InsertLookUpDataInDb.Designer.cs">
+      <DependentUpon>201810151950230_InsertLookUpDataInDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
@@ -916,6 +919,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.resx">
       <DependentUpon>201810151836379_UpdateUserPropertiesRequierd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810151950230_InsertLookUpDataInDb.resx">
+      <DependentUpon>201810151950230_InsertLookUpDataInDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
