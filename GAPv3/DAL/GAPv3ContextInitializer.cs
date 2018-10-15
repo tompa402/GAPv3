@@ -4,8 +4,7 @@ using GAPv3.Models;
 
 namespace GAPv3.DAL
 {
-    // public class GAPv3ContextInitializer : DropCreateDatabaseIfModelChanges<GAPv3Context>
-    public class GAPv3ContextInitializer : CreateDatabaseIfNotExists<GAPv3Context>
+    public class GAPv3ContextInitializer : DropCreateDatabaseAlways<GAPv3Context>
     {
         protected override void Seed(GAPv3Context context)
         {

@@ -274,6 +274,10 @@
     <Compile Include="Migrations\201810110409109_AddIsOrganisationLeaderToUserModel.Designer.cs">
       <DependentUpon>201810110409109_AddIsOrganisationLeaderToUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.cs" />
+    <Compile Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.Designer.cs">
+      <DependentUpon>201810151836379_UpdateUserPropertiesRequierd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -909,6 +913,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810110409109_AddIsOrganisationLeaderToUserModel.resx">
       <DependentUpon>201810110409109_AddIsOrganisationLeaderToUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810151836379_UpdateUserPropertiesRequierd.resx">
+      <DependentUpon>201810151836379_UpdateUserPropertiesRequierd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

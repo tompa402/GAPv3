@@ -80,7 +80,7 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _service.SaveUser(user);
                 return RedirectToAction("Index", "Users");

@@ -41,7 +41,7 @@ namespace GAPv3.Controllers
                     User user = null;
                     using (GAPv3Context dc = new GAPv3Context())
                     {
-                        user = dc.Users.Where(a => a.Email.Equals(userInput.Email)).FirstOrDefault();
+                        user = dc.Users.SingleOrDefault(a => a.Email.Equals(userInput.Email));
                     }
 
                     if (user != null)
@@ -84,7 +84,7 @@ namespace GAPv3.Controllers
                 User user = null;
                 using (GAPv3Context _context = new GAPv3Context())
                 {
-                    user = _context.Users.Where(a => a.Email.Equals(userInput.Email)).FirstOrDefault();
+                    user = _context.Users.SingleOrDefault(a => a.Email.Equals(userInput.Email));
                 }
 
                 if (user != null)
