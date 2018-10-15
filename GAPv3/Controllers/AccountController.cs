@@ -6,12 +6,16 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using GAPv3.DAL;
+using GAPv3.Handlers;
+using GAPv3.Helpers;
 using GAPv3.Models;
+using GAPv3.Service;
 
 namespace GAPv3.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly UserService _service = new UserService();
         // GET: Account
         public ActionResult Login()
         {
@@ -20,54 +24,24 @@ namespace GAPv3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User UserInput, string ReturnUrl = "")
+        public ActionResult Login(User userInput, string returnUrl = "")
         {
-            //using (GAPv2Context dc = new GAPv2Context())
-            //{
-            //    var user = dc.User.Where(a => a.Email.Equals(UserInput.Email) && 
-            //                                  a.Password.Equals(UserInput.Password)).FirstOrDefault();
-            //    if (user != null)
-            //    {
-            //        FormsAuthentication.SetAuthCookie(user.Email, true);
-            //        if (Url.IsLocalUrl(ReturnUrl))
-            //        {
-            //            return Redirect(ReturnUrl);
-            //        }
-            //        else
-            //        {
-            //            return RedirectToAction("Index", "Home");
-            //        }
-            //    }
-            //}
-            //ModelState.Remove("Password");
-            //return View();
-            //if (ModelState.IsValid)
-            //{
-            //    var isValidUser = Membership.ValidateUser(UserInput.Email, UserInput.Password);
-            //    if (isValidUser)
-            //    {
-            //        FormsAuthentication.SetAuthCookie(UserInput.Email,true);
-            //        if (Url.IsLocalUrl(ReturnUrl))
-            //        {
-            //            return Redirect(ReturnUrl);
-            //        }
-            //        else
-            //        {
-            //            return RedirectToAction("Index", "Home");
-            //        }
-            //    }
-            //}
-
-
             if (ModelState.IsValid)
             {
-                bool isValidUser = Membership.ValidateUser(UserInput.Email, UserInput.Password);
+                bool isValidUser =
+                    Membership.ValidateUser(userInput.Email, PasswordHandler.EncryptPassword(userInput.Password));
+
                 if (isValidUser)
                 {
+                    if (CredentialsManager.IsIdentical(userInput.Email, userInput.Password))
+                    {
+                        return RedirectToAction("ChangePassword");
+                    }
+
                     User user = null;
                     using (GAPv3Context dc = new GAPv3Context())
                     {
-                        user = dc.Users.Where(a => a.Email.Equals(UserInput.Email)).FirstOrDefault();
+                        user = dc.Users.Where(a => a.Email.Equals(userInput.Email)).FirstOrDefault();
                     }
 
                     if (user != null)
@@ -98,6 +72,34 @@ namespace GAPv3.Controllers
 
         public ActionResult ChangePassword()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(User userInput)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = null;
+                using (GAPv3Context _context = new GAPv3Context())
+                {
+                    user = _context.Users.Where(a => a.Email.Equals(userInput.Email)).FirstOrDefault();
+                }
+
+                if (user != null)
+                {
+                    if (!CredentialsManager.IsIdentical(userInput.Email, userInput.Password))
+                    {
+                        _service.UpdatePass(userInput);
+                        return RedirectToAction("Login");
+
+                    }
+
+                    return RedirectToAction("ChangePassword");
+                }
+            }
+            ModelState.Remove("Password");
             return View();
         }
 

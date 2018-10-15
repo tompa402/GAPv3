@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganisationsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomIdentity.cs" />
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomPrincipal.cs" />
@@ -192,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\PasswordHandler.cs" />
+    <Compile Include="Helpers\CredentialsManager.cs" />
     <Compile Include="Migrations\201808091646185_Initial.cs" />
     <Compile Include="Migrations\201808091646185_Initial.Designer.cs">
       <DependentUpon>201808091646185_Initial.cs</DependentUpon>
@@ -289,6 +291,7 @@
     <Compile Include="Service\AutoMapperWebProfile.cs" />
     <Compile Include="Service\OrganisationService.cs" />
     <Compile Include="Service\ReportService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\ReportDetailsViewModel.cs" />
     <Compile Include="ViewModels\ReportFormViewModel.cs" />
@@ -825,6 +828,10 @@
     <Content Include="Views\Reports\ReportsForm.cshtml" />
     <Content Include="Views\Reports\DisplayTemplates\_ReportValueDetails.cshtml" />
     <Content Include="Views\Reports\DisplayTemplates\_ReportValueStatistic.cshtml" />
+    <Content Include="Views\Shared\_LayoutLocked.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Update.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

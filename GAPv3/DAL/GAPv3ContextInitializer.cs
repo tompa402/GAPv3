@@ -5,7 +5,7 @@ using GAPv3.Models;
 namespace GAPv3.DAL
 {
     // public class GAPv3ContextInitializer : DropCreateDatabaseIfModelChanges<GAPv3Context>
-    public class GAPv3ContextInitializer : DropCreateDatabaseAlways<GAPv3Context>
+    public class GAPv3ContextInitializer : CreateDatabaseIfNotExists<GAPv3Context>
     {
         protected override void Seed(GAPv3Context context)
         {
@@ -135,11 +135,20 @@ namespace GAPv3.DAL
                 JMBAG = 123456,
                 IsActive = true
             });
+            context.Users.Add(new User()
+            {
+                Email = "isti@vvg.hr",
+                Password = "aXN0aQ==",
+                Name = "Testko",
+                LastName = "Testićić",
+                JMBAG = 123456
+            });
 
             context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });
             context.Roles.Add(new Role() { RoleId = 2, RoleName = "user" });
             context.Roles.Add(new Role() { RoleId = 3, RoleName = "guest" });
-
+            context.Roles.Add(new Role() { RoleId = 3, RoleName = "dev" });
+            
             context.UserRoles.Add(new UserRole() { RoleId = 1, UserId = 1 });
             context.UserRoles.Add(new UserRole() { RoleId = 2, UserId = 2 });
 
