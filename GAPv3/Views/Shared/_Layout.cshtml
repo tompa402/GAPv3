@@ -36,9 +36,9 @@
 
                         @{
                             var identity = (HttpContext.Current.User as CustomPrincipal).Identity as CustomIdentity;
-                            var mail = identity.User.Email.Substring(0, identity.User.Email.Length - 7);
+                            var user = identity.User.Name;
                         }
-                        <a class="nav-link dropdown-toggle nav-item" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@($"Dobrodošli, {mail}")</a>
+                        <a class="nav-link dropdown-toggle nav-item" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@($"Dobrodošli, {user}")</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a> @Html.ActionLink("Promijeni lozinku", "ChangePassword", new { controller = "Account" }, new { @class = "dropdown-item" })</a>
                             @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
