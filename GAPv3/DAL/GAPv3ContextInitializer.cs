@@ -4,7 +4,6 @@ using GAPv3.Models;
 
 namespace GAPv3.DAL
 {
-    // public class GAPv3ContextInitializer : DropCreateDatabaseIfModelChanges<GAPv3Context>
     public class GAPv3ContextInitializer : DropCreateDatabaseAlways<GAPv3Context>
     {
         protected override void Seed(GAPv3Context context)
@@ -39,7 +38,8 @@ namespace GAPv3.DAL
                 Ownership = "Full",
                 Size = "Ne znma",
                 Type = "4",
-                VideoSurveillance = "Da"
+                VideoSurveillance = "Da",
+                IsActive = true
             });
             context.Organisations.Add(new Organisation()
             {
@@ -57,7 +57,8 @@ namespace GAPv3.DAL
                 Ownership = "Full",
                 Size = "Ne znma",
                 Type = "4",
-                VideoSurveillance = "Da"
+                VideoSurveillance = "Da",
+                IsActive = true
             });
 
             context.Reports.Add(new Report() { Name = "Custom report", NormId = 1, OrganisationId = 1 });
@@ -87,7 +88,10 @@ namespace GAPv3.DAL
                 Password = "2",
                 Name = "Tom",
                 LastName = "N",
-                JMBAG = 123456
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 1,
+                IsOrganisationLeader = true
             });
             context.Users.Add(new User()
             {
@@ -95,7 +99,10 @@ namespace GAPv3.DAL
                 Password = "josip",
                 Name = "J",
                 LastName = "Lo",
-                JMBAG = 123456
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 1,
+                IsOrganisationLeader = false
             });
             context.Users.Add(new User()
             {
@@ -103,19 +110,46 @@ namespace GAPv3.DAL
                 Password = "test",
                 Name = "Test",
                 LastName = "Testić",
+                JMBAG = 123456,
+                IsActive = true,
+                OrganisationId = 2,
+                IsOrganisationLeader = true
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test2@vvg.hr",
+                Password = "test",
+                Name = "Test22",
+                LastName = "Testić2",
+                JMBAG = 123456,
+                IsActive = true,
+                IsOrganisationLeader = false
+            });
+            context.Users.Add(new User()
+            {
+                Email = "test3@vvg.hr",
+                Password = "test",
+                Name = "Test33",
+                LastName = "Testić3",
+                JMBAG = 123456,
+                IsActive = true
+            });
+            context.Users.Add(new User()
+            {
+                Email = "isti@vvg.hr",
+                Password = "aXN0aQ==",
+                Name = "Testko",
+                LastName = "Testićić",
                 JMBAG = 123456
             });
 
             context.Roles.Add(new Role() { RoleId = 1, RoleName = "admin" });
             context.Roles.Add(new Role() { RoleId = 2, RoleName = "user" });
             context.Roles.Add(new Role() { RoleId = 3, RoleName = "guest" });
-
+            context.Roles.Add(new Role() { RoleId = 3, RoleName = "dev" });
+            
             context.UserRoles.Add(new UserRole() { RoleId = 1, UserId = 1 });
             context.UserRoles.Add(new UserRole() { RoleId = 2, UserId = 2 });
-
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 1, OrganisationId = 1 });
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 2, OrganisationId = 1 });
-            context.UserOrganisations.Add(new UserOrganisation() { UserId = 3, OrganisationId = 2 });
 
             context.NormItems.Add(new NormItem() { NormItemId = 1, Name = "Kontekst organizacije", IsItem = false, ParentId = null, Order = 4, NormId = 1 });
             context.NormItems.Add(new NormItem() { NormItemId = 2, Name = "Razumijevanje organizacije i njenog konteksta", IsItem = true, Order = 1, ParentId = 1, NormId = 1 });

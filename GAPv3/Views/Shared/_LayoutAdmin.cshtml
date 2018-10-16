@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - GAP analiza</title>
     @Styles.Render("~/Content/cssAdmin")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fa")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -30,10 +32,18 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Korisnici">
-                    <a href="@Url.Action("Index","Users")" class="nav-link">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseUsers" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-users"></i>
                         <span class="nav-link-text">Korisnici</span>
                     </a>
+                    <ul class="sidenav-second-level collapse" id="collapseUsers">
+                        <li>
+                            <a href="@Url.Action("Create", "Users")">Novi</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Users")">Lista korisnika</a>
+                        </li>
+                        </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Norme">
                     <a href="@Url.Action("Index","Norms")" class="nav-link">

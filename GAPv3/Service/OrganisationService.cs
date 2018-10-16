@@ -6,21 +6,24 @@ using System.Web.Mvc;
 using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.ViewModels;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace GAPv3.Service
 {
     public class OrganisationService
     {
-        private UnitOfWork unitOfWork;
+        private GAPv3Context _context;
 
-        public OrganisationService(UnitOfWork unitOfWork)
+        public OrganisationService(GAPv3Context context)
         {
-            this.unitOfWork = unitOfWork;
+            _context = context;
         }
 
-        public IEnumerable<SelectListItem> GetUser()
+        public IEnumerable<SelectListItem> GetUsersWithoutOrganisation()
         {
-            var users = unitOfWork.UserRepository.Get()
+            var users = _context.Users
+                .Where(c => c.OrganisationId == null)
                 .Select(x =>
                     new SelectListItem
                     {
@@ -30,58 +33,96 @@ namespace GAPv3.Service
             return new SelectList(users, "Value", "Text");
         }
 
-        public void SaveUserOrganisation(UserOrganisationViewModel model)
+        public IEnumerable<SelectListItem> GetUsersForEdit(int orgId)
         {
-            unitOfWork.OrganisationRepository.Insert(model.Organisation);
-            int organisationId = model.Organisation.OrganisationId;
-
-            foreach (int id in model.SelectedUsers)
-            {
-                var UserOrganisation = new UserOrganisation
-                {
-                    OrganisationId = organisationId,
-                    UserId = id
-                };
-                unitOfWork.UserOrganisationRepository.Insert(UserOrganisation);
-            }
-
-            unitOfWork.Save();
+            var users = _context.Users
+                .Where(c => c.OrganisationId == null || c.OrganisationId == orgId)
+                .Select(x =>
+                    new SelectListItem
+                    {
+                        Value = x.UserId.ToString(),
+                        Text = x.Name + " " + x.LastName
+                    });
+            return new SelectList(users, "Value", "Text");
         }
 
         public IEnumerable<Organisation> GetOrganisations()
         {
-            return unitOfWork.OrganisationRepository.Get();
+            return _context.Organisations.Include(u => u.Users).ToList();
         }
 
-        public Organisation GetOrganisationById(int? id)
+        public Organisation GetOrganisationById(int id)
         {
-            return unitOfWork.OrganisationRepository.GetById(id);
+            return _context.Organisations.Include(c => c.Users).SingleOrDefault(c => c.OrganisationId == id);
         }
 
-        public void UpdateUserOrganisation(Organisation model)
+        public UserOrganisationViewModel CreateViewModel()
         {
-            unitOfWork.OrganisationRepository.Update(model);
-            // TODO: implement update of UserOrganization
-            /*int organisationId = model.Organisation.OrganisationId;
-
-            foreach (int id in model.SelectedUsers)
+            UserOrganisationViewModel model = new UserOrganisationViewModel
             {
-                var UserOrganisation = new UserOrganisation
-                {
-                    OrganisationId = organisationId,
-                    UserId = id
-                };
-                unitOfWork.UserOrganisationRepository.Update(UserOrganisation);
-            }*/
-
-            unitOfWork.Save();
+                Organisation = new Organisation(),
+                Users = GetUsersWithoutOrganisation()
+            };
+            return model;
         }
 
-        public void DeleteOrganisation(int? id)
+        public UserOrganisationViewModel EditViewModel(Organisation organisation)
         {
-            unitOfWork.OrganisationRepository.Delete(id);
-            // TODO: implement delete of UserOrganization
-            unitOfWork.Save();
+            UserOrganisationViewModel model = new UserOrganisationViewModel
+            {
+                Organisation = organisation,
+                Users = GetUsersForEdit(organisation.OrganisationId),
+                SelectedUsers = _context.Users
+                    .Where(c => c.OrganisationId == organisation.OrganisationId)
+                    .Select(c => c.UserId)
+                    .ToList()
+            };
+            return model;
         }
+
+        public void SaveUserOrganisation(UserOrganisationViewModel model)
+        {
+            _context.Organisations.Add(model.Organisation);
+
+            foreach (var usrId in model.SelectedUsers)
+            {
+                var userInDb = _context.Users.SingleOrDefault(c => c.UserId == usrId);
+                if (userInDb != null)
+                    userInDb.OrganisationId = model.Organisation.OrganisationId;
+            }
+            _context.SaveChanges();
+        }
+
+        public void UpdateUserOrganisation(UserOrganisationViewModel model)
+        {
+            model.Organisation.Modified = DateTime.Now;
+            _context.Organisations.AddOrUpdate(model.Organisation);
+
+            var oldUsers = _context.Users
+                .Where(c => c.OrganisationId == model.Organisation.OrganisationId)
+                .Select(c => c.UserId)
+                .ToList();
+
+            var newUsers = model.SelectedUsers.Except(oldUsers).ToList();
+
+            var usersToRemoveOrg = oldUsers.Except(model.SelectedUsers).ToList();
+
+            foreach (var usrId in newUsers)
+            {
+                var userInDb = _context.Users.SingleOrDefault(c => c.UserId == usrId);
+                if (userInDb != null)
+                    userInDb.OrganisationId = model.Organisation.OrganisationId;
+            }
+
+            foreach (var usrId in usersToRemoveOrg)
+            {
+                var userInDb = _context.Users.SingleOrDefault(c => c.UserId == usrId);
+                if (userInDb != null)
+                    userInDb.OrganisationId = null;
+            }
+            _context.SaveChanges();
+        }
+
+        //TODO: implement activate/deactivate module
     }
 }

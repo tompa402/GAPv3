@@ -26,12 +26,12 @@ namespace GAPv3
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/font-awesome/css/font-awesome.css",
                       "~/Content/Table.css"));
 
+            bundles.Add(new StyleBundle("~/Content/fa").Include(
+                "~/Content/font-awesome/css/font-awesome.css", new CssRewriteUrlTransform()));
+
             bundles.Add(new StyleBundle("~/Content/cssAdmin").Include(
-                "~/Content/bootstrap.css",
-                "~/Content/font-awesome/css/font-awesome.css",
                 "~/Content/sb-admin/sb-admin.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapAdmin").Include(
@@ -42,22 +42,23 @@ namespace GAPv3
             bundles.Add(new ScriptBundle("~/bundles/jquery-easing").Include(
                 "~/Scripts/jquery-easing/jquery.easing.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
+            bundles.Add(new ScriptBundle("~/bundles/sb-admin-js").Include(
                 "~/Scripts/sb-admin/sb-admin.js"));
-
-            bundles.Add(new StyleBundle("~/Content/HighCharts-css").Include(
-                "~/Content/HighCharts-css/highcharts.css"));
-
-            bundles.Add(new ScriptBundle("~/bundles/HighCharts-js").Include(
-                "~/Scripts/HighCharts-js/highcharts.js"));
 
             bundles.Add(new StyleBundle("~/Content/login").Include(
                 "~/Content/Login.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
+            bundles.Add(new ScriptBundle("~/bundles/chosen-js").Include(
                 "~/Content/Chosen/chosen.jquery.js"));
-            bundles.Add(new StyleBundle("~/Content/chosen").Include(
+
+            bundles.Add(new StyleBundle("~/Content/chosen-css").Include(
                 "~/Content/Chosen/chosen.css"));
+
+            bundles.Add(new StyleBundle("~/Content/HighCharts-css").Include(
+                "~/Content/Highcharts/highcharts.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/HighCharts-js").Include(
+                "~/Scripts/Highcharts/highcharts.js"));
 
         }
     }

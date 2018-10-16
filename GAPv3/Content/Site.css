@@ -23,14 +23,14 @@ textarea {
     max-width: 280px;
 }
 
-.blue {
-    background-color: #5AD3D1;
-}   
+.green {
+    background-color: #19C124;
+}
 .red {
-    background-color: #FF5A5E;
-}   
-.orange {
-    background-color: #FFC870;
+    background-color: #F40000;
+}
+.yellow {
+    background-color: #FFD800;
 }
 
 .fa-red {
@@ -39,5 +39,15 @@ textarea {
 
 .fa-green {
     color: green;
+}
+
+.field-validation-error,
+label.error {
+    color: red;
+}
+
+.input-validation-error,
+input.error {
+    border: 2px solid red;
 }
 

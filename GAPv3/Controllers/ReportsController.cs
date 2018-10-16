@@ -13,76 +13,92 @@ namespace GAPv3.Controllers
 {
     public class ReportsController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private GAPv3Context _context;
         private readonly ReportService _service;
 
         public ReportsController()
         {
-            _service = new ReportService(_unitOfWork);
+            _context = new GAPv3Context();
+            _service = new ReportService(_context);
         }
 
         // GET: Reports
         public ActionResult Index(int? id)
         {
-            var reports = _unitOfWork.ReportRepository.Get(filter: x => x.NormId == id);
+            var models = _service.GetReportsForNorm(id);
+            if (!models.Any())
+                return HttpNotFound();
 
-            List<ReportViewModel> reportsViewModel = new List<ReportViewModel>();
+            return View(models);
+        }
 
-            foreach (Report report in reports)
-            {
-                var reportViewModel = Mapper.Map<Report, ReportViewModel>(report);
-                reportViewModel.Popunjenost = _service.GetPopunjenost(report.ReportValues);
-                reportsViewModel.Add(reportViewModel);
-            }
+        // GET: Reports/New
+        public ActionResult New(int id)
+        {
+            var norm = _context.Norms.SingleOrDefault(n => n.NormId == id);
+            if (norm == null)
+                return HttpNotFound();
 
-            ViewBag.NormId = id;
-            return View(reportsViewModel);
+            var report = _service.CreateReportViewModel(id);
+
+            return View("ReportsForm", report);
+        }
+
+        // GET: Reports/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var report = _service.GetById(id);
+            if (report == null)
+                return HttpNotFound();
+
+            return View("ReportsForm", _service.EditViewModel(report));
+        }
+
+        // POST: Reports/Save
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Report report)
+        {
+            _service.InsertOrUpdate(report);
+            return RedirectToAction("Index", "Reports", new {id = report.NormId});
         }
 
         // GET: Reports/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Report report = _unitOfWork.ReportRepository.GetById(id);
+            var report = _service.GetById(id);
             if (report == null)
-            {
                 return HttpNotFound();
-            }
-            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
-            return View(report);
+            
+            return View(_service.DetailsViewModel(report));
         }
 
         // GET: Reports/Statistic/5
-        public ActionResult Statistic(int? id)
+        public ActionResult Statistic(int id)
         {
-            Report report = _unitOfWork.ReportRepository.GetById(id);
-            var reportViewModel = _service.GetStatisticForReport(report);
+            var report = _service.GetById(id);
+            if (report == null)
+                return HttpNotFound();
 
-            return View(reportViewModel);
+            return View(_service.GetStatisticForReport(report));
         }
 
-        // GET: Reports/Create
-        public ActionResult Create(int? id)
-        {
-            var rv = _unitOfWork.NormItemRepository.Get(filter: x => x.NormId == id && x.ParentId == null, orderBy: x => x.OrderBy(y => y.Order)).ToList();
+        // TODO: implement activation/deactivation module
+        // TODO: implement chart statistic
 
-            Report report = new Report()
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                NormId = id.GetValueOrDefault(),
-                ReportValues = _service.CreateInitialReportValuesList(rv)
-            };
-            ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
-            ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
-            ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
-            ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
-            return View(report);
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
-        // POST: Reports/Create
+        /*
+        // POST: Reports/New
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -101,25 +117,6 @@ namespace GAPv3.Controllers
             ViewBag.ControlId = new SelectList(_unitOfWork.ControlRepository.Get(), "ControlId", "Name");
             ViewBag.ReasonId = new SelectList(_unitOfWork.ReasonRepository.Get(), "ReasonId", "Name");
             ViewBag.StatusId = new SelectList(_unitOfWork.StatusRepository.Get(), "StatusId", "Name");
-            ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
-            return View(report);
-        }
-
-        // GET: Reports/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Report report = _unitOfWork.ReportRepository.GetById(id);
-            if (report == null)
-            {
-                return HttpNotFound();
-            }
-            report.ReportValues = report.ReportValues.Where(x => x.NormItem.ParentId == null).ToList();
-
-            ViewBag.StatusId = _unitOfWork.StatusRepository.Get();
             ViewBag.OrganisationId = new SelectList(_unitOfWork.OrganisationRepository.Get(), "OrganisationId", "Name");
             return View(report);
         }
@@ -171,17 +168,8 @@ namespace GAPv3.Controllers
             _unitOfWork.Save();
             return RedirectToAction("Index", new { id = report.NormId });
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _unitOfWork.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        public ActionResult GetRainfallChart()
+        
+            public ActionResult GetRainfallChart()
         {
             var key = new Chart(width: 600, height: 400)
                 .AddSeries(
@@ -192,6 +180,6 @@ namespace GAPv3.Controllers
                 .Write();
 
             return null;
-        }
+        }*/
     }
 }

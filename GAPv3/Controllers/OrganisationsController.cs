@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
+
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -12,122 +12,81 @@ namespace GAPv3.Controllers
 {
     public class OrganisationsController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private GAPv3Context _context;
         private readonly OrganisationService _service;
 
         public OrganisationsController()
         {
-            _service = new OrganisationService(_unitOfWork);
+            _context = new GAPv3Context();
+            _service = new OrganisationService(_context);
         }
 
         // GET: Organisations
         public ActionResult Index()
         {
-            IEnumerable<Organisation> organisation = _service.GetOrganisations();
-            return View(organisation);
+            return View(_service.GetOrganisations());
         }
 
         // GET: Organisations/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Organisation organisation = _service.GetOrganisationById(id);
+            var organisation = _service.GetOrganisationById(id);
+
             if (organisation == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(organisation);
         }
 
-        // GET: Organisations/Create
-        public ActionResult Create()
+        // GET: Organisations/New
+        public ActionResult New()
         {
-            UserOrganisationViewModel model = new UserOrganisationViewModel()
-            {
-                UsersList = _service.GetUser(),
-            };
-            return View(model);
+            var model = _service.CreateViewModel();
+            return View("OrganisationForm", model);
         }
 
-        // POST: Organisations/Create
+        // POST: Organisations/New
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserOrganisationViewModel model)
+        public ActionResult Save(UserOrganisationViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _service.SaveUserOrganisation(model);
-                return RedirectToAction("Index");
+                var viewModel = _service.CreateViewModel();
+                viewModel.Organisation = model.Organisation;
+                return View("OrganisationForm", viewModel);
             }
 
-            return View(model);
+            if (model.Organisation.OrganisationId == 0)
+                _service.SaveUserOrganisation(model);
+            else
+                _service.UpdateUserOrganisation(model);
+            
+            return RedirectToAction("Index", "Organisations");
         }
 
         // GET: Organisations/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Organisation organisation = _service.GetOrganisationById(id);
+            var organisation = _service.GetOrganisationById(id);
+
             if (organisation == null)
-            {
                 return HttpNotFound();
-            }
-            return View(organisation);
+
+            var model = _service.EditViewModel(organisation);
+
+            return View("OrganisationForm", model);
         }
 
-        // POST: Organisations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrganisationId,Name,Address,Ownership,Type,EmployeesNumber,Size,GuardService,VideoSurveillance,BuildingPossession,ITService,Location,AssetOne,AssetTwo,AssetThree,Created,Modified")] Organisation organisation)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.UpdateUserOrganisation(organisation);
-                return RedirectToAction("Index");
-            }
-            return View(organisation);
-        }
-
-        // GET: Organisations/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Organisation organisation = _service.GetOrganisationById(id);
-            if (organisation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(organisation);
-        }
-
-        // POST: Organisations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Organisation organisation = _service.GetOrganisationById(id);
-            _service.DeleteOrganisation(id);
-            return RedirectToAction("Index");
-        }
+        // TODO: implement activation/deactivation module
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

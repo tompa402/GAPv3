@@ -1,0 +1,36 @@
+﻿@model GAPv3.Models.ReportValue
+@{
+    var parentCss = Model.NormItem.IsItem ? "" : "bg-light text-dark";
+    var orderLayer1 = "";
+    var orderLayer2 = "";
+    if (Model.NormItem.Parent != null)
+    {
+
+        if (Model.NormItem.Parent.Parent != null)
+        {
+            orderLayer1 = Model.NormItem.Parent.Parent.Order + ".";
+            orderLayer2 = Model.NormItem.Parent.Order + ".";
+        }
+        else
+        {
+            orderLayer1 = Model.NormItem.Parent.Order + ".";
+        }
+    }
+}
+<div class="divTableRow @parentCss">
+    <div class="divTableCell">@orderLayer1@orderLayer2@Html.DisplayFor(model => model.NormItem.Order).</div>
+    <div class="divTableCell">@Html.DisplayFor(model => model.NormItem.Name)</div>
+    @foreach (var property in Model.NormItem.Norm.ReportValueAdditionalItem)
+    {
+        if (property.HaveControl)
+        {
+            <div class="divTableCell">@Html.DisplayFor(model => model.Control.Name)</div>
+        }
+        if (property.HaveReason)
+        {
+            <div class="divTableCell">@Html.DisplayFor(model => model.Reason.Name)</div>
+        }
+    }
+    <div class="divTableCell @Model.Color">@Html.DisplayFor(model => model.Status.Name)</div>
+    <div class="divTableCell">@Html.DisplayFor(model => model.Note)</div>
+</div>

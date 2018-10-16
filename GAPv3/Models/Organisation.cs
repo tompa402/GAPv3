@@ -16,27 +16,35 @@ namespace GAPv3.Models
         [Display(Name = "Adresa")]
         public string Address { get; set; }
 
+        [Required]
         [Display(Name = "Vlasništvo organizacije")]
         public string Ownership { get; set; }
 
+        [Required]
         [Display(Name = "Oblik")]
         public string Type { get; set; }
 
+        [Required]
         [Display(Name = "Broj zaposlenika")]
         public string EmployeesNumber { get; set; }
 
+        [Required]
         [Display(Name = "Veličina organizacije")]
         public string Size { get; set; }
 
+        [Required]
         [Display(Name = "Čuvarska služba")]
         public string GuardService { get; set; }
 
+        [Required]
         [Display(Name = "Video nadzor")]
         public string VideoSurveillance { get; set; }
 
+        [Required]
         [Display(Name = "Vlastiti poslovni subjekt")]
         public string BuildingPossession { get; set; }
 
+        [Required]
         [Display(Name = "Vlastita IT služba")]
         public string ITService { get; set; }
 
@@ -54,15 +62,19 @@ namespace GAPv3.Models
 
         [Display(Name = "Datum organizacije")]
         public DateTime Created { get; set; }
+
         public DateTime? Modified { get; set; }
+
+        public bool IsActive { get; set; }
 
         public Organisation()
         {
             Created = DateTime.Now;
         }
 
-        public virtual ICollection<Report> Report { get; set; }
+        public ICollection<Report> Report { get; set; }
+
         [Display(Name = "Članovi organizacije")]
-        public virtual ICollection<UserOrganisation> UserOrganisations { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
