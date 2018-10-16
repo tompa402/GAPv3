@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GAPv3.Models.Norm>
+﻿@model IEnumerable<GAPv3.ViewModels.NormViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -14,68 +14,73 @@
 
 @{ Html.RenderPartial("_modal"); }
 
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HaveAdditionalItems)
+        </th>
+        <th>Akcija</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaveAdditionalItems)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" })
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.NormId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.NormId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.NormId })
-                </td>
-            </tr>
-        }
+</table>
 
-    </table>
-
-<!-- 
-    https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html 
+<!-- TODO: remove this links
+    https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html
     https://github.com/UnLeving/ASP-MVC-Entity-CRUD-Modal-Bootstrap/blob/master/ASP%20MVC%20Entity%20CRUD%20Modal%20Bootstrap/Views/MyEntities/Create.cshtml
 -->
 
-    @section Scripts {
-        <script>
-            // TODO: Extract to separate js file
-            $('#modal-container').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var url = button.attr("href");
-                var modal = $(this);
+@section Scripts {
+    <script>
+        // TODO: Extract to separate js file
+        $('#modal-container').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var url = button.attr("href");
+            var modal = $(this);
 
-                // note that this will replace the content of modal-content ever time the modal is opened
-                modal.find('.modal-content').load(url);
+            // note that this will replace the content of modal-content ever time the modal is opened
+            modal.find('.modal-content').load(url);
+        });
+
+        function Save() {
+            $.ajax({
+                url: '/Norms/Save/',
+                type: 'POST',
+                data: $('form').serialize(),
+                success: function (response) {
+                    if (response.success === true) {
+                        $('#modal-container').modal('hide');
+                        location.reload(false);
+                    } else {
+                        // response message
+                    }
+                },
+                error: function (err) { alert("Error: " + err.responseText); }
             });
-
-            function CreateNew() {
-                $.ajax({
-                    url: '/Norms/Create/',
-                    type: 'POST',
-                    data: $('form').serialize(),
-                    success: function (response) {
-                        if (response.success === true) {
-                            $('#modal-container').modal('hide');
-                            location.reload(false);
-                        } else {
-                            // response message
-                        }
-                    },
-                    error: function (err) { alert("Error: " + err.responseText); }
-                });
-            };
-        </script>
-    }
+        };
+    </script>
+}

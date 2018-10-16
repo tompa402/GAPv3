@@ -1,6 +1,6 @@
-﻿@model GAPv3.Models.Norm
+﻿@model GAPv3.ViewModels.NormViewModel
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -16,7 +16,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -28,10 +28,17 @@
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="container">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(model => model.HaveAdditionalItems, htmlAttributes: new { @class = "custom-control-input" })
+                    @Html.LabelFor(model => model.HaveAdditionalItems, htmlAttributes: new { @class = "custom-control-label" })?
+                </div>
+            </div>
         </div>
     </div>
+    @Html.HiddenFor(m => m.NormId)
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="CreateNew()">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="Save()">Save changes</button>
     </div>
 }

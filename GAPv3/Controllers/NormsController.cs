@@ -1,126 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using GAPv3.DAL;
-using GAPv3.Models;
+using GAPv3.Service;
+using GAPv3.ViewModels;
 
 namespace GAPv3.Controllers
 {
     public class NormsController : Controller
     {
-        private GAPv3Context db = new GAPv3Context();
+        private readonly GAPv3Context _context;
+        private readonly NormService _service;
+
+        public NormsController()
+        {
+            _context = new GAPv3Context();
+            _service = new NormService(_context);
+        }
 
         // GET: Norms
         public ActionResult Index()
         {
-            return View(db.Norms.ToList());
+            return View(_service.GetNormList());
         }
 
-        // GET: Norms/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Norm norm = db.Norms.Find(id);
-            if (norm == null)
-            {
-                return HttpNotFound();
-            }
-            return View(norm);
-        }
-
-        // GET: Norms/Create
+        // GET: Norms/CreatePartial
         public ActionResult CreatePartial()
         {
-            return PartialView("_CreateNorm");
+            var model = _service.CreateViewModel();
+            return PartialView("_FormNorm", model);
         }
 
-        // POST: Norms/Create
+        // POST: Norms/Save
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NormId,Name,Description")] Norm norm)
+        public ActionResult Save(NormViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Norms.Add(norm);
-                db.SaveChanges();
-                return Json(new { success = true });
-            }
+            if (!ModelState.IsValid) return PartialView("_FormNorm", model);
 
-            return PartialView("_CreateNorm", norm);
+            if (model.NormId == 0)
+                _service.SaveNorm(model);
+            else
+                _service.UpdateNorm(model);
+            
+            return Json(new { success = true });
         }
 
         // GET: Norms/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Norm norm = db.Norms.Find(id);
+            var norm = _service.GetNormById(id);
+
             if (norm == null)
-            {
                 return HttpNotFound();
-            }
-            return View(norm);
+
+            var model = _service.EditViewModel(norm);
+
+            return PartialView("_FormNorm", model);
         }
 
-        // POST: Norms/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NormId,Name,Description")] Norm norm)
+        // GET: Norms/Details/5
+        public ActionResult Details(int id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(norm).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(norm);
-        }
-
-        // GET: Norms/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Norm norm = db.Norms.Find(id);
+            var norm = _service.GetNormById(id);
             if (norm == null)
-            {
                 return HttpNotFound();
-            }
-            return View(norm);
+            return PartialView("_Details", norm);
         }
 
-        // POST: Norms/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Norm norm = db.Norms.Find(id);
-            db.Norms.Remove(norm);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        // TODO: implement activation/deactivation module
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

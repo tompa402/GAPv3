@@ -18,6 +18,8 @@ namespace GAPv3.Service
             CreateMap<Report, ReportFormViewModel>();
             CreateMap<ReportValue, ReportValueFormViewModel>();
             CreateMap<Report, ReportDetailsViewModel>();
+            CreateMap<Norm, NormViewModel>();
+            CreateMap<NormViewModel, Norm>();
         }
 
         public static void Run()
