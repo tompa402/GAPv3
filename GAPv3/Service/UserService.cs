@@ -22,7 +22,16 @@ namespace GAPv3.Service
             {
                 //TODO: provjera je li user postoji.
                 user.Password = PasswordHandler.EncryptPassword(CredentialsManager.GetDefaultPass(user.Email));
+                
                 _context.Users.Add(user);
+
+                // TODO: export user role id or name to enum. Reason: to remove hardcoded value (in this case RoleId) from row below.
+                var userRole = new UserRole
+                {
+                    UserId = user.UserId,
+                    RoleId = 2
+                };
+                _context.UserRoles.Add(userRole);
                 _context.SaveChanges();
             }
         }
@@ -49,7 +58,7 @@ namespace GAPv3.Service
                     else
                     {
                         existingUser.IsActive = true;
-                    } 
+                    }
                     _context.SaveChanges();
                 }
             }
@@ -84,7 +93,7 @@ namespace GAPv3.Service
                     existingUser.Name = user.Name;
                     existingUser.LastName = user.LastName;
                     existingUser.JMBAG = user.JMBAG;
-                    existingUser.Modified=DateTime.Now;
+                    existingUser.Modified = DateTime.Now;
                     _context.SaveChanges();
                 }
 
@@ -93,7 +102,7 @@ namespace GAPv3.Service
         }
         public void UpdatePass(User user)
         {
-            
+
             using (GAPv3Context _context = new GAPv3Context())
             {
                 User existingUser = _context.Users.SingleOrDefault(u => u.Email == user.Email);
