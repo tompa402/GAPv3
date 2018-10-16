@@ -26,7 +26,7 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User userInput, string returnUrl = "")
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 bool isValidUser =
                     Membership.ValidateUser(userInput.Email, PasswordHandler.EncryptPassword(userInput.Password));
@@ -79,7 +79,7 @@ namespace GAPv3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(User userInput)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 User user = null;
                 using (GAPv3Context _context = new GAPv3Context())
