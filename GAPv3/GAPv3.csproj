@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NormItemsController.cs" />
     <Compile Include="Controllers\NormsController.cs" />
     <Compile Include="Controllers\OrganisationsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -297,11 +298,13 @@
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
+    <Compile Include="Service\NormItemService.cs" />
     <Compile Include="Service\NormService.cs" />
     <Compile Include="Service\OrganisationService.cs" />
     <Compile Include="Service\ReportService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
+    <Compile Include="ViewModels\NormItemViewModel.cs" />
     <Compile Include="ViewModels\NormViewModel.cs" />
     <Compile Include="ViewModels\ReportDetailsViewModel.cs" />
     <Compile Include="ViewModels\ReportFormViewModel.cs" />
@@ -849,6 +852,12 @@
     <Content Include="Views\Users\Update.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Norms\_Details.cshtml" />
+    <Content Include="Views\NormItems\Create.cshtml" />
+    <Content Include="Views\NormItems\Delete.cshtml" />
+    <Content Include="Views\NormItems\Details.cshtml" />
+    <Content Include="Views\NormItems\Edit.cshtml" />
+    <Content Include="Views\NormItems\Index.cshtml" />
+    <Content Include="Views\NormItems\_NormItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

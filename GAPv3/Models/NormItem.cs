@@ -10,6 +10,7 @@ namespace GAPv3.Models
 {
     public class NormItem
     {
+        // TODO: remove virtual, test application after removing.
         public int NormItemId { get; set; }
         [Display(Name = "Opis zahtjeva")]
         public string Name { get; set; }

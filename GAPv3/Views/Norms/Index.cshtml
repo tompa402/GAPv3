@@ -4,55 +4,60 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    <!-- Button trigger modal -->
-    @Html.ActionLink("Create new", "CreatePartial", "Norms", new { @class = "btn btn-primary", data_target = "#modal-container", data_toggle = "modal" })
-</p>
-
 @{ Html.RenderPartial("_modal"); }
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Popis normi</h2>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    @Html.ActionLink("Create new", "CreatePartial", "Norms", new { @class = "btn btn-primary pull-right", data_target = "#modal-container", data_toggle = "modal" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="norms" class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HaveAdditionalItems)
+                </th>
+                <th>Akcija</th>
+            </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HaveAdditionalItems)
-        </th>
-        <th>Akcija</th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HaveAdditionalItems)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
+                        @Html.ActionLink("Details", "Details", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
+                        @Html.ActionLink("Select", "Index", "NormItems", null, new { @class = "load-partial-parent", data_id = item.NormId })
+                    </td>
+                </tr>
+            }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HaveAdditionalItems)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" })
-            </td>
-        </tr>
-    }
-
-</table>
-
-<!-- TODO: remove this links
-    https://amlblog.net/programming/2016/04/25/bootstrap-modals-and-razor.html
-    https://github.com/UnLeving/ASP-MVC-Entity-CRUD-Modal-Bootstrap/blob/master/ASP%20MVC%20Entity%20CRUD%20Modal%20Bootstrap/Views/MyEntities/Create.cshtml
--->
+        </table>
+    </div>
+</div>
+<div id="cardParent">
+</div>
 
 @section Scripts {
     <script>
@@ -64,6 +69,22 @@
 
             // note that this will replace the content of modal-content ever time the modal is opened
             modal.find('.modal-content').load(url);
+        });
+
+        $('#norms').on('click', '.load-partial-parent', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            $('#norms tr').removeAttr('class');
+            button.closest('tr').attr('class', 'table-success');
+            $.ajax({
+                url: button.attr('href'),
+                type: 'GET',
+                data: { id: button.attr('data-id') },
+                success: function (data) {
+                    //$("#cardParent").css("display", "block");
+                    $('#cardParent').html(data);
+                }
+            });
         });
 
         function Save() {
