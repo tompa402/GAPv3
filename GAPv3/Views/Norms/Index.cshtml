@@ -48,7 +48,7 @@
                     <td>
                         @Html.ActionLink("Edit", "Edit", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
                         @Html.ActionLink("Details", "Details", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
-                        @Html.ActionLink("Select", "Index", "NormItems", null, new { @class = "load-partial-parent", data_id = item.NormId })
+                        @Html.ActionLink("Select", "Index", "NormItems", null, new { @class = "load-norm-item", data_norm_id = item.NormId, data_parent_id = "", data_target = "#cardParent" })
                     </td>
                 </tr>
             }
@@ -57,6 +57,10 @@
     </div>
 </div>
 <div id="cardParent">
+</div>
+<div id="cardChild">
+</div>
+<div id="cardItem">
 </div>
 
 @section Scripts {
@@ -71,18 +75,28 @@
             modal.find('.modal-content').load(url);
         });
 
-        $('#norms').on('click', '.load-partial-parent', function (e) {
+        $('.container-fluid').on('click', '.load-norm-item', function (e) {
             e.preventDefault();
             var button = $(this);
-            $('#norms tr').removeAttr('class');
-            button.closest('tr').attr('class', 'table-success');
+            console.log("norm " + button.attr('data-norm-id') + "parentId " + button.attr('data-parent-id'));
             $.ajax({
                 url: button.attr('href'),
                 type: 'GET',
-                data: { id: button.attr('data-id') },
+                data: { normId: button.attr('data-norm-id'), parentId: button.attr('data-parent-id')},
                 success: function (data) {
-                    //$("#cardParent").css("display", "block");
-                    $('#cardParent').html(data);
+                    if (button.attr('data-target') === "#cardParent") {
+                        $('#norms tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                        $('#cardChild, #cardItem').empty();
+                    } else if (button.attr('data-target') === "#cardChild") {
+                        $('#cardParent tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                        $('#cardItem').empty();
+                    } else if (button.attr('data-target') === "#cardItem") {
+                        $('#cardChild tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                    }
+                    $(button.attr('data-target')).html(data);
                 }
             });
         });

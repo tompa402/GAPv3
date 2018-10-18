@@ -24,10 +24,17 @@ namespace GAPv3.Controllers
         }
 
         // GET: NormItems
-        public ActionResult Index(int id)
+        public ActionResult Index(int normId, int? parentId)
         {
-            var normItems = _context.NormItems.Include(n => n.Norm).Include(n => n.Parent).Where(n => n.NormId == id);
-            return PartialView("_NormItemList",normItems.ToList());
+            var normItems = _service.GetNormItems(normId, parentId);
+            return PartialView("_NormItemList", normItems);
+        }
+
+        // GET: NormItems/CreatePartial
+        public ActionResult CreatePartial(int normId, int? parentId)
+        {
+            var model = _service.CreateNormItem(normId, parentId);
+            return PartialView("_FormNormItem", model);
         }
 
         /*// GET: NormItems/Details/5
@@ -45,13 +52,7 @@ namespace GAPv3.Controllers
             return View(normItem);
         }
 
-        // GET: NormItems/Create
-        public ActionResult Create()
-        {
-            ViewBag.NormId = new SelectList(db.Norms, "NormId", "Name");
-            ViewBag.ParentId = new SelectList(db.NormItems, "NormItemId", "Name");
-            return View();
-        }
+        
 
         // POST: NormItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

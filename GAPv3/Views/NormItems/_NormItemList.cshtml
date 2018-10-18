@@ -1,13 +1,18 @@
-﻿@model IEnumerable<GAPv3.Models.NormItem>
+﻿@model IEnumerable<GAPv3.ViewModels.NormItemViewModel>
+@{
+    var title = Model.Any() ? "razina " + Model.ElementAt(0).Level : "Nema podataka";
+    var normId = Model.ElementAt(0).NormId;
+    var parentId = Model.ElementAt(0).ParentId;
+}
 <div class="card mb-3">
     <div class="card-header">
         <div class="row">
             <div class="col-md-8">
-                <h2>Popis klauzula - razina 1</h2>
+                <h2>Popis klauzula - @title</h2>
             </div>
             <div class="col-md-4">
                 <p>
-                    @Html.ActionLink("Create New", "Create", "NormItems", new { @class = "btn btn-primary pull-right" })
+                    @Html.ActionLink("Create new", "CreatePartial", "NormItems", new { normId = normId, parentId = parentId }, new { @class = "btn btn-primary pull-right", data_target = "#modal-container", data_toggle = "modal" })
                 </p>
             </div>
         </div>
@@ -30,7 +35,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Order)
                 </th>
-                <th></th>
+                <th>Akcija</th>
             </tr>
 
             @foreach (var item in Model)
@@ -53,8 +58,11 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", "NormItems", new { id = item.NormItemId }) |
-                        @Html.ActionLink("Details", "Details", "NormItems", new { id = item.NormItemId }) |
-                        @Html.ActionLink("Delete", "Delete", "NormItems", new { id = item.NormItemId })
+                        @Html.ActionLink("Details", "Details", "NormItems", new { id = item.NormItemId })
+                        @if (!item.IsItem)
+                        {
+                            <span> | </span>@Html.ActionLink("Select", "Index", "NormItems", null, new { @class = "load-norm-item", data_norm_id = item.NormId, data_parent_id = item.NormItemId, data_target = item.Target })
+                        }
                     </td>
                 </tr>
             }
