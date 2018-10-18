@@ -4,29 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using GAPv3.Migrations;
+using GAPv3.Models;
 
-namespace GAPv3.Models
+namespace GAPv3.ViewModels
 {
-    public class NormItem
+    public class NormItemFormViewModel
     {
-        // TODO: remove virtual, test application after removing.
         public int NormItemId { get; set; }
         [Display(Name = "Opis zahtjeva")]
+        [DataType(DataType.MultilineText)]
         public string Name { get; set; }
         public bool IsItem { get; set; }
         [Display(Name = "Klauzula")]
         public int Order { get; set; }
-
         public int NormId { get; set; }
-        public virtual Norm Norm { get; set; }
-
+        public string NormName { get; set; }
         public int? ParentId { get; set; }
-        public virtual NormItem Parent { get; set; }
-        [ForeignKey("ParentId")]
-        public virtual IList<NormItem> Children { get; set; }
+        public string ParentName { get; set; }
 
-        [ForeignKey("NormItemId")]
-        public IList<ReportValue> ReportValue { get; set; }
+        public NormItemFormViewModel(int normId, int? parentId)
+        {
+            NormId = normId;
+            ParentId = parentId;
+        }
     }
 }

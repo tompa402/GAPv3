@@ -25,7 +25,7 @@
             </div>
         </nav>*@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <<a> @Html.ActionLink("Gap analiza", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })</a>
+        <a> @Html.ActionLink("Gap analiza", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,14 +38,21 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseUsers">
                         <li>
-                            <a href="@Url.Action("Create", "Users")">Novi</a>
+                            <a href="@Url.Action(" Create", "Users" )">Novi</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Users")">Lista korisnika</a>
+                            <a href="@Url.Action(" Index", "Users" )">Lista korisnika</a>
                         </li>
-                        </ul>
+                    </ul>
                 </li>
-                @*<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Norme">
+                    <a href="@Url.Action(" Index","Norms")" class="nav-link">
+                        <i class="fa fa-fw fa-wpforms"></i>
+                        <span class="nav-link-text">Norme</span>
+                    </a>
+                </li>
+                @*
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link" href="charts.html">
                         <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Charts</span>
@@ -148,13 +155,13 @@
     </nav>
     <div class="content-wrapper">
         <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Admin</a>
-                </li>
-                <li class="breadcrumb-item active">Admin</li>
-            </ol>
+            <!-- Breadcrumbs
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Admin</a>
+        </li>
+        <li class="breadcrumb-item active">Admin</li>
+    </ol>-->
             @RenderBody()
             <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
             <div style="height: 1000px;"></div>
@@ -194,7 +201,7 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrapAdmin")
         @Scripts.Render("~/bundles/jquery-easing")
-        @Scripts.Render("~/bundles/sb-admin")
+        @Scripts.Render("~/bundles/sb-admin-js")
         @RenderSection("scripts", required: false)
 
         <script>

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<GAPv3.ViewModels.NormViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{ Html.RenderPartial("_modal"); }
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Popis normi</h2>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    @Html.ActionLink("Create new", "CreatePartial", "Norms", new { @class = "btn btn-primary pull-right", data_target = "#modal-container", data_toggle = "modal" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="norms" class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HaveAdditionalItems)
+                </th>
+                <th>Akcija</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HaveAdditionalItems)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
+                        @Html.ActionLink("Details", "Details", "Norms", new { id = item.NormId }, new { data_target = "#modal-container", data_toggle = "modal" }) |
+                        @Html.ActionLink("Select", "Index", "NormItems", null, new { @class = "load-norm-item", data_norm_id = item.NormId, data_parent_id = "", data_target = "#cardParent" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<div id="cardParent">
+</div>
+<div id="cardChild">
+</div>
+<div id="cardItem">
+</div>
+
+@section Scripts {
+    <script>
+        // TODO: Extract to separate js file
+        $('#modal-container').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var url = button.attr("href");
+            var modal = $(this);
+
+            // note that this will replace the content of modal-content ever time the modal is opened
+            modal.find('.modal-content').load(url);
+        });
+
+        $('.container-fluid').on('click', '.load-norm-item', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            console.log("norm " + button.attr('data-norm-id') + "parentId " + button.attr('data-parent-id'));
+            $.ajax({
+                url: button.attr('href'),
+                type: 'GET',
+                data: { normId: button.attr('data-norm-id'), parentId: button.attr('data-parent-id')},
+                success: function (data) {
+                    if (button.attr('data-target') === "#cardParent") {
+                        $('#norms tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                        $('#cardChild, #cardItem').empty();
+                    } else if (button.attr('data-target') === "#cardChild") {
+                        $('#cardParent tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                        $('#cardItem').empty();
+                    } else if (button.attr('data-target') === "#cardItem") {
+                        $('#cardChild tr').removeAttr('class');
+                        button.closest('tr').attr('class', 'table-success');
+                    }
+                    $(button.attr('data-target')).html(data);
+                }
+            });
+        });
+
+        function Save() {
+            $.ajax({
+                url: '/Norms/Save/',
+                type: 'POST',
+                data: $('form').serialize(),
+                success: function (response) {
+                    if (response.success === true) {
+                        $('#modal-container').modal('hide');
+                        location.reload(false);
+                    } else {
+                        // response message
+                    }
+                },
+                error: function (err) { alert("Error: " + err.responseText); }
+            });
+        };
+    </script>
+}

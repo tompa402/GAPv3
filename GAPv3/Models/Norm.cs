@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using GAPv3.Models;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GAPv3.Models
 {
@@ -10,8 +7,11 @@ namespace GAPv3.Models
     {
         public int NormId { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        // TODO: remove virtual from properties. Test application after that!
+        // TODO: implement isActive.
         public virtual ICollection<NormItem> NormItem { get; set; }
         public virtual ICollection<Report> Report { get; set; }
         public virtual ICollection<ReportValueAdditionalItem> ReportValueAdditionalItem { get; set; }
