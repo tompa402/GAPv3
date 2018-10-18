@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.Service;
+using GAPv3.ViewModels;
 
 namespace GAPv3.Controllers
 {
@@ -35,6 +36,36 @@ namespace GAPv3.Controllers
         {
             var model = _service.CreateNormItem(normId, parentId);
             return PartialView("_FormNormItem", model);
+        }
+
+        // GET: Normitems/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var normItem = _service.GetNormItemById(id);
+
+            if (normItem == null)
+                return HttpNotFound();
+
+            var model = _service.EditViewModel(normItem);
+
+            return PartialView("_FormNormItem", model);
+        }
+
+        // POST: NormItems/Save
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(NormItemFormViewModel model)
+        {
+            if (!ModelState.IsValid) return PartialView("_FormNormItem", model);
+
+            if (model.NormItemId == 0)
+                _service.SaveNormItem(model);
+            else
+                _service.UpdateNormItem(model);
+
+            return Json(new { success = true });
         }
 
         /*// GET: NormItems/Details/5

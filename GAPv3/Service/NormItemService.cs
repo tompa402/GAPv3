@@ -54,5 +54,34 @@ namespace GAPv3.Service
             };
             return model;
         }
+
+        public NormItem GetNormItemById(int id)
+        {
+            return _context.NormItems.SingleOrDefault(n => n.NormItemId == id);
+        }
+
+        public NormItemFormViewModel EditViewModel(NormItem norm)
+        {
+            var model = Mapper.Map <NormItem, NormItemFormViewModel> (norm);
+            return model;
+        }
+
+        public void SaveNormItem(NormItemFormViewModel model)
+        {
+            _context.NormItems.Add(Mapper.Map<NormItemFormViewModel, NormItem>(model));
+            _context.SaveChanges();
+        }
+
+        public void UpdateNormItem(NormItemFormViewModel model)
+        {
+            var norm = _context.NormItems.SingleOrDefault(n => n.NormItemId == model.NormItemId);
+            if (norm != null)
+            {
+                norm.Name = model.Name;
+                norm.Order = model.Order;
+                norm.IsItem = model.IsItem;
+            }
+            _context.SaveChanges();
+        }
     }
 }
