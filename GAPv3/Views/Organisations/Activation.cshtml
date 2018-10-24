@@ -1,0 +1,79 @@
+﻿@model IEnumerable<GAPv3.Models.Organisation>
+@{
+    ViewBag.Title = "Organisation Activation";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Activation</h2>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    @Html.ActionLink("Deaktiviraj sve", "ChangeIsActive", "Organisations", new { orgId = 0 }, new { @class = "btn btn-danger pull-right" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="organisations" class="table">
+            <tr class="table-secondary">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users)
+                </th>
+                <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @foreach (var user in item.Users)
+                        {
+                            var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
+                            var name = user.Name + " " + user.LastName;
+                            <span class="@badge">@name</span>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            var activeClass = item.IsActive ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red";
+                        }
+                        <a href="@Url.Action("ChangeIsActive", "Organisations")" class="change-status" data-org-id=@item.OrganisationId><i class="@activeClass"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+    @section Scripts {
+        <script>
+            // TODO: Extract to separate js file
+            $('#organisations').on('click', '.change-status', function (e) {
+                e.preventDefault();
+                var button = $(this);
+                var itemStatusIcon = button.children().first().attr('class');
+                $.ajax({
+                    url: button.attr('href'),
+                    type: 'POST',
+                    data: { orgId: button.attr('data-org-id') },
+                    success: function (response) {
+                        if (response) {
+                            button.children().first().toggleClass('fa-check fa-times');
+                            button.children().first().toggleClass('fa-green fa-red');
+                        }
+                    }
+                });
+            });
+        </script>
+    }
+

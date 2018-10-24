@@ -860,6 +860,7 @@
     <Content Include="Views\NormItems\Index.cshtml" />
     <Content Include="Views\NormItems\_NormItemList.cshtml" />
     <Content Include="Views\NormItems\_FormNormItem.cshtml" />
+    <Content Include="Views\Organisations\Activation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

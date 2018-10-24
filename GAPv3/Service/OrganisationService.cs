@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using GAPv3.DAL;
+﻿using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace GAPv3.Service
 {
@@ -123,6 +122,28 @@ namespace GAPv3.Service
             _context.SaveChanges();
         }
 
-        //TODO: implement activate/deactivate module
+        public void DeactivateSingleOrganisation(int id)
+        {
+            var organisation = GetOrganisationById(id);
+            if (organisation != null)
+            {
+                organisation.IsActive = !organisation.IsActive;
+                organisation.Modified = DateTime.Now;
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void DeactivateAllOrganisations()
+        {
+            var organisations = _context.Organisations.Where(i => i.IsActive);
+            foreach (var organisation in organisations)
+            {
+                organisation.IsActive = !organisation.IsActive;
+                organisation.Modified = DateTime.Now;
+            }
+
+            _context.SaveChanges();
+        }
     }
 }

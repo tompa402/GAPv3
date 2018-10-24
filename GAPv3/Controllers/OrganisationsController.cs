@@ -80,7 +80,23 @@ namespace GAPv3.Controllers
             return View("OrganisationForm", model);
         }
 
-        // TODO: implement activation/deactivation module
+        // GET: Organisations/Activation
+        public ActionResult Activation()
+        {
+            return View(_service.GetOrganisations());
+        }
+
+        // POST: Organisations/Activation
+        public ActionResult ChangeIsActive(int orgId)
+        {
+            if (orgId == 0)
+            {
+                _service.DeactivateAllOrganisations();
+                return View("Activation", _service.GetOrganisations());
+            }
+            _service.DeactivateSingleOrganisation(orgId);
+            return Json(new { success = true });
+        }
 
         protected override void Dispose(bool disposing)
         {

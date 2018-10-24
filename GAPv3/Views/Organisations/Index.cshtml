@@ -28,8 +28,9 @@
         <td>
             @foreach (var user in item.Users)
             {
-                var text = user.Name + " " + user.LastName;
-                <span class="badge badge-secondary">@text</span>
+                var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
+                var name = user.Name + " " + user.LastName;
+                <span class="@badge">@name</span>
             }
         </td>
         <td>
