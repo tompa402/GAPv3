@@ -145,5 +145,16 @@ namespace GAPv3.Service
 
             _context.SaveChanges();
         }
+
+        public void ChangeOrganisationLeader(int orgId, int usrId)
+        {
+            var users = _context.Users.Where(u => u.OrganisationId == orgId);
+            var oldTeamLeader = users.SingleOrDefault(u => u.IsOrganisationLeader);
+            if (oldTeamLeader != null) oldTeamLeader.IsOrganisationLeader = false;
+            var newTeamLeader = users.SingleOrDefault(u => u.UserId == usrId);
+            if (newTeamLeader != null) newTeamLeader.IsOrganisationLeader = true;
+
+            _context.SaveChanges();
+        }
     }
 }

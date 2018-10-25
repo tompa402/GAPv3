@@ -81,7 +81,7 @@ namespace GAPv3.Controllers
         }
 
         // GET: Organisations/Activation
-        public ActionResult Activation()
+        public ActionResult Administration()
         {
             return View(_service.GetOrganisations());
         }
@@ -92,9 +92,16 @@ namespace GAPv3.Controllers
             if (orgId == 0)
             {
                 _service.DeactivateAllOrganisations();
-                return View("Activation", _service.GetOrganisations());
+                return View("Administration", _service.GetOrganisations());
             }
             _service.DeactivateSingleOrganisation(orgId);
+            return Json(new { success = true });
+        }
+
+        // POST: Organisations/ChangeLeader
+        public ActionResult ChangeLeader(int orgId, int usrId)
+        {
+            _service.ChangeOrganisationLeader(orgId, usrId);
             return Json(new { success = true });
         }
 

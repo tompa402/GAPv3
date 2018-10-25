@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<GAPv3.Models.Organisation>
 @{
-    ViewBag.Title = "Organisation Activation";
+    ViewBag.Title = "Organisation Administration";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <div class="card mb-3">
@@ -39,7 +39,7 @@
                         {
                             var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
                             var name = user.Name + " " + user.LastName;
-                            <span class="@badge">@name</span>
+                            <a href="@Url.Action("ChangeLeader", "Organisations")" class="change-leader" data-org-id=@item.OrganisationId data-user-id=@user.UserId><span class="@badge">@name</span></a>
                         }
                     </td>
                     <td>
@@ -55,25 +55,46 @@
     </div>
 </div>
 
-    @section Scripts {
-        <script>
-            // TODO: Extract to separate js file
-            $('#organisations').on('click', '.change-status', function (e) {
-                e.preventDefault();
-                var button = $(this);
-                var itemStatusIcon = button.children().first().attr('class');
+@section Scripts {
+    <script>
+        // TODO: Extract to separate js file
+        // TODO: Prompt window before applying change 
+        $('#organisations').on('click', '.change-status', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            $.ajax({
+                url: button.attr('href'),
+                type: 'POST',
+                data: { orgId: button.attr('data-org-id') },
+                success: function (response) {
+                    if (response.success === true) {
+                        button.children().first().toggleClass('fa-check fa-times');
+                        button.children().first().toggleClass('fa-green fa-red');
+                    }
+                }
+            });
+        });
+
+        $('#organisations').on('click', '.change-leader', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            var url = $(this).attr('href');
+            var orgId = $(this).attr('data-org-id');
+            var usrId = $(this).attr('data-user-id');
+            if (button.children().first().attr('class') === "badge badge-secondary") {
                 $.ajax({
-                    url: button.attr('href'),
+                    url: url,
                     type: 'POST',
-                    data: { orgId: button.attr('data-org-id') },
+                    data: { orgId: orgId, usrId: usrId },
                     success: function (response) {
-                        if (response) {
-                            button.children().first().toggleClass('fa-check fa-times');
-                            button.children().first().toggleClass('fa-green fa-red');
+                        if (response.success === true) {
+                            button.closest('td').find('.badge-primary').toggleClass('badge-primary badge-secondary');
+                            button.children().first().toggleClass('badge-primary badge-secondary');
                         }
                     }
                 });
-            });
-        </script>
-    }
+            };
+        });
+    </script>
+}
 
