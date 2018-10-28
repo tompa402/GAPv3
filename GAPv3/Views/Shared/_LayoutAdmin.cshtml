@@ -65,6 +65,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="reports">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReports" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-file"></i>
+                        <span class="nav-link-text">Izvješća</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseReports">
+                        <li>
+                            <a href="@Url.Action("Index","Organisations")">Popis Izvješća</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Administration","Organisations")">Administracija</a>
+                        </li>
+                    </ul>
+                </li>
                 @*
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="charts.html">

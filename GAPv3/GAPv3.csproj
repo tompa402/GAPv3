@@ -283,6 +283,10 @@
     <Compile Include="Migrations\201810151950230_InsertLookUpDataInDb.Designer.cs">
       <DependentUpon>201810151950230_InsertLookUpDataInDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810280736136_UpdateReportModelToTrackHistory.cs" />
+    <Compile Include="Migrations\201810280736136_UpdateReportModelToTrackHistory.Designer.cs">
+      <DependentUpon>201810280736136_UpdateReportModelToTrackHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\Norm.cs" />
@@ -943,6 +947,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810151950230_InsertLookUpDataInDb.resx">
       <DependentUpon>201810151950230_InsertLookUpDataInDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810280736136_UpdateReportModelToTrackHistory.resx">
+      <DependentUpon>201810280736136_UpdateReportModelToTrackHistory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
