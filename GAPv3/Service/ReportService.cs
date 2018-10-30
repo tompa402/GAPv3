@@ -25,12 +25,25 @@ namespace GAPv3.Service
         public IEnumerable<ReportViewModel> GetReportsForNorm(int? normId)
         {
             var reportsViewModels = new List<ReportViewModel>();
-            var reports = _context.Reports
-                .Where(r => r.NormId == normId)
-                .Include(o => o.Organisation)
-                .Include(n => n.Norm)
-                .Include(rv => rv.ReportValues.Select(s => s.Status))
-                .Include(rv => rv.ReportValues.Select(x => x.NormItem));
+            List<Report> reports;
+            if (normId == 0)
+            {
+                reports = _context.Reports
+                    .Include(o => o.Organisation)
+                    .Include(n => n.Norm)
+                    .Include(rv => rv.ReportValues.Select(s => s.Status))
+                    .Include(rv => rv.ReportValues.Select(x => x.NormItem)).ToList();
+            }
+            else
+            {
+                reports = _context.Reports
+                    .Where(r => r.NormId == normId)
+                    .Include(o => o.Organisation)
+                    .Include(n => n.Norm)
+                    .Include(rv => rv.ReportValues.Select(s => s.Status))
+                    .Include(rv => rv.ReportValues.Select(x => x.NormItem)).ToList();
+            }
+            
 
             foreach (var report in reports)
             {
@@ -41,7 +54,9 @@ namespace GAPv3.Service
                     NormId = report.Norm.NormId,
                     NormName = report.Norm.Name,
                     OrgName = report.Organisation.Name,
-                    Popunjenost = GetPopunjenost(report.ReportValues)
+                    Popunjenost = GetPopunjenost(report.ReportValues),
+                    IsActiveIcon = report.IsActive ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red",
+                    IsLockedIcon = report.IsLocked ? "fa fa-lock fa-lg fa-red" : "fa fa-unlock-alt fa-lg fa-green",
                 };
                 reportsViewModels.Add(reportViewModel);
             }
@@ -320,42 +335,89 @@ namespace GAPv3.Service
              return chart;
          }
 
-    /*public List<ColumnSeriesData> GenerateColumnSeriesData(List<int?> data)
-    {
-        List<ColumnSeriesData> columnSeriesData = new List<ColumnSeriesData>();
-        data.ForEach(p => columnSeriesData.Add(new ColumnSeriesData { Y = p }));
-        return columnSeriesData;
-    }
-
-    public Highcharts CreateChartTest()
-    {
-        Highcharts chart = new Highcharts
+        public void DeactivateSingleReport(int id)
         {
-            Chart = new Chart
+            var report = GetById(id);
+            if (report != null)
             {
-                Height = 400,
-                Type = ChartType.Column
-            },
-            Series = new List<Series>
+                report.IsActive = !report.IsActive;
+                report.Modified = DateTime.Now;
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void DeactivateAllReports()
+        {
+            var reports = _context.Reports.Where(i => i.IsActive);
+            foreach (var report in reports)
             {
-                new ColumnSeries
+                report.IsActive = !report.IsActive;
+                report.Modified = DateTime.Now;
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void LockSingleReport(int id)
+        {
+            var report = GetById(id);
+            if (report != null)
+            {
+                report.IsLocked = !report.IsLocked;
+                report.Modified = DateTime.Now;
+            }
+            _context.SaveChanges();
+        }
+
+        public void LockAllReports()
+        {
+            var reports = _context.Reports.Where(i => i.IsActive);
+            foreach (var report in reports)
+            {
+                report.IsLocked = !report.IsLocked;
+                report.Modified = DateTime.Now;
+            }
+
+            _context.SaveChanges();
+        }
+
+        /*public List<ColumnSeriesData> GenerateColumnSeriesData(List<int?> data)
+        {
+            List<ColumnSeriesData> columnSeriesData = new List<ColumnSeriesData>();
+            data.ForEach(p => columnSeriesData.Add(new ColumnSeriesData { Y = p }));
+            return columnSeriesData;
+        }
+
+        public Highcharts CreateChartTest()
+        {
+            Highcharts chart = new Highcharts
+            {
+                Chart = new Chart
                 {
-                    Name = "Brands",
-                    ColorByPoint = true,
-                    Data = new List<ColumnSeriesData>
+                    Height = 400,
+                    Type = ChartType.Column
+                },
+                Series = new List<Series>
+                {
+                    new ColumnSeries
                     {
-                        new ColumnSeriesData { Name = "Microsoft Internet Explorer", Y = 56.3, Drilldown = "Microsoft Internet Explorer" },
-                        new ColumnSeriesData { Name = "Chrome", Y = 24.03, Drilldown = "Chrome" },
-                        new ColumnSeriesData { Name = "Firefox", Y = 10.3, Drilldown = "Firefox" },
-                        new ColumnSeriesData { Name = "Safari", Y = 4.77, Drilldown = "Safari" },
-                        new ColumnSeriesData { Name = "Opera", Y = 0.91, Drilldown = "Opera" },
-                        new ColumnSeriesData { Name = "Proprietary or Undetectable", Y = 0.2, Drilldown = null }
+                        Name = "Brands",
+                        ColorByPoint = true,
+                        Data = new List<ColumnSeriesData>
+                        {
+                            new ColumnSeriesData { Name = "Microsoft Internet Explorer", Y = 56.3, Drilldown = "Microsoft Internet Explorer" },
+                            new ColumnSeriesData { Name = "Chrome", Y = 24.03, Drilldown = "Chrome" },
+                            new ColumnSeriesData { Name = "Firefox", Y = 10.3, Drilldown = "Firefox" },
+                            new ColumnSeriesData { Name = "Safari", Y = 4.77, Drilldown = "Safari" },
+                            new ColumnSeriesData { Name = "Opera", Y = 0.91, Drilldown = "Opera" },
+                            new ColumnSeriesData { Name = "Proprietary or Undetectable", Y = 0.2, Drilldown = null }
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        return chart;
-   }*/
-}
+            return chart;
+       }*/
+    }
 }

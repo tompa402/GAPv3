@@ -24,5 +24,11 @@ namespace GAPv3.ViewModels
 
         [Display(Name = "Popunjenost")]
         public int Popunjenost { get; set; }
+
+        [Display(Name = "Zaključan")]
+        public string IsLockedIcon { get; set; }
+
+        [Display(Name = "Aktivan")]
+        public string IsActiveIcon { get; set; }
     }
 }

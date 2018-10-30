@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using GAPv3.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -70,14 +71,7 @@
                         <i class="fa fa-fw fa-file"></i>
                         <span class="nav-link-text">Izvješća</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseReports">
-                        <li>
-                            <a href="@Url.Action("Index","Organisations")">Popis Izvješća</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Administration","Organisations")">Administracija</a>
-                        </li>
-                    </ul>
+                    @Html.Action("NavItems", "Norms")
                 </li>
                 @*
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">

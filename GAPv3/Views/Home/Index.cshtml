@@ -19,7 +19,7 @@
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text">@item.Description</p>
                     <a> @Html.ActionLink("Novi unos", "New", new { controller = "Reports", id = item.NormId }, new { @class = "btn btn-primary" })</a>
-                    <a> @Html.ActionLink("Prikaz svih", "Index", new { controller = "Reports", id = item.NormId }, new { @class = "btn btn-primary" })</a>
+                    <a> @Html.ActionLink("Prikaz svih", "Administration", new { controller = "Reports", id = item.NormId }, new { @class = "btn btn-primary" })</a>
                 </div>
             </div>
         </div>
