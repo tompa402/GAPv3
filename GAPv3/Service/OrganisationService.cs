@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GAPv3.Service
@@ -53,6 +54,27 @@ namespace GAPv3.Service
         public Organisation GetOrganisationById(int id)
         {
             return _context.Organisations.Include(c => c.Users).SingleOrDefault(c => c.OrganisationId == id);
+        }
+
+        public UserOrganisationCardViewModel GetOrganisationForCard()
+        {
+            if (!((HttpContext.Current.User as CustomPrincipal)?.Identity is CustomIdentity identity)) return null;
+
+            var orgId = identity.User.OrganisationId;
+            if (orgId == null) return null;
+
+            var organisation = _context.Organisations.Include(u => u.Users).SingleOrDefault(o => o.OrganisationId == orgId);
+            if (organisation == null) return null;
+
+            var model = new UserOrganisationCardViewModel()
+            {
+                OrganisationId = organisation.OrganisationId,
+                Name = organisation.Name,
+                Users = organisation.Users.ToList(),
+                IsActive = organisation.IsActive
+            };
+            return model;
+
         }
 
         public UserOrganisationViewModel CreateViewModel()

@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201811010831572_AddLogDataToHomeMessages.Designer.cs">
       <DependentUpon>201811010831572_AddLogDataToHomeMessages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811011600467_UpdateNormModelWithLogData.cs" />
+    <Compile Include="Migrations\201811011600467_UpdateNormModelWithLogData.Designer.cs">
+      <DependentUpon>201811011600467_UpdateNormModelWithLogData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\HomeMessage.cs" />
@@ -326,12 +330,14 @@
     <Compile Include="ViewModels\NormItemFormViewModel.cs" />
     <Compile Include="ViewModels\NormItemViewModel.cs" />
     <Compile Include="ViewModels\NormViewModel.cs" />
+    <Compile Include="ViewModels\ReportCardViewModel.cs" />
     <Compile Include="ViewModels\ReportDetailsViewModel.cs" />
     <Compile Include="ViewModels\ReportFormViewModel.cs" />
     <Compile Include="ViewModels\ReportStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportValueFormViewModel.cs" />
     <Compile Include="ViewModels\ReportValueStatisticViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\UserOrganisationCardViewModel.cs" />
     <Compile Include="ViewModels\UserOrganisationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1127,6 +1133,9 @@
     <Content Include="Views\Norms\_NavbarNorms.cshtml" />
     <Content Include="Views\HomeMessages\Administration.cshtml" />
     <Content Include="Views\HomeMessages\_FormHomeMessage.cshtml" />
+    <Content Include="Views\HomeMessages\_JumbotronMessages.cshtml" />
+    <Content Include="Views\Organisations\_OrganisationCard.cshtml" />
+    <Content Include="Views\Reports\_ReportCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1221,6 +1230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811010831572_AddLogDataToHomeMessages.resx">
       <DependentUpon>201811010831572_AddLogDataToHomeMessages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811011600467_UpdateNormModelWithLogData.resx">
+      <DependentUpon>201811011600467_UpdateNormModelWithLogData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

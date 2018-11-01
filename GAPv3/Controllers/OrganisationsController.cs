@@ -27,6 +27,11 @@ namespace GAPv3.Controllers
             return View(_service.GetOrganisations());
         }
 
+        public ActionResult OrganisationCard()
+        {
+            return PartialView("_OrganisationCard", _service.GetOrganisationForCard());
+        }
+
         // GET: Organisations/Details/5
         public ActionResult Details(int id)
         {

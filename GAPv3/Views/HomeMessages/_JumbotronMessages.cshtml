@@ -1,0 +1,16 @@
+﻿@model IEnumerable<GAPv3.Models.HomeMessage>
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-6">
+        <div class="card mb-4 border-danger">
+            <div class="card-header text-danger">
+                <h5 class="card-title">@item.Title</h5>
+            </div>
+            <div class="card-body" style="min-height: 8em">
+                <p class="card-text">@item.Message</p>
+            </div>
+            <div class="card-footer border-danger text-muted">Datum unosa: @item.Created</div>
+        </div>
+    </div>
+}

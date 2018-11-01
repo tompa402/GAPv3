@@ -1,0 +1,57 @@
+﻿@model GAPv3.ViewModels.ReportCardViewModel
+
+@foreach (var item in Model.Norms)
+{
+    <div class="col-sm-4">
+        <div class="card mt-4 mb-4">
+            <div class="card-header">
+                @item.Name
+            </div>
+            <div class="card-body"  style="min-height: 9em">
+                @{
+                    var report = Model.ReportViewModels.SingleOrDefault(x => x.NormId == item.NormId);
+                    if (report == null)
+                    {
+                        <h5 class="card-title">Nemate pridruženi izvještaj. Molimo Vas kreirajte novi izvještaj odabirom gumba kreiraj.</h5>
+                    }
+                    else if (!report.IsActive)
+                    {
+                        <h5 class="card-title">Vaš izvještaj je deaktiviran. Molimo Vas kontaktirajte profesora.</h5>
+                    }
+                    else
+                    {
+                        <div class="form-row">
+                            <div class="col-form-label col-md-5 font-weight-bold">Naziv:</div>
+                            <div class="col-form-label col-md-7">@report.Name</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-form-label col-md-5 font-weight-bold">Popunjenost:</div>
+                            <div class="col-form-label col-md-7">@report.Popunjenost %</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="card-footer">
+                @if (report == null)
+                {
+                    @Html.ActionLink("Kreiraj", "New", "Reports", new { id = item.NormId }, new { @class = "btn btn-outline-primary" })
+                }
+                else if (!report.IsActive)
+                {
+
+                }
+                else
+                {
+                    if (!report.IsLocked)
+                    {
+                        @Html.ActionLink("Uredi", "Edit", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info mr-2" })
+                    }
+                    @Html.ActionLink("Detalji", "Details", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info mr-2" })
+                    @Html.ActionLink("Statistika", "Statistic", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info" })
+                }
+
+
+            </div>
+        </div>
+    </div>
+}

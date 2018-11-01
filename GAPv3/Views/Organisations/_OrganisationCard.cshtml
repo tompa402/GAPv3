@@ -1,0 +1,57 @@
+﻿@model GAPv3.ViewModels.UserOrganisationCardViewModel
+
+<div class="col-sm-4">
+    <div class="card mt-4 mb-4">
+        <div class="card-header">
+            Organizacija
+        </div>
+        <div class="card-body" style="min-height: 9em">
+            @{
+                if (Model == null)
+                {
+                    <h5 class="card-title">Nemate pridruženih organizacija. Molimo Vas kreirajte novu organizaciju odabirom gumba kreiraj.</h5>
+                }
+                else if (!Model.IsActive)
+                {
+                    <h5 class="card-title">Vaša organizacija je deaktivirana. Molimo Vas kontaktirajte profesora.</h5>
+                }
+                else
+                {
+                    <div class="form-row">
+                        <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Name):</div>
+                        <div class="col-form-label col-md-9">@Html.DisplayFor(model => model.Name)</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label col-md-3 font-weight-bold">@Html.DisplayNameFor(model => model.Users):</div>
+                        <div class="col-form-label col-md-9">
+                            @foreach (var user in Model.Users)
+                            {
+                                var badge = user.IsOrganisationLeader ? "badge badge-primary" : "badge badge-secondary";
+                                var text = user.Name + " " + user.LastName;
+                                <span class="@badge">@text</span>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="card-footer">
+
+            @if (Model == null)
+            {
+                @Html.ActionLink("Kreiraj", "New", "Organisations", new { @class = "btn btn-outline-primary" })
+            }
+            else if (!Model.IsActive)
+            {
+
+            }
+            else
+            {
+                @Html.ActionLink("Uredi", "Edit", "Organisations", new { id = Model.OrganisationId }, new { @class = "btn btn-outline-info mr-2" })
+                @Html.ActionLink("Detalji", "Details", "Organisations", new { id = Model.OrganisationId }, new { @class = "btn btn-outline-info" })
+            }
+
+
+        </div>
+    </div>
+</div>
