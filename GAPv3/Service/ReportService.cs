@@ -22,6 +22,43 @@ namespace GAPv3.Service
             _context = context;
         }
 
+        public ReportCardViewModel GetReportsForCard()
+        {
+            var reportsViewModels = new List<ReportViewModel>();
+            if ((HttpContext.Current.User as CustomPrincipal)?.Identity is CustomIdentity identity)
+            {
+                var orgId = identity.User.OrganisationId;
+                var reports = _context.Reports
+                    .Where(o => o.OrganisationId == orgId)
+                    .Include(o => o.Organisation)
+                    .Include(n => n.Norm)
+                    .Include(rv => rv.ReportValues.Select(s => s.Status))
+                    .Include(rv => rv.ReportValues.Select(x => x.NormItem)).ToList()
+                    .ToList();
+                foreach (var report in reports)
+                {
+                    var reportViewModel = new ReportViewModel
+                    {
+                        ReportId = report.ReportId,
+                        Name = report.Name,
+                        NormId = report.Norm.NormId,
+                        NormName = report.Norm.Name,
+                        IsActive = report.IsActive,
+                        IsLocked = report.IsLocked,
+                        Popunjenost = GetPopunjenost(report.ReportValues)
+                    };
+                    reportsViewModels.Add(reportViewModel);
+                }
+            }
+
+            var model = new ReportCardViewModel()
+            {
+                Norms = _context.Norms.Where(n => n.IsActive),
+                ReportViewModels = reportsViewModels
+            };
+            return model;
+        }
+
         public IEnumerable<ReportViewModel> GetReportsForNorm(int? normId)
         {
             var reportsViewModels = new List<ReportViewModel>();

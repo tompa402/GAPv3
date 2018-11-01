@@ -1,27 +1,14 @@
-﻿@model IEnumerable<GAPv3.Models.Norm>
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<div class="row">
+    @Html.Action("OrganisationCard", "Organisations")
+    @Html.Action("ReportCard", "Reports")
+</div>
 <div class="jumbotron">
     <h1>GAP Analiza</h1>
     <p class="lead">Dobro došli na stranice za vođenje GAP analize.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-sm-6">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Description</p>
-                    @Html.ActionLink("Novi unos", "New", new { controller = "Reports", id = item.NormId }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Prikaz svih", "Administration", new { controller = "Reports", id = item.NormId }, new { @class = "btn btn-primary" })
-                </div>
-            </div>
-        </div>
-    }
+    <div class="row">
+        @Html.Action("JumbotronMessages", "HomeMessages")
+    </div>
 </div>

@@ -23,6 +23,11 @@ namespace GAPv3.Controllers
             return View();
         }
 
+        public ActionResult JumbotronMessages()
+        {
+            return PartialView("_JumbotronMessages", _service.GetActiveMessages());
+        }
+
         // GET: HomeMessages/Administration
         public ActionResult Administration()
         {

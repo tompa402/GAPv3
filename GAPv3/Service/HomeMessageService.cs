@@ -25,6 +25,11 @@ namespace GAPv3.Service
             return _context.HomeMessages.ToList();
         }
 
+        public List<HomeMessage> GetActiveMessages()
+        {
+            return _context.HomeMessages.Where(m => m.IsActive).ToList();
+        }
+
         public void AddMessage(HomeMessage message)
         {
             _context.HomeMessages.Add(message);

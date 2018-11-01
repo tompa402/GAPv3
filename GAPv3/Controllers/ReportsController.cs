@@ -32,6 +32,11 @@ namespace GAPv3.Controllers
             return View(models);
         }
 
+        public ActionResult ReportCard()
+        {
+            return PartialView("_ReportCard", _service.GetReportsForCard());
+        }
+
         // GET: Reports/New
         public ActionResult New(int id)
         {
