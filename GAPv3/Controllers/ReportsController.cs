@@ -23,7 +23,7 @@ namespace GAPv3.Controllers
         }
 
         // GET: Reports
-        public ActionResult Index(int? id)
+        public ActionResult Administration(int? id)
         {
             var models = _service.GetReportsForNorm(id);
             if (!models.Any())
@@ -85,8 +85,29 @@ namespace GAPv3.Controllers
             return View(_service.GetStatisticForReport(report));
         }
 
-        // TODO: implement activation/deactivation module
-        // TODO: implement chart statistic
+        // POST: Reports/Activation
+        public ActionResult ChangeIsActive(int reportId)
+        {
+           if (reportId == 0)
+            {
+                _service.DeactivateAllReports();
+                return View("Administration", _service.GetReportsForNorm(0));
+            }
+            _service.DeactivateSingleReport(reportId);
+            return Json(new { changeActiveIcon = true });
+        }
+
+        // POST: Reports/Locking
+        public ActionResult ChangeIsLocked(int reportId)
+        {
+            if (reportId == 0)
+            {
+                _service.LockAllReports();
+                return View("Administration", _service.GetReportsForNorm(0));
+            }
+            _service.LockSingleReport(reportId);
+            return Json(new { changeLockedIcon = true });
+        }
 
         protected override void Dispose(bool disposing)
         {

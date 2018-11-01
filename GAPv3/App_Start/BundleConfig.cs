@@ -60,6 +60,22 @@ namespace GAPv3
             bundles.Add(new ScriptBundle("~/bundles/HighCharts-js").Include(
                 "~/Scripts/Highcharts/highcharts.js"));
 
+            bundles.Add(new StyleBundle("~/Content/DataTables-css").Include(
+                "~/Content/DataTables/css/dataTables.bootstrap4.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/DataTables-js").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/dataTables.bootstrap4.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapBox").Include(
+                "~/Scripts/bootbox.js"));
+
+            bundles.Add(new StyleBundle("~/Content/toastr-css").Include(
+                "~/content/toastr.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/toastr-js").Include(
+                "~/scripts/toastr.js"));
+
         }
     }
 }

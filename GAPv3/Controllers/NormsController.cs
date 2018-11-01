@@ -22,6 +22,11 @@ namespace GAPv3.Controllers
             return View(_service.GetNormList());
         }
 
+        public ActionResult NavItems()
+        {
+            return PartialView("_NavbarNorms", _service.GetNormsForNavbar());
+        }
+
         // GET: Norms/CreatePartial
         public ActionResult CreatePartial()
         {

@@ -1,0 +1,143 @@
+﻿@model IEnumerable<GAPv3.Models.HomeMessage>
+@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/toastr-css")
+@{ Html.RenderPartial("_modal"); }
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Administracija - obavijesti</h2>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    @Html.ActionLink("Nova obavijest", "New", "HomeMessages", new { @class = "btn btn-primary pull-right", data_target = "#modal-container", data_toggle = "modal" })
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="board-messages" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Message)
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "HomeMessages", new { id = item.HomeMessageId }, new { data_target = "#modal-container", data_toggle = "modal" })
+                        </td>
+                        <td>
+                            @{
+                                var activeClass = item.IsActive ? "fa fa-check fa-lg fa-green" : "fa fa-times fa-lg fa-red";
+                            }
+                            <a href="@Url.Action("ChangeIsActive", "HomeMessages")" class="change-status" data-msg-id=@item.HomeMessageId><i class="@activeClass"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/toastr-js")
+    @Scripts.Render("~/bundles/bootstrapBox")
+    <script>
+        // TODO: Extract to separate js file
+        // TODO: Prompt window before applying change
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            }
+        });
+
+        $('#modal-container').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var url = button.attr("href");
+            var modal = $(this);
+
+            // note that this will replace the content of modal-content ever time the modal is opened
+            // and add client side validation
+            modal.find('.modal-content').load(url, function () {
+                $.validator.unobtrusive.parse("#form-home-message");
+            });
+        });
+
+        $("#modal-container").on("submit", "#form-home-message", function (e) {
+            e.preventDefault();  // prevent standard form submission
+            var form = $(this);
+
+            $.ajax({
+                url: form.attr("action"),
+                type: form.attr("method"),  // post
+                data: form.serialize()
+            })
+                .done(function () {
+                    $('#modal-container').modal('hide');
+                    location.reload(false);
+                })
+                .fail(function () {
+                    toastr.error("Something unexpected happened.");
+                });
+        });
+
+        $('#board-messages').on('click', '.change-status', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            bootbox.confirm({
+                message: "Are you sure you want to edit this message?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: button.attr('href'),
+                            type: 'POST',
+                            data: { msgId: button.attr('data-msg-id') }
+                        })
+                            .done(function () {
+                                button.children().first().toggleClass('fa-check fa-times');
+                                button.children().first().toggleClass('fa-green fa-red');
+                                toastr.success("Message board successfully updated.");
+                            })
+                            .fail(function () {
+                                toastr.error("Something unexpected happened.");
+                            });
+                    }
+                }
+            });
+        });
+    </script>
+}

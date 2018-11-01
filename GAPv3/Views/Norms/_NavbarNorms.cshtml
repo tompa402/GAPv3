@@ -1,0 +1,13 @@
+﻿@model IEnumerable<GAPv3.Models.Norm>
+
+<ul class="sidenav-second-level collapse" id="collapseReports">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item.Name, "Administration", new { controller = "Reports", id = item.NormId })
+        </li>
+    }
+    <li>
+        @Html.ActionLink("Dohvati sve", "Administration", new { controller = "Reports", id = 0 })
+    </li>
+</ul>

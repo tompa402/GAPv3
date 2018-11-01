@@ -17,6 +17,11 @@ namespace GAPv3.Service
             _context = context;
         }
 
+        public IEnumerable<Norm> GetNormsForNavbar()
+        {
+            return _context.Norms;
+        }
+
         public Norm GetNormById(int id)
         {
             return _context.Norms.SingleOrDefault(n => n.NormId == id);

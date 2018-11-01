@@ -29,6 +29,9 @@ namespace GAPv3.Models
         public DateTime? Modified { get; set; }
 
         public bool IsActive { get; set; }
+        public bool IsLocked { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         public Report()
         {

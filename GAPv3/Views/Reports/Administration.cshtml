@@ -1,0 +1,132 @@
+﻿@model IEnumerable<GAPv3.ViewModels.ReportViewModel>
+
+@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/DataTables-css")
+@Styles.Render("~/Content/toastr-css")
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Popis izvješća</h2>
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Zaključaj sve", "ChangeIsLocked", "Reports", new { reportId = 0 }, new { @class = "btn btn-danger pull-right" })
+                @Html.ActionLink("Deaktiviraj sve", "ChangeIsActive", "Reports", new { reportId = 0 }, new { @class = "btn btn-danger pull-right mr-2" })
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="reports" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NormName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrgName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Popunjenost)
+                    </th>
+                    <th>Action</th>
+                    <th>@Html.DisplayNameFor(model => model.IsLockedIcon)</th>
+                    <th>@Html.DisplayNameFor(model => model.IsActiveIcon)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NormName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrgName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Popunjenost)%
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ReportId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ReportId }) |
+                            @Html.ActionLink("Statistic", "Statistic", new { id = item.ReportId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ReportId })
+                        </td>
+                        <td class="text-center"><a href="@Url.Action("ChangeIsLocked", "Reports")" class="change-status" data-report-id=@item.ReportId><i class="@item.IsLockedIcon"></i></a></td>
+                        <td class="text-center"><a href="@Url.Action("ChangeIsActive", "Reports")" class="change-status" data-report-id=@item.ReportId><i class="@item.IsActiveIcon"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/DataTables-js")
+    @Scripts.Render("~/bundles/bootstrapBox")
+    @Scripts.Render("~/bundles/toastr-js")
+    <script>
+        // TODO: Extract to separate js file
+        $(document).ready(function () {
+            $('#reports').DataTable({
+                "columnDefs": [
+                    { "orderable": false, "targets": [4, 5, 6] }
+                ]
+            });
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            }
+        });
+
+        $("#reports").on("click",
+            ".change-status",
+            function (e) {
+                e.preventDefault();
+                var button = $(this);
+                bootbox.confirm({
+                    message: "Are you sure you want to edit this report?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                    url: button.attr('href'),
+                                    method: "POST",
+                                    data: { reportId: button.attr('data-report-id') }
+                                })
+                                .done(function (data) {
+                                    if (data.changeActiveIcon) {
+                                        button.children().first().toggleClass('fa-check fa-times');
+                                        button.children().first().toggleClass('fa-green fa-red');
+                                    } else {
+                                        button.children().first().toggleClass('fa-unlock-alt fa-lock');
+                                        button.children().first().toggleClass('fa-green fa-red');
+                                    }
+                                    toastr.success("Report successfully updated.");
+                                })
+                                .fail(function () {
+                                    toastr.error("Something unexpected happened.");
+                                });
+                        }
+                    }
+                });
+            });
+    </script>
+}
