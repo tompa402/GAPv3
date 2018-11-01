@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeMessagesController.cs" />
     <Compile Include="Controllers\NormItemsController.cs" />
     <Compile Include="Controllers\NormsController.cs" />
     <Compile Include="Controllers\OrganisationsController.cs" />
@@ -287,8 +288,21 @@
     <Compile Include="Migrations\201810280736136_UpdateReportModelToTrackHistory.Designer.cs">
       <DependentUpon>201810280736136_UpdateReportModelToTrackHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810311732493_AddHomeMessageModel.cs" />
+    <Compile Include="Migrations\201810311732493_AddHomeMessageModel.Designer.cs">
+      <DependentUpon>201810311732493_AddHomeMessageModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810311801432_UpdateHomeMessageModel.cs" />
+    <Compile Include="Migrations\201810311801432_UpdateHomeMessageModel.Designer.cs">
+      <DependentUpon>201810311801432_UpdateHomeMessageModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811010831572_AddLogDataToHomeMessages.cs" />
+    <Compile Include="Migrations\201811010831572_AddLogDataToHomeMessages.Designer.cs">
+      <DependentUpon>201811010831572_AddLogDataToHomeMessages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Control.cs" />
+    <Compile Include="Models\HomeMessage.cs" />
     <Compile Include="Models\Norm.cs" />
     <Compile Include="Models\NormItem.cs" />
     <Compile Include="Models\Organisation.cs" />
@@ -302,6 +316,7 @@
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AutoMapperWebProfile.cs" />
+    <Compile Include="Service\HomeMessageService.cs" />
     <Compile Include="Service\NormItemService.cs" />
     <Compile Include="Service\NormService.cs" />
     <Compile Include="Service\OrganisationService.cs" />
@@ -1110,6 +1125,8 @@
     <Content Include="Views\NormItems\_FormNormItem.cshtml" />
     <Content Include="Views\Organisations\Administration.cshtml" />
     <Content Include="Views\Norms\_NavbarNorms.cshtml" />
+    <Content Include="Views\HomeMessages\Administration.cshtml" />
+    <Content Include="Views\HomeMessages\_FormHomeMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1195,6 +1212,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810280736136_UpdateReportModelToTrackHistory.resx">
       <DependentUpon>201810280736136_UpdateReportModelToTrackHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311732493_AddHomeMessageModel.resx">
+      <DependentUpon>201810311732493_AddHomeMessageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311801432_UpdateHomeMessageModel.resx">
+      <DependentUpon>201810311801432_UpdateHomeMessageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811010831572_AddLogDataToHomeMessages.resx">
+      <DependentUpon>201811010831572_AddLogDataToHomeMessages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
