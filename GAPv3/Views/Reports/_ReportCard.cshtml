@@ -46,6 +46,7 @@
                     {
                         @Html.ActionLink("Uredi", "Edit", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info mr-2" })
                     }
+                    @Html.ActionLink("PDF", "GetPdf", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info mr-2" })
                     @Html.ActionLink("Detalji", "Details", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info mr-2" })
                     @Html.ActionLink("Statistika", "Statistic", "Reports", new { id = report.ReportId }, new { @class = "btn btn-outline-info" })
                 }

@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
 using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.ViewModels;
-//using Highsoft.Web.Mvc.Charts;
-using Microsoft.Ajax.Utilities;
+using PuppeteerSharp;
 
 namespace GAPv3.Service
 {
@@ -419,6 +419,57 @@ namespace GAPv3.Service
             _context.SaveChanges();
         }
 
+        public async Task<byte[]> GetPdfForReport(string url)
+        {
+            var options = new LaunchOptions
+            {
+                Headless = true,
+                ExecutablePath = HttpContext.Current.Server.MapPath("~/App_Data/.local-chromium/Win64-594312/chrome-win/chrome.exe")
+            };
+            
+            //Console.WriteLine("Downloading chromium");
+            //await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+
+            //Console.WriteLine("Navigating desired page");
+            using (var browser = await Puppeteer.LaunchAsync(options))
+            using (var page = await browser.NewPageAsync())
+            {
+                await page.GoToAsync(url);
+
+                //Console.WriteLine("Generating PDF"); Commented line is to save pdf to server
+                //await page.PdfAsync(Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/pdfReporting"), "google.pdf"));
+                return await page.PdfDataAsync();
+
+                // Console.WriteLine("Export completed");
+            }
+            //comments below are steps to get pdf from server
+            //string filepath = Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/pdfReporting"), "google.pdf");
+            //byte[] pdfByte = GetBytesFromFile(filepath);
+            //return pdfByte;
+            
+        }
+
+        public byte[] GetBytesFromFile(string fullFilePath)
+        {
+            // this method is limited to 2^32 byte files (4.2 GB)
+            FileStream fs = null;
+            try
+            {
+                fs = System.IO.File.OpenRead(fullFilePath);
+                byte[] bytes = new byte[fs.Length];
+                fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
+                return bytes;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+            }
+        }
+
         /*public List<ColumnSeriesData> GenerateColumnSeriesData(List<int?> data)
         {
             List<ColumnSeriesData> columnSeriesData = new List<ColumnSeriesData>();
@@ -456,5 +507,5 @@ namespace GAPv3.Service
 
             return chart;
        }*/
-    }
+        }
 }

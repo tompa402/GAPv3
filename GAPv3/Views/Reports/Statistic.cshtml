@@ -1,5 +1,4 @@
-﻿@using GAPv3.ViewModels
-@model GAPv3.ViewModels.ReportStatisticViewModel
+﻿@model GAPv3.ViewModels.ReportStatisticViewModel
 @{
     ViewBag.Title = "Statistic";
 }
@@ -105,7 +104,8 @@
                 },
                 plotOptions: {
                     column: {
-                        stacking: 'percent'
+                        stacking: 'percent',
+                        animation: false
                     }
                 },
                 series: [{

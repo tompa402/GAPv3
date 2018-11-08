@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using AutoMapper;
-using GAPv3.DAL;
+﻿using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.Service;
-using GAPv3.ViewModels;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace GAPv3.Controllers
 {
@@ -67,7 +63,7 @@ namespace GAPv3.Controllers
         public ActionResult Save(Report report)
         {
             _service.InsertOrUpdate(report);
-            return RedirectToAction("Index", "Reports", new {id = report.NormId});
+            return RedirectToAction("Index", "Reports", new { id = report.NormId });
         }
 
         // GET: Reports/Details/5
@@ -76,7 +72,7 @@ namespace GAPv3.Controllers
             var report = _service.GetById(id);
             if (report == null)
                 return HttpNotFound();
-            
+
             return View(_service.DetailsViewModel(report));
         }
 
@@ -90,10 +86,17 @@ namespace GAPv3.Controllers
             return View(_service.GetStatisticForReport(report));
         }
 
+        public async Task<ActionResult> GetPdf(int id)
+        {
+            var url = Url.Action("Statistic", "reports", new { id }, Request.Url?.Scheme);
+            var bytePdf = await _service.GetPdfForReport(url);
+            return File(bytePdf, "application/pdf", "test.pdf");
+        }
+
         // POST: Reports/Activation
         public ActionResult ChangeIsActive(int reportId)
         {
-           if (reportId == 0)
+            if (reportId == 0)
             {
                 _service.DeactivateAllReports();
                 return View("Administration", _service.GetReportsForNorm(0));

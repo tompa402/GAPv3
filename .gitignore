@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /GAPv3/Properties/PublishProfiles/CustomProfile.pubxml
+/GAPv3/App_Data/.local-chromium/Win64-594312/chrome-win
