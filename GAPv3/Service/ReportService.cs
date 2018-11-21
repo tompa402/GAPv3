@@ -10,6 +10,7 @@ using GAPv3.DAL;
 using GAPv3.Models;
 using GAPv3.ViewModels;
 using PuppeteerSharp;
+using PuppeteerSharp.Media;
 
 namespace GAPv3.Service
 {
@@ -424,7 +425,8 @@ namespace GAPv3.Service
             var options = new LaunchOptions
             {
                 Headless = true,
-                ExecutablePath = HttpContext.Current.Server.MapPath("~/App_Data/.local-chromium/Win64-594312/chrome-win/chrome.exe")
+                ExecutablePath = HttpContext.Current.Server.MapPath("~/App_Data/.local-chromium/Win64-594312/chrome-win/chrome.exe"),
+                Args = new []{"--no-sandbox", "--disable-setuid-sandbox"}
             };
             
             //Console.WriteLine("Downloading chromium");
@@ -438,7 +440,7 @@ namespace GAPv3.Service
 
                 //Console.WriteLine("Generating PDF"); Commented line is to save pdf to server
                 //await page.PdfAsync(Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/pdfReporting"), "google.pdf"));
-                return await page.PdfDataAsync();
+                return await page.PdfDataAsync(new PdfOptions(){});
 
                 // Console.WriteLine("Export completed");
             }
