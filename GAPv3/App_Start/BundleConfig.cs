@@ -76,6 +76,9 @@ namespace GAPv3
             bundles.Add(new ScriptBundle("~/bundles/toastr-js").Include(
                 "~/scripts/toastr.js"));
 
+            bundles.Add(new StyleBundle("~/Content/print-css").Include(
+                "~/content/print.css"));
+
         }
     }
 }
